@@ -16,7 +16,7 @@ public class Jugador extends Persona {
 
     /* Constructor */
     public Jugador(String nombre, int edad, Posicion posicion, int statMedia, int tarjetasAmarillas, int tarjetasRojas, int golesAnotados, boolean piernaBuena, int velocidad) {
-        super(edad, nombre);
+        super(edad);
         this.posicion = posicion;
         this.statMedia = statMedia;
         this.tarjetasAmarillas = tarjetasAmarillas;
@@ -24,6 +24,10 @@ public class Jugador extends Persona {
         this.golesAnotados = golesAnotados;
         this.piernaBuena = piernaBuena;
         this.velocidad = velocidad;
+    }
+
+    public Jugador(String nombre) {
+    super(nombre);
     }
 
     /* Getters y Setters */

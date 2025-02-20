@@ -1,5 +1,10 @@
+import personal.Nombres;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hemos hecho el mejor proyecto");
+
+Nombres nombres = new Nombres();
+nombres.cargarNombres();
+
     }
 }

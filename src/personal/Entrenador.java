@@ -7,7 +7,7 @@ public class Entrenador extends Persona {
     private Equipo equipo;
 
     public Entrenador(String nombre, int edad, int añosDeExperiencia, Equipo equipo) {
-        super(edad, nombre);
+        super(edad);
         this.añosDeExperiencia = añosDeExperiencia;
         this.equipo = equipo;
     }

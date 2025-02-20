@@ -6,8 +6,11 @@ public class Persona {
     private int edad;
     private String nombre;
 
-    public Persona(int edad, String nombre) {
+    public Persona(int edad) {
         this.edad = edad;
+    }
+
+    public Persona(String nombre) {
         this.nombre = nombre;
     }
 

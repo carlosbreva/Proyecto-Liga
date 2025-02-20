@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class Equipo {
     private String nombre;
-    private Jugador [] jugadores; 
+    private Jugador [] jugadores= new Jugador[21]; 
     private int golesAfavor;
     private int golesEnContra;
     private int diferenciaGoles;
@@ -24,6 +24,10 @@ public class Equipo {
         this.mediaStats = mediaStats;
         this.puntos = puntos;
         this.partidos = partidos;
+    }
+
+    public Equipo(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getNombre() {
@@ -89,6 +93,7 @@ public class Equipo {
     public void setPartidos(Partido[] partidos) {
         this.partidos = partidos;
     }
+
 
     @Override
     public boolean equals(Object o) {
