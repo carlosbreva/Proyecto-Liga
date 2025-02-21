@@ -1,12 +1,17 @@
 package personal;
 
-import java.util.Objects;
 
 public class Persona {
+    /* Variables*/
     private int edad;
     private String nombre;
 
-    public Persona(int edad) {
+
+
+
+    /* Constructor */
+    public Persona(String nombre, int edad) {
+        this.nombre = nombre;
         this.edad = edad;
     }
 
@@ -14,6 +19,7 @@ public class Persona {
         this.nombre = nombre;
     }
 
+    /* Getters y Setters */
     public int getEdad() {
         return edad;
     }
@@ -30,19 +36,23 @@ public class Persona {
         this.nombre = nombre;
     }
 
+
+
+
+
+    /* Equals y ToString */
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Persona persona = (Persona) o;
-        return edad == persona.edad && Objects.equals(nombre, persona.nombre);
+        Persona jugador = (Persona) o;
+        return edad == jugador.edad && nombre == jugador.nombre;
     }
 
     @Override
     public String toString() {
         return "Persona{" +
                 "edad=" + edad +
-                ", nombre='" + nombre + '\'' +
+                ", nombre=" + nombre +
                 '}';
     }
 }
-    

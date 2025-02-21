@@ -1,6 +1,6 @@
 package liga;
 import personal.Equipo;
-import personal.Jugador;
+import personal.Persona;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -11,7 +11,7 @@ public class Liga {
     private String nombre;
     private Equipo[] equipos;
     private Jornada[] jornadas;
-    private Jugador[] jugadores;
+    private Persona[] jugadores;
 
 //Constructor//
  public Liga(String nombre){
@@ -49,11 +49,11 @@ public class Liga {
         this.jornadas = jornadas;
     }
 
-    public Jugador[] getJugadores() {
+    public Persona[] getJugadores() {
         return jugadores;
     }
 
-    public void setJugadores(Jugador[] jugadores) {
+    public void setJugadores(Persona[] jugadores) {
         this.jugadores = jugadores;
     }
 

@@ -3,7 +3,7 @@ package personal;
 import java.util.Objects;
 
 public class Jugador extends Persona {
-    /* Variables*/
+
     private Posicion posicion;
     private int statMedia;
     private int tarjetasAmarillas;
@@ -12,11 +12,18 @@ public class Jugador extends Persona {
     private boolean piernaBuena;
     private int velocidad;
 
+    //Estadísticas de Jugador de Campo
+    private int ritmo;
+    private int pase;
+    private int tiros;
+    private int defensa;
+    private int regate;
+    private int fisico;
 
 
-    /* Constructor */
-    public Jugador(String nombre, int edad, Posicion posicion, int statMedia, int tarjetasAmarillas, int tarjetasRojas, int golesAnotados, boolean piernaBuena, int velocidad) {
-        super(edad);
+
+    public Jugador(String nombre, int edad, Posicion posicion, int statMedia, int tarjetasAmarillas, int tarjetasRojas, boolean piernaBuena, int golesAnotados, int velocidad, int ritmo, int pase, int tiros, int defensa, int regate, int fisico) {
+        super(nombre, edad);
         this.posicion = posicion;
         this.statMedia = statMedia;
         this.tarjetasAmarillas = tarjetasAmarillas;
@@ -24,88 +31,81 @@ public class Jugador extends Persona {
         this.golesAnotados = golesAnotados;
         this.piernaBuena = piernaBuena;
         this.velocidad = velocidad;
-    }
-
-    public Jugador(String nombre) {
-    super(nombre);
-    }
-
-    /* Getters y Setters */
-    public Posicion getPosicion() {
-        return posicion;
-    }
-
-    public void setPosicion(Posicion posicion) {
-        this.posicion = posicion;
-    }
-
-    public int getStatMedia() {
-        return statMedia;
-    }
-
-    public void setStatMedia(int statMedia) {
-        this.statMedia = statMedia;
-    }
-
-    public int getTarjetasAmarillas() {
-        return tarjetasAmarillas;
-    }
-
-    public void setTarjetasAmarillas(int tarjetasAmarillas) {
-        this.tarjetasAmarillas = tarjetasAmarillas;
-    }
-
-    public int getTarjetasRojas() {
-        return tarjetasRojas;
-    }
-
-    public void setTarjetasRojas(int tarjetasRojas) {
-        this.tarjetasRojas = tarjetasRojas;
-    }
-
-    public int getGolesAnotados() {
-        return golesAnotados;
-    }
-
-    public void setGolesAnotados(int golesAnotados) {
-        this.golesAnotados = golesAnotados;
-    }
-
-    public boolean isPiernaBuena() {
-        return piernaBuena;
-    }
-
-    public void setPiernaBuena(boolean piernaBuena) {
-        this.piernaBuena = piernaBuena;
-    }
-
-    public int getVelocidad() {
-        return velocidad;
-    }
-
-    public void setVelocidad(int velocidad) {
-        this.velocidad = velocidad;
+        this.ritmo = ritmo;
+        this.pase = pase;
+        this.tiros = tiros;
+        this.defensa = defensa;
+        this.regate = regate;
+        this.fisico = fisico;
     }
 
 
-    /* Equals y ToString */
+    public int getRitmo() {
+    	return this.ritmo;
+    }
+    public void setRitmo(int ritmo) {
+    	this.ritmo = ritmo;
+    }
+
+
+    public int getPase() {
+    	return this.pase;
+    }
+    public void setPase(int pase) {
+    	this.pase = pase;
+    }
+
+
+    public int getTiros() {
+    	return this.tiros;
+    }
+    public void setTiros(int tiros) {
+    	this.tiros = tiros;
+    }
+
+
+    public int getDefensa() {
+    	return this.defensa;
+    }
+    public void setDefensa(int defensa) {
+    	this.defensa = defensa;
+    }
+
+
+    public int getRegate() {
+    	return this.regate;
+    }
+    public void setRegate(int regate) {
+    	this.regate = regate;
+    }
+
+
+    public int getFisico() {
+    	return this.fisico;
+    }
+    public void setFisico(int fisico) {
+    	this.fisico = fisico;
+    }
+
+    
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Jugador jugador = (Jugador) o;
-        return statMedia == jugador.statMedia && tarjetasAmarillas == jugador.tarjetasAmarillas && tarjetasRojas == jugador.tarjetasRojas && posicion == jugador.posicion && golesAnotados == jugador.golesAnotados && piernaBuena == jugador.piernaBuena && velocidad == jugador.velocidad;
+        if (!super.equals(o)) return false;
+        Jugador that = (Jugador) o;
+        return ritmo == that.ritmo && pase == that.pase && tiros == that.tiros && defensa == that.defensa && regate == that.regate && fisico == that.fisico;
     }
 
     @Override
     public String toString() {
-        return "Jugador{" +
-                "posicion=" + posicion +
-                ", statMedia=" + statMedia +
-                ", tarjetasAmarillas=" + tarjetasAmarillas +
-                ", tarjetasRojas=" + tarjetasRojas + 
-                ", golesAnotados=" + golesAnotados +
-                ", piernaBuena=" + piernaBuena +
-                ", velocidad=" + velocidad +
+        return "JugadorDeCampo{" +
+                "ritmo=" + ritmo +
+                ", pase=" + pase +
+                ", tiros=" + tiros +
+                ", defensa=" + defensa +
+                ", regate=" + regate +
+                ", fisico=" + fisico +
                 '}';
     }
 }

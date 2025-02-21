@@ -2,7 +2,7 @@ package personal;
 
 import java.util.Objects;
 
-public class Portero extends Jugador {
+public class Portero extends Persona {
     private int numeroDeParadas;
     private int estirada;
     private int agarre;
@@ -10,8 +10,8 @@ public class Portero extends Jugador {
     private int reflejos;
     private int posicionamiento;
 
-    public Portero(String nombre, int edad, Posicion posicion, int statMedia, int tarjetasAmarillas, int tarjetasRojas, int golesAnotados, boolean piernaBuena, int velocidad, int numeroDeParadas, int estirada, int agarre, int saqueLargo, int reflejos, int posicionamiento) {
-        super(nombre, edad, posicion, statMedia, tarjetasAmarillas, tarjetasRojas, golesAnotados, piernaBuena, velocidad);
+    public Portero(String nombre, int edad, int numeroDeParadas, int estirada, int agarre, int saqueLargo, int reflejos, int posicionamiento) {
+        super(nombre, edad);
         this.numeroDeParadas = numeroDeParadas;
         this.estirada = estirada;
         this.agarre = agarre;

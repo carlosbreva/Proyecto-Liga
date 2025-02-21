@@ -4,10 +4,17 @@ import liga.Partido;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+
 
 public class Equipo {
     private String nombre;
-    private Jugador [] jugadores= new Jugador[21]; 
+    private String nombreEntrenador;
+    private Persona [] jugadores= new Persona[21]; 
     private int golesAfavor;
     private int golesEnContra;
     private int diferenciaGoles;
@@ -15,7 +22,7 @@ public class Equipo {
     private int puntos;
     private Partido [] partidos;
 
-    public Equipo(String nombre, Jugador[] jugadores, int golesAfavor, int golesEnContra, int diferenciaGoles, int mediaStats, int puntos, Partido[] partidos) {
+    public Equipo(String nombre, Persona[] jugadores, int golesAfavor, int golesEnContra, int diferenciaGoles, int mediaStats, int puntos, Partido[] partidos) {
         this.nombre = nombre;
         this.jugadores = jugadores;
         this.golesAfavor = golesAfavor;
@@ -38,11 +45,11 @@ public class Equipo {
         this.nombre = nombre;
     }
 
-    public Jugador[] getJugadores() {
+    public Persona[] getJugadores() {
         return jugadores;
     }
 
-    public void setJugadores(Jugador[] jugadores) {
+    public void setJugadores(Persona[] jugadores) {
         this.jugadores = jugadores;
     }
 
@@ -93,6 +100,22 @@ public class Equipo {
     public void setPartidos(Partido[] partidos) {
         this.partidos = partidos;
     }
+
+   // Método asignar nombres a equipos desde el fichero
+   public static List<Equipo> crearEquiposDesdeFichero(String rutaFichero) {
+    List<Equipo> equipos = new ArrayList<>();
+    try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {
+        String linea;
+        while ((linea = br.readLine()) != null) {
+            Equipo equipo = new Equipo(linea);
+            equipos.add(equipo);
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return equipos;
+}
+
 
 
     @Override
