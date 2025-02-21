@@ -1,6 +1,13 @@
 package personal;
 
 import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Random;
 
 public class Portero extends Persona {
     private int numeroDeParadas;
@@ -9,6 +16,8 @@ public class Portero extends Persona {
     private int saqueLargo;
     private int reflejos;
     private int posicionamiento;
+    private static String rutaFichero = "src/Nombres_Jugadores.txt";
+    private static Random random = new Random();
 
     public Portero(String nombre, int edad, int numeroDeParadas, int estirada, int agarre, int saqueLargo, int reflejos, int posicionamiento) {
         super(nombre, edad);
@@ -67,6 +76,31 @@ public class Portero extends Persona {
     public void setPosicionamiento(int posicionamiento) {
         this.posicionamiento = posicionamiento;
     }
+
+
+    public static List<Portero> crearPorteros() {
+        List<Portero> porteros = new ArrayList<>();
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {
+            String linea;
+            while ((linea = br.readLine()) != null && porteros.size() <20) {
+                if (!linea.trim().isEmpty()) {
+
+                    int añosExperiencia = 5 + random.nextInt(10); // Entre 5 y 14 años de experiencia
+                    int edad = 30 + random.nextInt(30); // Entre 30 y 59 años
+                    Portero portero = new Portero(linea.trim(), edad, añosExperiencia);
+                    porteros.add(portero);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("No se encontró el archivo de nombres de equipos: " + rutaFichero);
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
+        
+        return porteros;  
+    }
+
 
     @Override
     public boolean equals(Object o) {

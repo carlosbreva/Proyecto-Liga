@@ -13,7 +13,7 @@ public class Entrenador extends Persona {
 
     private int añosDeExperiencia;
     private static String rutaFichero = "src/Nombres_Jugadores.txt";
-    private static final Random random = new Random();
+    private static Random random = new Random();
 
     
     
