@@ -17,11 +17,11 @@ public class Portero extends Persona {
     private int saqueLargo;
     private int reflejos;
     private int posicionamiento;
-    private int statMedia;
+    private int statMediaJugador;
     private static String rutaFichero = "src/Nombres_Jugadores.txt";
     private static Random random = new Random();
 
-    public Portero(String nombre, int edad, Posicion posicion, int numeroDeParadas, int estirada, int agarre, int saqueLargo, int reflejos, int posicionamiento, int statMedia) {
+    public Portero(String nombre, int edad, Posicion posicion, int numeroDeParadas, int estirada, int agarre, int saqueLargo, int reflejos, int posicionamiento, int statMediaJugador) {
         super(nombre, edad);
         this.posicion = posicion;
         this.numeroDeParadas = numeroDeParadas;
@@ -30,7 +30,7 @@ public class Portero extends Persona {
         this.saqueLargo = saqueLargo;
         this.reflejos = reflejos;
         this.posicionamiento = posicionamiento;
-        this.statMedia = statMedia;
+        this.statMediaJugador = statMediaJugador;
     }
 
     public int getNumeroDeParadas() {
@@ -89,6 +89,13 @@ public class Portero extends Persona {
         this.posicion = posicion;
     }
 
+    public int getStatMediaJugador() {
+        return statMediaJugador;
+    }
+
+    public void setStatMediaJugador(int statMediaJugador) {
+        this.statMediaJugador = statMediaJugador;
+    }
     public static List<Portero> crearPorteros() {
         List<Portero> porteros = new ArrayList<>();
         
@@ -126,7 +133,7 @@ public class Portero extends Persona {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Portero portero = (Portero) o;
-        return numeroDeParadas == portero.numeroDeParadas && estirada == portero.estirada && agarre == portero.agarre && saqueLargo == portero.saqueLargo && reflejos == portero.reflejos && posicionamiento == portero.posicionamiento;
+        return numeroDeParadas == portero.numeroDeParadas && estirada == portero.estirada && agarre == portero.agarre && saqueLargo == portero.saqueLargo && reflejos == portero.reflejos && posicionamiento == portero.posicionamiento && statMediaJugador == portero.statMediaJugador;
     }
 
     @Override
@@ -137,7 +144,7 @@ public class Portero extends Persona {
                 ", saqueLargo=" + saqueLargo +
                 ", reflejos=" + reflejos +
                 ", posicionamiento=" + posicionamiento +
-                ", statMedia=" + statMedia;
+                ", statMediaJugador=" + statMediaJugador;
     }
 }
 

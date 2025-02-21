@@ -18,17 +18,17 @@ public class Equipo {
     private int golesAfavor;
     private int golesEnContra;
     private int diferenciaGoles;
-    private int mediaStats;
+    private int mediaStatsEquipo;
     private int puntos;
     private Partido [] partidos;
 
-    public Equipo(String nombre, Persona[] jugadores, int golesAfavor, int golesEnContra, int diferenciaGoles, int mediaStats, int puntos, Partido[] partidos) {
+    public Equipo(String nombre, Persona[] jugadores, int golesAfavor, int golesEnContra, int diferenciaGoles, int mediaStatsEquipo, int puntos, Partido[] partidos) {
         this.nombre = nombre;
         this.jugadores = jugadores;
         this.golesAfavor = golesAfavor;
         this.golesEnContra = golesEnContra;
         this.diferenciaGoles = diferenciaGoles;
-        this.mediaStats = mediaStats;
+        this.mediaStatsEquipo = mediaStatsEquipo;
         this.puntos = puntos;
         this.partidos = partidos;
     }
@@ -77,12 +77,12 @@ public class Equipo {
         this.diferenciaGoles = diferenciaGoles;
     }
 
-    public int getMediaStats() {
-        return mediaStats;
+    public int getMediaStatsEquipo() {
+        return mediaStatsEquipo;
     }
 
-    public void setMediaStats(int mediaStats) {
-        this.mediaStats = mediaStats;
+    public void setMediaStatsEquipo(int mediaStatsEquipo) {
+        this.mediaStatsEquipo = mediaStatsEquipo;
     }
 
     public int getPuntos() {
@@ -122,7 +122,7 @@ public class Equipo {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Equipo equipo = (Equipo) o;
-        return golesAfavor == equipo.golesAfavor && golesEnContra == equipo.golesEnContra && diferenciaGoles == equipo.diferenciaGoles && mediaStats == equipo.mediaStats && puntos == equipo.puntos && Objects.equals(nombre, equipo.nombre) && Objects.deepEquals(jugadores, equipo.jugadores) && Objects.deepEquals(partidos, equipo.partidos);
+        return golesAfavor == equipo.golesAfavor && golesEnContra == equipo.golesEnContra && diferenciaGoles == equipo.diferenciaGoles && mediaStatsEquipo == equipo.mediaStatsEquipo && puntos == equipo.puntos && Objects.equals(nombre, equipo.nombre) && Objects.deepEquals(jugadores, equipo.jugadores) && Objects.deepEquals(partidos, equipo.partidos);
     }
 
     @Override
@@ -133,7 +133,7 @@ public class Equipo {
                 ", golesAfavor=" + golesAfavor +
                 ", golesEnContra=" + golesEnContra +
                 ", diferenciaGoles=" + diferenciaGoles +
-                ", mediaStats=" + mediaStats +
+                ", mediaStatsEquipo=" + mediaStatsEquipo +
                 ", puntos=" + puntos +
                 ", partidos=" + Arrays.toString(partidos) +
                 '}';
