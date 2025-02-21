@@ -16,7 +16,6 @@ public class Jugador extends Persona {
     private int tarjetasAmarillas;
     private int tarjetasRojas;
     private int golesAnotados;
-    private boolean piernaBuena;
     private int velocidad;
     private static String rutaFichero = "src/Nombres_Jugadores.txt";
     private static Random random = new Random();
@@ -30,14 +29,13 @@ public class Jugador extends Persona {
 
 
 
-    public Jugador(String nombre, int edad, Posicion posicion, int statMedia, int tarjetasAmarillas, int tarjetasRojas, boolean piernaBuena, int golesAnotados, int velocidad, int ritmo, int pase, int tiros, int defensa, int regate, int fisico) {
+    public Jugador(String nombre, int edad, Posicion posicion, int tarjetasAmarillas, int tarjetasRojas, int golesAnotados, int velocidad, int ritmo, int pase, int tiros, int defensa, int regate, int fisico,int statMedia) {
         super(nombre, edad);
         this.posicion = posicion;
         this.statMedia = statMedia;
         this.tarjetasAmarillas = tarjetasAmarillas;
         this.tarjetasRojas = tarjetasRojas;
         this.golesAnotados = golesAnotados;
-        this.piernaBuena = piernaBuena;
         this.velocidad = velocidad;
         this.ritmo = ritmo;
         this.pase = pase;
@@ -100,17 +98,29 @@ public class Jugador extends Persona {
         
         try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {
             String linea;
-            while ((linea = br.readLine()) != null && jugadores.size() <20) {
-                if (!linea.trim().isEmpty()) {
-
-                    int añosExperiencia = 5 + random.nextInt(10); // Entre 5 y 14 años de experiencia
-                    int edad = 30 + random.nextInt(30); // Entre 30 y 59 años
-                    Jugador jugador = new Jugador(linea.trim(), edad, añosExperiencia);
-                    jugadores.add(jugador);
+            int lineaActual = 1;
+            while ((linea = br.readLine()) != null) {
+                // Saltamos las primeras 40 líneas que son para entrenadores (1-20) y porteros (21-40)
+                if (lineaActual > 40) {
+                    if (!linea.trim().isEmpty()) {
+                        Posicion posicion = Posicion.values()[random.nextInt(Posicion.values().length - 1)];
+                        int edad = 18 + random.nextInt(22); // Entre 18 y 39 años
+                        int ritmo = 60 + random.nextInt(41); // Entre 60-100
+                        int pase = 60 + random.nextInt(41); // Entre 60-100
+                        int tiros = 60 + random.nextInt(41); // Entre 60-100
+                        int defensa = 60 + random.nextInt(41); // Entre 60-100
+                        int regate = 60 + random.nextInt(41); // Entre 60-100
+                        int fisico = 60 + random.nextInt(41); // Entre 60-100
+                        int velocidad = 60 + random.nextInt(41); // Entre 60-100
+                        int statMedia = (ritmo + pase + tiros + defensa + regate + fisico + velocidad) / 7;
+                        Jugador jugador = new Jugador(linea.trim(), edad, posicion, 0, 0, 0, velocidad, ritmo, pase, tiros, defensa, regate, fisico, statMedia);
+                        jugadores.add(jugador);
+                    }
                 }
+                lineaActual++;
             }
         } catch (FileNotFoundException e) {
-            System.err.println("No se encontró el archivo de nombres de equipos: " + rutaFichero);
+            System.err.println("No se encontró el archivo de nombres: " + rutaFichero);
         } catch (IOException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
@@ -126,15 +136,14 @@ public class Jugador extends Persona {
         return ritmo == that.ritmo && pase == that.pase && tiros == that.tiros && defensa == that.defensa && regate == that.regate && fisico == that.fisico;
     }
 
+
     @Override
     public String toString() {
-        return "JugadorDeCampo{" +
-                "ritmo=" + ritmo +
-                ", pase=" + pase +
-                ", tiros=" + tiros +
-                ", defensa=" + defensa +
-                ", regate=" + regate +
-                ", fisico=" + fisico +
-                '}';
+        return  "Jugador: " + super.toString() + " posicion=" + posicion + ", tarjetasAmarillas=" + tarjetasAmarillas
+                + ", tarjetasRojas=" + tarjetasRojas + ", golesAnotados=" + golesAnotados + ", velocidad=" + velocidad
+                + ", ritmo=" + ritmo + ", pase=" + pase + ", tiros=" + tiros + ", defensa=" + defensa + ", regate="
+                + regate + ", fisico=" + fisico + ", statMedia=" + statMedia;
     }
+
+
 }

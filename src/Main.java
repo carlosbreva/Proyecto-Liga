@@ -3,7 +3,7 @@ import personal.Equipo;
 import personal.Jugador;
 import personal.Entrenador;
 import java.util.List;
-import personal.Persona;
+import personal.Portero;
 
 
 public class Main {
@@ -15,5 +15,16 @@ public class Main {
         for (Entrenador entrenador : entrenadores) {
             System.out.println(entrenador);
         }
+
+        List<Portero> porteros = Portero.crearPorteros();
+        for (Portero portero : porteros) {
+            System.out.println(portero);
+        }
+        
+        List<Jugador> jugadores = Jugador.crearJugadores();
+        for (Jugador jugador : jugadores) {
+            System.out.println(jugador);
+        }
+
     }
 }

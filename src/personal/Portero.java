@@ -10,23 +10,27 @@ import java.io.IOException;
 import java.util.Random;
 
 public class Portero extends Persona {
+    private Posicion posicion;
     private int numeroDeParadas;
     private int estirada;
     private int agarre;
     private int saqueLargo;
     private int reflejos;
     private int posicionamiento;
+    private int statMedia;
     private static String rutaFichero = "src/Nombres_Jugadores.txt";
     private static Random random = new Random();
 
-    public Portero(String nombre, int edad, int numeroDeParadas, int estirada, int agarre, int saqueLargo, int reflejos, int posicionamiento) {
+    public Portero(String nombre, int edad, Posicion posicion, int numeroDeParadas, int estirada, int agarre, int saqueLargo, int reflejos, int posicionamiento, int statMedia) {
         super(nombre, edad);
+        this.posicion = posicion;
         this.numeroDeParadas = numeroDeParadas;
         this.estirada = estirada;
         this.agarre = agarre;
         this.saqueLargo = saqueLargo;
         this.reflejos = reflejos;
         this.posicionamiento = posicionamiento;
+        this.statMedia = statMedia;
     }
 
     public int getNumeroDeParadas() {
@@ -77,20 +81,35 @@ public class Portero extends Persona {
         this.posicionamiento = posicionamiento;
     }
 
+    public Posicion getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(Posicion posicion) {
+        this.posicion = posicion;
+    }
 
     public static List<Portero> crearPorteros() {
         List<Portero> porteros = new ArrayList<>();
         
         try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {
             String linea;
-            while ((linea = br.readLine()) != null && porteros.size() <20) {
-                if (!linea.trim().isEmpty()) {
-
-                    int añosExperiencia = 5 + random.nextInt(10); // Entre 5 y 14 años de experiencia
-                    int edad = 30 + random.nextInt(30); // Entre 30 y 59 años
-                    Portero portero = new Portero(linea.trim(), edad, añosExperiencia);
-                    porteros.add(portero);
+            int lineaActual = 1;
+            while ((linea = br.readLine()) != null) {
+                if (lineaActual >= 21 && lineaActual <= 40) {
+                    if (!linea.trim().isEmpty()) {
+                        int edad = 18 + random.nextInt(22); // Entre 18 y 39 años
+                        int estirada = 60 + random.nextInt(41); // Entre 60-100
+                        int agarre = 60 + random.nextInt(41);   // Entre 60-100
+                        int saqueLargo = 60 + random.nextInt(41); // Entre 60-100
+                        int reflejos = 60 + random.nextInt(41);   // Entre 60-100
+                        int posicionamiento = 60 + random.nextInt(41); // Entre 60-100
+                        int statMedia = (estirada + agarre + saqueLargo + reflejos + posicionamiento) / 5;
+                        Portero portero = new Portero(linea.trim(), edad, Posicion.PORTERO, 0, estirada, agarre, saqueLargo, reflejos, posicionamiento, statMedia);
+                        porteros.add(portero);
+                    }
                 }
+                lineaActual++;
             }
         } catch (FileNotFoundException e) {
             System.err.println("No se encontró el archivo de nombres de equipos: " + rutaFichero);
@@ -112,14 +131,13 @@ public class Portero extends Persona {
 
     @Override
     public String toString() {
-        return "Portero{" +
-                "numeroDeParadas=" + numeroDeParadas +
+        return  "Jugador: " + super.toString() + " posicion=" + posicion + " numeroDeParadas=" + numeroDeParadas +
                 ", estirada=" + estirada +
                 ", agarre=" + agarre +
                 ", saqueLargo=" + saqueLargo +
                 ", reflejos=" + reflejos +
                 ", posicionamiento=" + posicionamiento +
-                '}';
+                ", statMedia=" + statMedia;
     }
 }
 
