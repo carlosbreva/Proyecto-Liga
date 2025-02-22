@@ -103,14 +103,15 @@ public class Portero extends Persona {
             String linea;
             int lineaActual = 1;
             while ((linea = br.readLine()) != null) {
-                if (lineaActual >= 21 && lineaActual <= 40) {
+                // Tomar nombres desde la línea 21 hasta la 60 para porteros
+                if (lineaActual > 20 && lineaActual <= 60) {
                     if (!linea.trim().isEmpty()) {
                         int edad = 18 + random.nextInt(22); // Entre 18 y 39 años
-                        int estirada = 60 + random.nextInt(41); // Entre 60-100
-                        int agarre = 60 + random.nextInt(41);   // Entre 60-100
-                        int saqueLargo = 60 + random.nextInt(41); // Entre 60-100
-                        int reflejos = 60 + random.nextInt(41);   // Entre 60-100
-                        int posicionamiento = 60 + random.nextInt(41); // Entre 60-100
+                        int estirada = 40 + random.nextInt(61); // Entre 40-100
+                        int agarre = 40 + random.nextInt(61);   // Entre 40-100
+                        int saqueLargo = 40 + random.nextInt(61); // Entre 40-100
+                        int reflejos = 40 + random.nextInt(61);   // Entre 40-100
+                        int posicionamiento = 40 + random.nextInt(61); // Entre 40-100
                         int statMedia = (estirada + agarre + saqueLargo + reflejos + posicionamiento) / 5;
                         Portero portero = new Portero(linea.trim(), edad, Posicion.PORTERO, 0, estirada, agarre, saqueLargo, reflejos, posicionamiento, statMedia);
                         porteros.add(portero);
@@ -119,7 +120,7 @@ public class Portero extends Persona {
                 lineaActual++;
             }
         } catch (FileNotFoundException e) {
-            System.err.println("No se encontró el archivo de nombres de equipos: " + rutaFichero);
+            System.err.println("No se encontró el archivo de nombres: " + rutaFichero);
         } catch (IOException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }

@@ -108,18 +108,18 @@ public class Jugador extends Persona {
             String linea;
             int lineaActual = 1;
             while ((linea = br.readLine()) != null) {
-                // Saltamos las primeras 40 líneas que son para entrenadores (1-20) y porteros (21-40)
-                if (lineaActual > 40) {
+                // Tomar nombres a partir de la línea 61 para jugadores de campo
+                if (lineaActual > 60) {
                     if (!linea.trim().isEmpty()) {
                         Posicion posicion = Posicion.values()[random.nextInt(Posicion.values().length - 1)];
                         int edad = 18 + random.nextInt(22); // Entre 18 y 39 años
-                        int ritmo = 60 + random.nextInt(41); // Entre 60-100
-                        int pase = 60 + random.nextInt(41); // Entre 60-100
-                        int tiros = 60 + random.nextInt(41); // Entre 60-100
-                        int defensa = 60 + random.nextInt(41); // Entre 60-100
-                        int regate = 60 + random.nextInt(41); // Entre 60-100
-                        int fisico = 60 + random.nextInt(41); // Entre 60-100
-                        int velocidad = 60 + random.nextInt(41); // Entre 60-100
+                        int ritmo = 40 + random.nextInt(61); // Entre 40-100
+                        int pase = 40 + random.nextInt(61); // Entre 40-100
+                        int tiros = 40 + random.nextInt(61); // Entre 40-100
+                        int defensa = 40 + random.nextInt(61); // Entre 40-100
+                        int regate = 40 + random.nextInt(61); // Entre 40-100
+                        int fisico = 40 + random.nextInt(61); // Entre 40-100
+                        int velocidad = 40 + random.nextInt(61); // Entre 40-100
                         int statMediaJugador = (ritmo + pase + tiros + defensa + regate + fisico + velocidad) / 7;
                         Jugador jugador = new Jugador(linea.trim(), edad, posicion, 0, 0, 0, velocidad, ritmo, pase, tiros, defensa, regate, fisico, statMediaJugador);
                         jugadores.add(jugador);
@@ -153,5 +153,12 @@ public class Jugador extends Persona {
                 + regate + ", fisico=" + fisico + ", statMediaJugador=" + statMediaJugador;
     }
 
+    public Posicion getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(Posicion posicion) {
+        this.posicion = posicion;
+    }
 
 }
