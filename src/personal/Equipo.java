@@ -1,6 +1,7 @@
 package personal;
 
 import liga.Partido;
+import personal.Entrenador;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Random;
 
 
 public class Equipo {
@@ -21,9 +23,12 @@ public class Equipo {
     private int mediaStatsEquipo;
     private int puntos;
     private Partido [] partidos;
+    private static String rutaFichero = "src/Nombres_Equipos.txt";
+    private static Random random = new Random();
 
-    public Equipo(String nombre, Persona[] jugadores, int golesAfavor, int golesEnContra, int diferenciaGoles, int mediaStatsEquipo, int puntos, Partido[] partidos) {
+    public Equipo(String nombre, String nombreEntrenador, Persona[] jugadores, int golesAfavor, int golesEnContra, int diferenciaGoles, int mediaStatsEquipo, int puntos, Partido[] partidos) {
         this.nombre = nombre;
+        this.nombreEntrenador= nombreEntrenador;
         this.jugadores = jugadores;
         this.golesAfavor = golesAfavor;
         this.golesEnContra = golesEnContra;
@@ -101,20 +106,44 @@ public class Equipo {
         this.partidos = partidos;
     }
 
-   // Método asignar nombres a equipos desde el fichero
+
+    
+   public String getNombreEntrenador() {
+        return nombreEntrenador;
+    }
+
+    public void setNombreEntrenador(String nombreEntrenador) {
+        this.nombreEntrenador = nombreEntrenador;
+    }
+
+// Método asignar nombres a equipos desde el fichero
    public static List<Equipo> crearEquiposDesdeFichero(String rutaFichero) {
     List<Equipo> equipos = new ArrayList<>();
     try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {
         String linea;
         while ((linea = br.readLine()) != null) {
             Equipo equipo = new Equipo(linea);
+
             equipos.add(equipo);
-        }
+            
+   /* for (int i ; i< List<Entrenador> entrenadores.size; i++){
+       List<Equipo> equipos(1)= entrenador.setNombreEntrenador;
+        }*/
     } catch (IOException e) {
         e.printStackTrace();
     }
     return equipos;
 }
+
+
+
+
+   
+    // 1 entrenador
+    // 2 porteros 
+    // 8 defensas posicion.value 3 
+    // 8 mediocentro posiicon.value 2 
+    // 4 delanteros posiicon.value 4
 
 
 
@@ -139,6 +168,9 @@ public class Equipo {
                 '}';
     }
 }
+}
+
+
 
 
 
