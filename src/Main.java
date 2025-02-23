@@ -5,7 +5,8 @@ import personal.Entrenador;
 import java.util.List;
 import personal.Portero;
 import liga.Partido;
-
+import liga.Jornada;
+import liga.Liga;
 public class Main {
     public static void main(String[] args) {
         System.out.println("=== CREANDO LIGA ===\n");
@@ -29,9 +30,11 @@ public class Main {
         }
         System.out.println("Equipos creados: " + equipos.size());
 
-        Partido partido = new Partido(equipos.get(18), equipos.get(19), new int[] {0, 0}, 0);
-        partido.simularPartido(equipos.get(18), equipos.get(19), jugadores);
-        System.out.println(partido);
+        Liga liga = new Liga("Liga 1", equipos);
+        liga.jugarLiga();
+
+
+
     }
 
 }

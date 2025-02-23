@@ -135,20 +135,7 @@ public static List<Equipo> crearEquipos(List<Entrenador> entrenadores, List<Port
                 // Agregar 2 porteros
                 for (int i = 0; i < 2; i++) {
                     Portero portero = porteros.get(indicePortero++);
-                    jugadoresEquipo.add(new Jugador(
-                        portero.getNombre(), 
-                        portero.getEdad(), 
-                        Posicion.PORTERO, 
-                        0, 0, 0,  // tarjetas y goles
-                        portero.getReflejos(),  // usando reflejos como velocidad
-                        portero.getEstirada(),  // usando estirada como ritmo
-                        portero.getAgarre(),    // usando agarre como pase
-                        portero.getSaqueLargo(),// usando saqueLargo como tiros
-                        portero.getPosicionamiento(), // usando posicionamiento como defensa
-                        portero.getReflejos(),  // usando reflejos como regate
-                        portero.getAgarre(),    // usando agarre como físico
-                        portero.getStatMediaJugador()
-                    ));
+                    jugadoresEquipo.add(portero); // Añadir el portero directamente sin convertirlo a Jugador
                 }
                 
                 // Agregar 8 defensas

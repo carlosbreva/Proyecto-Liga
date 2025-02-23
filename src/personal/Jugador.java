@@ -93,10 +93,37 @@ public class Jugador extends Persona {
     	this.fisico = fisico;
     }
 
-    public int getStatMediaJugador() {
-        return statMediaJugador;
+    public int getTarjetasAmarillas() {
+        return this.tarjetasAmarillas;
+    }
+    public void setTarjetasAmarillas(int tarjetasAmarillas) {
+        this.tarjetasAmarillas = tarjetasAmarillas;
     }
 
+    public int getTarjetasRojas() {
+        return this.tarjetasRojas;
+    }
+    public void setTarjetasRojas(int tarjetasRojas) {
+        this.tarjetasRojas = tarjetasRojas;
+    }
+
+    public int getGolesAnotados() {
+        return this.golesAnotados;
+    }
+    public void setGolesAnotados(int golesAnotados) {
+        this.golesAnotados = golesAnotados;
+    }
+
+    public int getVelocidad() {
+        return this.velocidad;
+    }
+    public void setVelocidad(int velocidad) {
+        this.velocidad = velocidad;
+    }
+
+    public int getStatMediaJugador() {
+        return this.statMediaJugador;
+    }
     public void setStatMediaJugador(int statMediaJugador) {
         this.statMediaJugador = statMediaJugador;
     }

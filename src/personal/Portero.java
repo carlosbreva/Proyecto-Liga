@@ -9,28 +9,24 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Random;
 
-public class Portero extends Persona {
-    private Posicion posicion;
+public class Portero extends Jugador {
     private int numeroDeParadas;
     private int estirada;
     private int agarre;
     private int saqueLargo;
     private int reflejos;
     private int posicionamiento;
-    private int statMediaJugador;
     private static String rutaFichero = "src/Nombres_Jugadores.txt";
     private static Random random = new Random();
 
     public Portero(String nombre, int edad, Posicion posicion, int numeroDeParadas, int estirada, int agarre, int saqueLargo, int reflejos, int posicionamiento, int statMediaJugador) {
-        super(nombre, edad);
-        this.posicion = posicion;
+        super(nombre, edad, posicion, 0, 0, 0, reflejos, estirada, agarre, saqueLargo, posicionamiento, reflejos, agarre, statMediaJugador);
         this.numeroDeParadas = numeroDeParadas;
         this.estirada = estirada;
         this.agarre = agarre;
         this.saqueLargo = saqueLargo;
         this.reflejos = reflejos;
         this.posicionamiento = posicionamiento;
-        this.statMediaJugador = statMediaJugador;
     }
 
     public int getNumeroDeParadas() {
@@ -81,21 +77,6 @@ public class Portero extends Persona {
         this.posicionamiento = posicionamiento;
     }
 
-    public Posicion getPosicion() {
-        return posicion;
-    }
-
-    public void setPosicion(Posicion posicion) {
-        this.posicion = posicion;
-    }
-
-    public int getStatMediaJugador() {
-        return statMediaJugador;
-    }
-
-    public void setStatMediaJugador(int statMediaJugador) {
-        this.statMediaJugador = statMediaJugador;
-    }
     public static List<Portero> crearPorteros() {
         List<Portero> porteros = new ArrayList<>();
         
@@ -113,7 +94,19 @@ public class Portero extends Persona {
                         int reflejos = 40 + random.nextInt(61);   // Entre 40-100
                         int posicionamiento = 40 + random.nextInt(61); // Entre 40-100
                         int statMedia = (estirada + agarre + saqueLargo + reflejos + posicionamiento) / 5;
-                        Portero portero = new Portero(linea.trim(), edad, Posicion.PORTERO, 0, estirada, agarre, saqueLargo, reflejos, posicionamiento, statMedia);
+                        
+                        Portero portero = new Portero(
+                            linea.trim(),
+                            edad,
+                            Posicion.PORTERO,
+                            0, // numeroDeParadas inicial
+                            estirada,
+                            agarre,
+                            saqueLargo,
+                            reflejos,
+                            posicionamiento,
+                            statMedia
+                        );
                         porteros.add(portero);
                     }
                 }
@@ -128,24 +121,22 @@ public class Portero extends Persona {
         return porteros;  
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Portero portero = (Portero) o;
-        return numeroDeParadas == portero.numeroDeParadas && estirada == portero.estirada && agarre == portero.agarre && saqueLargo == portero.saqueLargo && reflejos == portero.reflejos && posicionamiento == portero.posicionamiento && statMediaJugador == portero.statMediaJugador;
+        return numeroDeParadas == portero.numeroDeParadas && estirada == portero.estirada && agarre == portero.agarre && saqueLargo == portero.saqueLargo && reflejos == portero.reflejos && posicionamiento == portero.posicionamiento;
     }
 
     @Override
     public String toString() {
-        return  "Jugador: " + super.toString() + " posicion=" + posicion + " numeroDeParadas=" + numeroDeParadas +
+        return  "Jugador: " + super.toString() + " numeroDeParadas=" + numeroDeParadas +
                 ", estirada=" + estirada +
                 ", agarre=" + agarre +
                 ", saqueLargo=" + saqueLargo +
                 ", reflejos=" + reflejos +
-                ", posicionamiento=" + posicionamiento +
-                ", statMediaJugador=" + statMediaJugador;
+                ", posicionamiento=" + posicionamiento;
     }
 }
 
