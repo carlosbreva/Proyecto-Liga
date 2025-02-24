@@ -39,7 +39,7 @@ public class Entrenador extends Persona {
     }
 
     // métodos 
-    public static List<Entrenador> crearEntrenadores() {
+    public static List<Entrenador> crearEntrenadores(String rutaFichero) {
         List<Entrenador> entrenadores = new ArrayList<>();
         
         try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {

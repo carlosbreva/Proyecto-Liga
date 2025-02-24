@@ -68,6 +68,8 @@ public class Jornada {
         }
 
         int numeroPartidosenJornada = equipos.size()/2;
+        // Calcula el desplazamiento para leer los equipos correctos del archivo según la jornada actual
+        // Multiplica por 2 porque cada partido tiene 2 equipos (local y visitante)
         int offset = (numeroJornada - 1) * numeroPartidosenJornada * 2;
         
         for (int i = 0; i < numeroPartidosenJornada; i++) {
@@ -91,6 +93,7 @@ public class Jornada {
             if (equipoLocal != null && equipoVisitante != null) {
                 Partido partido = new Partido(equipoLocal, equipoVisitante, new int[]{0, 0}, 0);
                 partido.simularPartido(equipoLocal, equipoVisitante);
+                System.out.println("QUieres");
                 partidos.add(partido);
             } else {
                 System.out.println("Error: No se encontraron los equipos " + nombreEquipoLocal + " y/o " + nombreEquipoVisitante);

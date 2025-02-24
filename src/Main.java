@@ -7,36 +7,53 @@ import personal.Portero;
 import liga.Partido;
 import liga.Jornada;
 import liga.Liga;
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
-        System.out.println("=== CREANDO LIGA ===\n");
+        Scanner scanner = new Scanner(System.in);  // Un solo Scanner para toda la aplicación
+        boolean seguirJugando = true;
 
-        List<Entrenador> entrenadores = Entrenador.crearEntrenadores();
-        System.out.println("Entrenadores creados: " + entrenadores.size());
+        while (seguirJugando) {
+            System.out.println("=== XTART FURBOL SIMULATOR ===\n");
+            System.out.println("=== OPCIONES DISPONIBLES: ===\n");
+            System.out.println("1. Bundesliga");
+            System.out.println("2. La Liga");
+            System.out.println("3. Serie A");
+            System.out.println("4. Ligue 1");
+            System.out.println("6. Salir");
+            
+            int opcion = scanner.nextInt();
+            scanner.nextLine(); // Consumir el salto de línea
 
-        List<Portero> porteros = Portero.crearPorteros();
-        System.out.println("Porteros creados: " + porteros.size());
-        
-        List<Jugador> jugadores = Jugador.crearJugadores();
-        System.out.println("Jugadores creados: " + jugadores.size());
+            switch (opcion) {
+                case 1:
+                    System.out.println("Has seleccionado la Bundesliga");
+                    String rutaFichero = "src/Nombres_Jugadores.txt";
+                    List<Entrenador> entrenadores = Entrenador.crearEntrenadores(rutaFichero);
+                    List<Portero> porteros = Portero.crearPorteros(rutaFichero);
+                    List<Jugador> jugadores = Jugador.crearJugadores(rutaFichero);
+                    List<Equipo> equipos = Equipo.crearEquipos(entrenadores, porteros, jugadores);
+                    Liga liga = new Liga("Bundesliga", equipos);
+                    liga.jugarLiga();
+                    
+                    System.out.println("¿Quieres jugar otra liga? (1. Si 2. No)");
+                    int respuesta = scanner.nextInt();
+                    scanner.nextLine(); // Consumir el salto de línea
+                    
+                    if (respuesta != 1) {
+                        seguirJugando = false;
+                        System.out.println("Gracias por jugar");
+                    } else {
+                        continue; // Volver al menú principal
+                    }
+                    break;
 
-
-        System.out.println("\n=== EQUIPOS DE LA LIGA ===\n");
-        List<Equipo> equipos = Equipo.crearEquipos(entrenadores, porteros, jugadores);
-        for (Equipo equipo : equipos) {
-            System.out.println("==========================================");
-            System.out.println(equipo);
-            System.out.println("==========================================\n");
+                case 6:
+                    seguirJugando = false;
+                    System.out.println("Gracias por jugar");
+                    break;
+            }
         }
-        System.out.println("Equipos creados: " + equipos.size());
-
-        Liga liga = new Liga("Liga 1", equipos);
-        liga.jugarLiga();
-        
-
-
-
+        scanner.close(); // Cerrar el Scanner solo al final del programa
     }
-
 }
-

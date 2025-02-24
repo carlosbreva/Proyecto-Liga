@@ -128,7 +128,7 @@ public class Jugador extends Persona {
         this.statMediaJugador = statMediaJugador;
     }
 
-    public static List<Jugador> crearJugadores() {
+    public static List<Jugador> crearJugadores(String rutaFichero) {
         List<Jugador> jugadores = new ArrayList<>();
         
         try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {

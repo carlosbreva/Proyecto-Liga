@@ -77,7 +77,7 @@ public class Portero extends Jugador {
         this.posicionamiento = posicionamiento;
     }
 
-    public static List<Portero> crearPorteros() {
+    public static List<Portero> crearPorteros(String rutaFichero) {
         List<Portero> porteros = new ArrayList<>();
         
         try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {

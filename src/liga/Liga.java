@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.ArrayList;
 import java.util.Random;
+import java.io.IOException;
 
 public class Liga {
 
@@ -77,16 +78,20 @@ public class Liga {
 
         System.out.println("\n=== INICIO DE LA LIGA ===\n");
         for (Jornada jornada : jornadas) {
-            System.out.println("\n=== INICIO DE LA JORNADA ===\n");
-            System.out.println("Jornada " + jornada.getNumeroJornada());
+            System.out.println("\n=== JORNADA " + jornada.getNumeroJornada() + " ===\n");
             jornada.jugarPartidos(equipos);
-            System.out.println("\n=== FIN DE LA JORNADA ===\n");
-            System.out.println("\nClasificación actual:");
+            System.out.println("\n=== CLASIFICACIÓN TRAS LA JORNADA " + jornada.getNumeroJornada() + " ===");
             VerClasificacion();
-            System.out.println();
+            System.out.println("\nPresiona Enter para continuar...");
+            try {
+                System.in.read();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        System.out.println("=== FIN DE LA LIGA ===\n");
-        
+        System.out.println("\n=== CLASIFICACIÓN FINAL DE LA LIGA ===");
+        VerClasificacion();
+        System.out.println("\n=== FIN DE LA LIGA ===\n");
     }
     
 

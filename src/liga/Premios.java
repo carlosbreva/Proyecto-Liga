@@ -2,7 +2,7 @@ package liga;
 import java.util.List;
 import personal.Jugador;
 import personal.Equipo;
-
+import personal.Portero;
 public class Premios {
     
     private String MVP;
@@ -50,16 +50,15 @@ public class Premios {
     }
 
 
-    public void darPremios(List<Jugador> jugadores, List<Equipo> equipos) {
-
+    public void darPremios(List<Jugador> jugadores, List<Equipo> equipos, List<Portero> porteros) {
         //LIGA
-         Equipo campeon = equipos.get(0);
-         for (Equipo equipo : equipos) {
+        Equipo campeon = equipos.get(0);
+        for (Equipo equipo : equipos) {
             if (equipo.getPuntos() > campeon.getPuntos()) {
                 campeon = equipo;
             }
-         }
-         System.out.println("Equipo campeón: " + campeon.getNombre());
+        }
+        System.out.println("Equipo campeón: " + campeon.getNombre());
         // MVP
         Jugador mvp = jugadores.get(0);
         for (Jugador jugador : jugadores) {
@@ -68,8 +67,26 @@ public class Premios {
             }
         }
         System.out.println("MVP: " + mvp.getNombre());
+        // Goleador
+        Jugador goleador = jugadores.get(0);
+        for (Jugador jugador : jugadores) {
+            if (jugador.getGolesAnotados() > goleador.getGolesAnotados()) {
+                goleador = jugador;
+            }
+        }
+        System.out.println("Goleador: " + goleador.getNombre());
 
+        // Portero del torneo
+        Portero mejorPortero = porteros.get(0);
+        for (Portero p : porteros) {
+            if (p.getNumeroDeParadas() > mejorPortero.getNumeroDeParadas()) {
+                mejorPortero = p;
+            }
+        }
+        System.out.println("Portero del torneo: " + mejorPortero.getNombre());  
     }
+
+
 
 
 

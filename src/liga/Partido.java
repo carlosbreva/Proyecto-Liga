@@ -11,7 +11,8 @@ import java.util.TimerTask;
 import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
-
+import java.util.Scanner;
+import liga.Liga;
 public class Partido {
     // Variables declaradas
     private Equipo equipoLocal;
@@ -241,6 +242,8 @@ public class Partido {
                     System.out.println(equipoLocal.getNombre() + " " + golesLocal[0] + " - " + golesVisitante[0] + " " + equipoVisitante.getNombre());
                     equipoLocal.setPartidosJugados(equipoLocal.getPartidosJugados() + 1);
                     equipoVisitante.setPartidosJugados(equipoVisitante.getPartidosJugados() + 1);
+
+                    
                     
                     if (porteroLocalFinal != null) {
                         System.out.println("Paradas de " + porteroLocalFinal.getNombre() + ": " + paradasLocal[0]);
