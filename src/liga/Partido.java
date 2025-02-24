@@ -66,9 +66,83 @@ public class Partido {
 
 
     /* Metodos y funciones */
+    private List<Jugador> seleccionar11Titular(Equipo equipo) {
+        List<Jugador> titular = new ArrayList<>();
+        Random random = new Random();
+        
+        // Seleccionar 1 portero al azar
+        List<Jugador> porteros = new ArrayList<>();
+        for (Jugador j : equipo.getJugadores()) {
+            if (j.getPosicion() == Posicion.PORTERO) {
+                porteros.add(j);
+            }
+        }
+        if (!porteros.isEmpty()) {
+            titular.add(porteros.get(random.nextInt(porteros.size())));
+        }
+
+        // Seleccionar 4 defensas al azar
+        List<Jugador> defensas = new ArrayList<>();
+        for (Jugador j : equipo.getJugadores()) {
+            if (j.getPosicion() == Posicion.DEFENSA) {
+                defensas.add(j);
+            }
+        }
+        for (int i = 0; i < 4 && !defensas.isEmpty(); i++) {
+            int index = random.nextInt(defensas.size());
+            titular.add(defensas.get(index));
+            defensas.remove(index); // Evitar seleccionar el mismo jugador dos veces
+        }
+
+        // Seleccionar 3 mediocentros al azar
+        List<Jugador> mediocentros = new ArrayList<>();
+        for (Jugador j : equipo.getJugadores()) {
+            if (j.getPosicion() == Posicion.MEDIOCENTRO) {
+                mediocentros.add(j);
+            }
+        }
+        for (int i = 0; i < 3 && !mediocentros.isEmpty(); i++) {
+            int index = random.nextInt(mediocentros.size());
+            titular.add(mediocentros.get(index));
+            mediocentros.remove(index); // Evitar seleccionar el mismo jugador dos veces
+        }
+
+        // Seleccionar 3 delanteros al azar
+        List<Jugador> delanteros = new ArrayList<>();
+        for (Jugador j : equipo.getJugadores()) {
+            if (j.getPosicion() == Posicion.DELANTERO) {
+                delanteros.add(j);
+            }
+        }
+        for (int i = 0; i < 3 && !delanteros.isEmpty(); i++) {
+            int index = random.nextInt(delanteros.size());
+            titular.add(delanteros.get(index));
+            delanteros.remove(index); // Evitar seleccionar el mismo jugador dos veces
+        }
+
+        return titular;
+    }
+
     public void simularPartido(Equipo equipoLocal, Equipo equipoVisitante) { 
         System.out.println("\n=== INICIO DEL PARTIDO ===");
         System.out.println(equipoLocal.getNombre() + " vs " + equipoVisitante.getNombre());
+
+        // Seleccionar 11 titulares para cada equipo
+        List<Jugador> titularesLocal = seleccionar11Titular(equipoLocal);
+        List<Jugador> titularesVisitante = seleccionar11Titular(equipoVisitante);
+
+        // Mostrar alineaciones
+        System.out.println("\nAlineación " + equipoLocal.getNombre() + ":");
+        for (Jugador j : titularesLocal) {
+            System.out.println("- " + j.getNombre() + " (" + j.getPosicion() + ")");
+        }
+
+        System.out.println("\nAlineación " + equipoVisitante.getNombre() + ":");
+        for (Jugador j : titularesVisitante) {
+            System.out.println("- " + j.getNombre() + " (" + j.getPosicion() + ")");
+        }
+        System.out.println();
+
         final int[] golesLocal = {0};
         final int[] golesVisitante = {0};
         final int[] paradasLocal = {0};
@@ -79,21 +153,9 @@ public class Partido {
         Random random = new Random();
         Timer timer = new Timer();
         
-        // Obtener los porteros de ambos equipos
-        Portero porteroLocal = null;
-        Portero porteroVisitante = null;
-        for (Jugador j : equipoLocal.getJugadores()) {
-            if (j.getPosicion() == Posicion.PORTERO) {
-                porteroLocal = (Portero) j;
-                break;
-            }
-        }
-        for (Jugador j : equipoVisitante.getJugadores()) {
-            if (j.getPosicion() == Posicion.PORTERO) {
-                porteroVisitante = (Portero) j;
-                break;
-            }
-        }
+        // Obtener los porteros titulares
+        Portero porteroLocal = (Portero)titularesLocal.get(0);
+        Portero porteroVisitante = (Portero)titularesVisitante.get(0);
         
         final Portero porteroLocalFinal = porteroLocal;
         final Portero porteroVisitanteFinal = porteroVisitante;
@@ -106,7 +168,7 @@ public class Partido {
             public void run() {
                 if (loQueLleva < tiempoMax) {
                     // Comprobar tarjetas para equipo local
-                    for (Jugador j : equipoLocal.getJugadores()) {
+                    for (Jugador j : titularesLocal) {
                         if (!jugadoresExpulsados.contains(j)) {
                             // 5% de probabilidad de tarjeta amarilla
                             if (random.nextDouble() < 0.05) {
@@ -129,7 +191,7 @@ public class Partido {
                     }
                     
                     // Comprobar tarjetas para equipo visitante
-                    for (Jugador j : equipoVisitante.getJugadores()) {
+                    for (Jugador j : titularesVisitante) {
                         if (!jugadoresExpulsados.contains(j)) {
                             // 5% de probabilidad de tarjeta amarilla
                             if (random.nextDouble() < 0.05) {
@@ -169,9 +231,11 @@ public class Partido {
                         
                         if (!parada) {
                             List<Jugador> posiblesGoleadores = new ArrayList<>();
-                            for (Jugador j : equipoLocal.getJugadores()) {
+                            for (Jugador j : titularesLocal) {
                                 if (j.getPosicion() == Posicion.DELANTERO || j.getPosicion() == Posicion.MEDIOCENTRO) {
-                                    posiblesGoleadores.add(j);
+                                    if (!jugadoresExpulsados.contains(j)) {
+                                        posiblesGoleadores.add(j);
+                                    }
                                 }
                             }
                             if (!posiblesGoleadores.isEmpty()) {
@@ -200,9 +264,11 @@ public class Partido {
                         
                         if (!parada) {
                             List<Jugador> posiblesGoleadores = new ArrayList<>();
-                            for (Jugador j : equipoVisitante.getJugadores()) {
+                            for (Jugador j : titularesVisitante) {
                                 if (j.getPosicion() == Posicion.DELANTERO || j.getPosicion() == Posicion.MEDIOCENTRO) {
-                                    posiblesGoleadores.add(j);
+                                    if (!jugadoresExpulsados.contains(j)) {
+                                        posiblesGoleadores.add(j);
+                                    }
                                 }
                             }
                             if (!posiblesGoleadores.isEmpty()) {
@@ -255,7 +321,7 @@ public class Partido {
                     // Mostrar resumen de tarjetas
                     System.out.println("\nRESUMEN DE TARJETAS:");
                     System.out.println(equipoLocal.getNombre() + ":");
-                    for (Jugador j : equipoLocal.getJugadores()) {
+                    for (Jugador j : titularesLocal) {
                         if (j.getTarjetasAmarillas() > 0 || j.getTarjetasRojas() > 0) {
                             System.out.println("- " + j.getNombre() + ": " + 
                                              (j.getTarjetasAmarillas() > 0 ? j.getTarjetasAmarillas() + " amarillas" : "") +
@@ -263,7 +329,7 @@ public class Partido {
                         }
                     }
                     System.out.println(equipoVisitante.getNombre() + ":");
-                    for (Jugador j : equipoVisitante.getJugadores()) {
+                    for (Jugador j : titularesVisitante) {
                         if (j.getTarjetasAmarillas() > 0 || j.getTarjetasRojas() > 0) {
                             System.out.println("- " + j.getNombre() + ": " + 
                                              (j.getTarjetasAmarillas() > 0 ? j.getTarjetasAmarillas() + " amarillas" : "") +

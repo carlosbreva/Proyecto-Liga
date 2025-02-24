@@ -12,7 +12,7 @@ import java.util.List;
 public class Entrenador extends Persona {
 
     private int añosDeExperiencia;
-    private static String rutaFichero = "src/Nombres_Jugadores.txt";
+    private static String rutaFichero;
     private static Random random = new Random();
 
     
@@ -38,13 +38,15 @@ public class Entrenador extends Persona {
         this.rutaFichero = rutaFichero;
     }
 
+
+
     // métodos 
     public static List<Entrenador> crearEntrenadores(String rutaFichero) {
         List<Entrenador> entrenadores = new ArrayList<>();
         
         try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {
             String linea;
-            while ((linea = br.readLine()) != null && entrenadores.size() <20) {
+            while ((linea = br.readLine()) != null) {
                 if (!linea.trim().isEmpty()) {
                     int añosExperiencia = 5 + random.nextInt(10); // Entre 5 y 14 años de experiencia
                     int edad = 30 + random.nextInt(30); // Entre 30 y 59 años

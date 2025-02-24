@@ -16,7 +16,7 @@ public class Portero extends Jugador {
     private int saqueLargo;
     private int reflejos;
     private int posicionamiento;
-    private static String rutaFichero = "src/Nombres_Jugadores.txt";
+    private static String rutaFichero;
     private static Random random = new Random();
 
     public Portero(String nombre, int edad, Posicion posicion, int numeroDeParadas, int estirada, int agarre, int saqueLargo, int reflejos, int posicionamiento, int statMediaJugador) {
@@ -77,38 +77,39 @@ public class Portero extends Jugador {
         this.posicionamiento = posicionamiento;
     }
 
+
     public static List<Portero> crearPorteros(String rutaFichero) {
         List<Portero> porteros = new ArrayList<>();
         
         try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {
             String linea;
             int lineaActual = 1;
+            
             while ((linea = br.readLine()) != null) {
-                // Tomar nombres desde la línea 21 hasta la 60 para porteros
-                if (lineaActual > 20 && lineaActual <= 60) {
-                    if (!linea.trim().isEmpty()) {
-                        int edad = 18 + random.nextInt(22); // Entre 18 y 39 años
-                        int estirada = 40 + random.nextInt(61); // Entre 40-100
-                        int agarre = 40 + random.nextInt(61);   // Entre 40-100
-                        int saqueLargo = 40 + random.nextInt(61); // Entre 40-100
-                        int reflejos = 40 + random.nextInt(61);   // Entre 40-100
-                        int posicionamiento = 40 + random.nextInt(61); // Entre 40-100
-                        int statMedia = (estirada + agarre + saqueLargo + reflejos + posicionamiento) / 5;
-                        
-                        Portero portero = new Portero(
-                            linea.trim(),
-                            edad,
-                            Posicion.PORTERO,
-                            0, // numeroDeParadas inicial
-                            estirada,
-                            agarre,
-                            saqueLargo,
-                            reflejos,
-                            posicionamiento,
-                            statMedia
-                        );
-                        porteros.add(portero);
-                    }
+                if (!linea.trim().isEmpty()) {
+                    int edad = 18 + random.nextInt(22); // Entre 18 y 39 años
+                    int estirada = 40 + random.nextInt(61); // Entre 40-100
+                    int agarre = 40 + random.nextInt(61);   // Entre 40-100
+                    int saqueLargo = 40 + random.nextInt(61); // Entre 40-100
+                    int reflejos = 40 + random.nextInt(61);   // Entre 40-100
+                    int posicionamiento = 40 + random.nextInt(61); // Entre 40-100
+                    int statMedia = (estirada + agarre + saqueLargo + reflejos + posicionamiento) / 5;
+                    
+                    Portero portero = new Portero(
+                        linea.trim(),
+                        edad,
+                        Posicion.PORTERO,
+                        0, // numeroDeParadas inicial
+                        estirada,
+                        agarre,
+                        saqueLargo,
+                        reflejos,
+                        posicionamiento,
+                        statMedia
+                    );
+                    porteros.add(portero);
+                } else {
+                    System.out.println("La linea " + lineaActual + " no es válida");
                 }
                 lineaActual++;
             }

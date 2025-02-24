@@ -17,7 +17,7 @@ public class Jugador extends Persona {
     private int tarjetasRojas;
     private int golesAnotados;
     private int velocidad;
-    private static String rutaFichero = "src/Nombres_Jugadores.txt";
+    private static String rutaFichero;
     private static Random random = new Random();
     //Estadísticas de Jugador de Campo
     private int ritmo;
@@ -130,37 +130,100 @@ public class Jugador extends Persona {
 
     public static List<Jugador> crearJugadores(String rutaFichero) {
         List<Jugador> jugadores = new ArrayList<>();
+        List<String> nombresJugadores = new ArrayList<>();
         
+        // Primero leemos todos los nombres
         try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {
             String linea;
-            int lineaActual = 1;
             while ((linea = br.readLine()) != null) {
-                // Tomar nombres a partir de la línea 61 para jugadores de campo
-                if (lineaActual > 60) {
-                    if (!linea.trim().isEmpty()) {
-                        Posicion posicion = Posicion.values()[random.nextInt(Posicion.values().length - 1)];
-                        int edad = 18 + random.nextInt(22); // Entre 18 y 39 años
-                        int ritmo = 40 + random.nextInt(61); // Entre 40-100
-                        int pase = 40 + random.nextInt(61); // Entre 40-100
-                        int tiros = 40 + random.nextInt(61); // Entre 40-100
-                        int defensa = 40 + random.nextInt(61); // Entre 40-100
-                        int regate = 40 + random.nextInt(61); // Entre 40-100
-                        int fisico = 40 + random.nextInt(61); // Entre 40-100
-                        int velocidad = 40 + random.nextInt(61); // Entre 40-100
-                        int statMediaJugador = (ritmo + pase + tiros + defensa + regate + fisico + velocidad) / 7;
-                        Jugador jugador = new Jugador(linea.trim(), edad, posicion, 0, 0, 0, velocidad, ritmo, pase, tiros, defensa, regate, fisico, statMediaJugador);
-                        jugadores.add(jugador);
-                    }
+                if (!linea.trim().isEmpty()) {
+                    nombresJugadores.add(linea.trim());
                 }
-                lineaActual++;
             }
         } catch (FileNotFoundException e) {
             System.err.println("No se encontró el archivo de nombres: " + rutaFichero);
+            return jugadores;
         } catch (IOException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
+            return jugadores;
         }
+
+        // Mezclar la lista de nombres aleatoriamente
+        for (int i = nombresJugadores.size() - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            String temp = nombresJugadores.get(i);
+            nombresJugadores.set(i, nombresJugadores.get(j));
+            nombresJugadores.set(j, temp);
+        }
+
+        int defensasNecesarios = 8;
+        int mediocentrosNecesarios = 8;
+        int delanterosNecesarios = 4;
+        int jugadoresCreados = 0;
+
+        // Crear jugadores con posiciones aleatorias
+        while (jugadoresCreados < nombresJugadores.size() && 
+               (defensasNecesarios > 0 || mediocentrosNecesarios > 0 || delanterosNecesarios > 0)) {
+            
+            // Determinar qué posiciones aún necesitan jugadores
+            List<Posicion> posicionesDisponibles = new ArrayList<>();
+            if (defensasNecesarios > 0) posicionesDisponibles.add(Posicion.DEFENSA);
+            if (mediocentrosNecesarios > 0) posicionesDisponibles.add(Posicion.MEDIOCENTRO);
+            if (delanterosNecesarios > 0) posicionesDisponibles.add(Posicion.DELANTERO);
+
+            // Seleccionar una posición aleatoria de las disponibles
+            Posicion posicion = posicionesDisponibles.get(random.nextInt(posicionesDisponibles.size()));
+
+            // Actualizar contadores
+            switch (posicion) {
+                case DEFENSA:
+                    defensasNecesarios--;
+                    break;
+                case MEDIOCENTRO:
+                    mediocentrosNecesarios--;
+                    break;
+                case DELANTERO:
+                    delanterosNecesarios--;
+                    break;
+            }
+
+            // Crear jugador con estadísticas aleatorias
+            int edad = 18 + random.nextInt(22); // Entre 18 y 39 años
+            int ritmo = 40 + random.nextInt(61); // Entre 40-100
+            int pase = 40 + random.nextInt(61);
+            int tiros = 40 + random.nextInt(61);
+            int defensa = 40 + random.nextInt(61);
+            int regate = 40 + random.nextInt(61);
+            int fisico = 40 + random.nextInt(61);
+            int velocidad = 40 + random.nextInt(61);
+            int statMediaJugador = (ritmo + pase + tiros + defensa + regate + fisico + velocidad) / 7;
+
+            Jugador jugador = new Jugador(
+                nombresJugadores.get(jugadoresCreados),
+                edad,
+                posicion,
+                0, 0, 0, // tarjetas y goles
+                velocidad,
+                ritmo,
+                pase,
+                tiros,
+                defensa,
+                regate,
+                fisico,
+                statMediaJugador
+            );
+            
+            jugadores.add(jugador);
+            jugadoresCreados++;
+        }
+
+        // Verificar que se crearon todos los jugadores necesarios
+        System.out.println("\nDistribución de jugadores creados:");
+        System.out.println("Defensas: " + (8 - defensasNecesarios) + "/8");
+        System.out.println("Mediocentros: " + (8 - mediocentrosNecesarios) + "/8");
+        System.out.println("Delanteros: " + (4 - delanterosNecesarios) + "/4");
         
-        return jugadores;  
+        return jugadores;
     }
 
     @Override

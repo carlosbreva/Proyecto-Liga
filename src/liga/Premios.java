@@ -3,18 +3,24 @@ import java.util.List;
 import personal.Jugador;
 import personal.Equipo;
 import personal.Portero;
-public class Premios {
+public class Premios  {
     
     private String MVP;
     private String Goleador;
     private String PorteroTorneo;
     private String EquipoCampeon;
 
+
     public Premios(String MVP, String Goleador, String PorteroTorneo, String EquipoCampeon) {
         this.MVP = MVP;
         this.Goleador = Goleador;
         this.PorteroTorneo = PorteroTorneo;
         this.EquipoCampeon = EquipoCampeon;
+
+    }
+
+    public Premios(){
+
     }
     
     public String getMVP() {
@@ -50,7 +56,7 @@ public class Premios {
     }
 
 
-    public void darPremios(List<Jugador> jugadores, List<Equipo> equipos, List<Portero> porteros) {
+    public static void darPremios(List<Jugador> jugadores, List<Equipo> equipos, List<Portero> porteros) {
         //LIGA
         Equipo campeon = equipos.get(0);
         for (Equipo equipo : equipos) {
@@ -84,6 +90,9 @@ public class Premios {
             }
         }
         System.out.println("Portero del torneo: " + mejorPortero.getNombre());  
+
+        
+
     }
 
 

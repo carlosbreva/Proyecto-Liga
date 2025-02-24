@@ -15,12 +15,13 @@ public class Liga {
     private List<Equipo> equipos;
     private Jornada[] jornadas;
     private Persona[] jugadores;
+    private static String rutaFichero;
 
 //Constructor//
- public Liga(String nombre, List<Equipo> equipos){
+ public Liga(String nombre, List<Equipo> equipos, String rutaFichero){
     this.nombre = nombre;
     this.equipos = equipos;
-    
+    this.rutaFichero = rutaFichero;
     // Crear jornadas (cada equipo juega contra todos los demás una vez)
     int numeroJornadas = (equipos.size() * 2) - 2; // Multiplicado por 2 para ida y vuelta
     this.jornadas = new Jornada[numeroJornadas];
@@ -79,21 +80,18 @@ public class Liga {
         System.out.println("\n=== INICIO DE LA LIGA ===\n");
         for (Jornada jornada : jornadas) {
             System.out.println("\n=== JORNADA " + jornada.getNumeroJornada() + " ===\n");
-            jornada.jugarPartidos(equipos);
-            System.out.println("\n=== CLASIFICACIÓN TRAS LA JORNADA " + jornada.getNumeroJornada() + " ===");
-            VerClasificacion();
-            System.out.println("\nPresiona Enter para continuar...");
-            try {
-                System.in.read();
-            } catch (IOException e) {
-                e.printStackTrace();
+            jornada.jugarPartidos(equipos, rutaFichero);
+            if (jornada.getNumeroJornada() < jornadas.length) {
+                System.out.println("\n=== CLASIFICACIÓN TRAS LA JORNADA " + jornada.getNumeroJornada() + " ===");
+                VerClasificacion();
+            } else {
+                System.out.println("\n=== CLASIFICACIÓN FINAL DE LA LIGA ===");
+                VerClasificacion();
             }
         }
-        System.out.println("\n=== CLASIFICACIÓN FINAL DE LA LIGA ===");
-        VerClasificacion();
         System.out.println("\n=== FIN DE LA LIGA ===\n");
     }
-    
+
 
 public void VerClasificacion(){
     System.out.println("\n=== CLASIFICACIÓN ===");

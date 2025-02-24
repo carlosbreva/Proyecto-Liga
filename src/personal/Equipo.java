@@ -24,7 +24,7 @@ public class Equipo {
     private int mediaStatsEquipo;
     private int puntos;
     private Partido[] partidos;
-    private static String rutaFichero = "src/Nombres_Equipos.txt";
+    private static String rutaFichero;
     private static Random random = new Random();
     private int partidosJugados;
 
@@ -125,83 +125,48 @@ public class Equipo {
     public void setPartidosJugados(int partidosJugados) {
         this.partidosJugados = partidosJugados;
     }
-public static List<Equipo> crearEquipos(List<Entrenador> entrenadores, List<Portero> porteros, List<Jugador> jugadores) {
+public static List<Equipo> crearEquipos(String rutaFichero, List<Entrenador> entrenadores, List<Portero> porteros, List<Jugador> jugadores) {
     List<Equipo> equipos = new ArrayList<>();
     int indiceEntrenador = 0;
     int indiceJugador = 0;
-    int indicePortero = 0;
     
     try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {
         String linea;
-        while ((linea = br.readLine()) != null && indiceEntrenador < entrenadores.size() 
-               && indicePortero + 2 <= porteros.size()  
-               && indiceJugador + 20 <= jugadores.size()) { 
-            
+        while ((linea = br.readLine()) != null && indiceEntrenador < entrenadores.size()) { 
             if (!linea.trim().isEmpty()) {
                 String nombreEntrenador = entrenadores.get(indiceEntrenador).getNombre();
                 List<Jugador> jugadoresEquipo = new ArrayList<>();
                 
                 // Agregar 2 porteros
-                for (int i = 0; i < 2; i++) {
-                    Portero portero = porteros.get(indicePortero++);
-                    jugadoresEquipo.add(portero); // Añadir el portero directamente sin convertirlo a Jugador
+                for (int i = 0; i < 2 && i < porteros.size(); i++) {
+                    jugadoresEquipo.add(porteros.get(i));
                 }
                 
                 // Agregar 8 defensas
-                for (int i = 0; i < 8; i++) {
-                    Jugador jugador = jugadores.get(indiceJugador++);
-                    jugadoresEquipo.add(new Jugador(
-                        jugador.getNombre(),
-                        jugador.getEdad(),
-                        Posicion.DEFENSA,
-                        0, 0, 0,  // Inicializar tarjetas y goles en 0
-                        jugador.getRitmo(),
-                        jugador.getPase(),
-                        jugador.getTiros(),
-                        jugador.getDefensa(),
-                        jugador.getRegate(),
-                        jugador.getFisico(),
-                        jugador.getRitmo(),  // velocidad
-                        jugador.getStatMediaJugador()
-                    ));
+                int defensasAgregados = 0;
+                for (Jugador j : jugadores) {
+                    if (j.getPosicion() == Posicion.DEFENSA && defensasAgregados < 8) {
+                        jugadoresEquipo.add(j);
+                        defensasAgregados++;
+                    }
                 }
                 
                 // Agregar 8 mediocentros
-                for (int i = 0; i < 8; i++) {
-                    Jugador jugador = jugadores.get(indiceJugador++);
-                    jugadoresEquipo.add(new Jugador(
-                        jugador.getNombre(),
-                        jugador.getEdad(),
-                        Posicion.MEDIOCENTRO,
-                        0, 0, 0,  // Inicializar tarjetas y goles en 0
-                        jugador.getRitmo(),
-                        jugador.getPase(),
-                        jugador.getTiros(),
-                        jugador.getDefensa(),
-                        jugador.getRegate(),
-                        jugador.getFisico(),
-                        jugador.getRitmo(),  // velocidad
-                        jugador.getStatMediaJugador()
-                    ));
+                int mediocentrosAgregados = 0;
+                for (Jugador j : jugadores) {
+                    if (j.getPosicion() == Posicion.MEDIOCENTRO && mediocentrosAgregados < 8) {
+                        jugadoresEquipo.add(j);
+                        mediocentrosAgregados++;
+                    }
                 }
                 
                 // Agregar 4 delanteros
-                for (int i = 0; i < 4; i++) {
-                    Jugador jugador = jugadores.get(indiceJugador++);
-                    jugadoresEquipo.add(new Jugador(
-                        jugador.getNombre(),
-                        jugador.getEdad(),
-                        Posicion.DELANTERO,
-                        0, 0, 0,  // Inicializar tarjetas y goles en 0
-                        jugador.getRitmo(),
-                        jugador.getPase(),
-                        jugador.getTiros(),
-                        jugador.getDefensa(),
-                        jugador.getRegate(),
-                        jugador.getFisico(),
-                        jugador.getRitmo(),  // velocidad
-                        jugador.getStatMediaJugador()
-                    ));
+                int delanterosAgregados = 0;
+                for (Jugador j : jugadores) {
+                    if (j.getPosicion() == Posicion.DELANTERO && delanterosAgregados < 4) {
+                        jugadoresEquipo.add(j);
+                        delanterosAgregados++;
+                    }
                 }
                 
                 // Calcular la media de estadísticas del equipo
@@ -216,6 +181,15 @@ public static List<Equipo> crearEquipos(List<Entrenador> entrenadores, List<Port
                 Equipo equipo = new Equipo(linea.trim(), nombreEntrenador, jugadoresEquipo, 0, 0, 0, mediaStats, 0, null, 0);
                 equipos.add(equipo);
                 indiceEntrenador++;
+
+                // Verificar que el equipo tiene todos los jugadores necesarios
+                if (jugadoresEquipo.size() < 22) {
+                    System.err.println("Advertencia: El equipo " + linea.trim() + " no tiene todos los jugadores necesarios.");
+                    System.err.println("Jugadores totales: " + jugadoresEquipo.size());
+                    System.err.println("Defensas: " + defensasAgregados + "/8");
+                    System.err.println("Mediocentros: " + mediocentrosAgregados + "/8");
+                    System.err.println("Delanteros: " + delanterosAgregados + "/4");
+                }
             }
         }
     } catch (FileNotFoundException e) {
@@ -226,9 +200,6 @@ public static List<Equipo> crearEquipos(List<Entrenador> entrenadores, List<Port
     
     if (equipos.isEmpty()) {
         System.err.println("No se pudieron crear equipos. Verifica que hay suficientes jugadores y porteros.");
-    } else if (indiceEntrenador < entrenadores.size()) {
-        System.err.println("Advertencia: No se pudieron crear todos los equipos por falta de jugadores o porteros.");
-        System.err.println("Equipos creados: " + equipos.size());
     }
     
     return equipos;  
