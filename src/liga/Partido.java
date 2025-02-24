@@ -100,7 +100,7 @@ public class Partido {
         TimerTask task = new TimerTask() {
             private int loQueLleva = 0;
             final int tiempoMax = (int) (0.3/0.05); // Reducido a 0.3 segundos total
-            
+
             @Override
             public void run() {
                 if (loQueLleva < tiempoMax) {
@@ -239,6 +239,9 @@ public class Partido {
                     
                     System.out.println("\n=== FINAL DEL PARTIDO ===");
                     System.out.println(equipoLocal.getNombre() + " " + golesLocal[0] + " - " + golesVisitante[0] + " " + equipoVisitante.getNombre());
+                    equipoLocal.setPartidosJugados(equipoLocal.getPartidosJugados() + 1);
+                    equipoVisitante.setPartidosJugados(equipoVisitante.getPartidosJugados() + 1);
+                    
                     if (porteroLocalFinal != null) {
                         System.out.println("Paradas de " + porteroLocalFinal.getNombre() + ": " + paradasLocal[0]);
                     }

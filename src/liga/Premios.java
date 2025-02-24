@@ -51,6 +51,15 @@ public class Premios {
 
 
     public void darPremios(List<Jugador> jugadores, List<Equipo> equipos) {
+
+        //LIGA
+         Equipo campeon = equipos.get(0);
+         for (Equipo equipo : equipos) {
+            if (equipo.getPuntos() > campeon.getPuntos()) {
+                campeon = equipo;
+            }
+         }
+         System.out.println("Equipo campeón: " + campeon.getNombre());
         // MVP
         Jugador mvp = jugadores.get(0);
         for (Jugador jugador : jugadores) {

@@ -26,8 +26,9 @@ public class Equipo {
     private Partido[] partidos;
     private static String rutaFichero = "src/Nombres_Equipos.txt";
     private static Random random = new Random();
+    private int partidosJugados;
 
-    public Equipo(String nombre, String nombreEntrenador, List<Jugador> jugadores, int golesAfavor, int golesEnContra, int diferenciaGoles, int mediaStatsEquipo, int puntos, Partido[] partidos) {
+    public Equipo(String nombre, String nombreEntrenador, List<Jugador> jugadores, int golesAfavor, int golesEnContra, int diferenciaGoles, int mediaStatsEquipo, int puntos, Partido[] partidos, int partidosJugados) {
         this.nombre = nombre;
         this.nombreEntrenador = nombreEntrenador;
         this.jugadores = jugadores;
@@ -37,6 +38,7 @@ public class Equipo {
         this.mediaStatsEquipo = mediaStatsEquipo;
         this.puntos = puntos;
         this.partidos = partidos;
+        this.partidosJugados = partidosJugados;
     }
 
     public Equipo(String nombre, String nombreEntrenador) {
@@ -116,6 +118,13 @@ public class Equipo {
         this.nombreEntrenador = nombreEntrenador;
     }
 
+    public int getPartidosJugados() {
+        return partidosJugados;
+    }
+
+    public void setPartidosJugados(int partidosJugados) {
+        this.partidosJugados = partidosJugados;
+    }
 public static List<Equipo> crearEquipos(List<Entrenador> entrenadores, List<Portero> porteros, List<Jugador> jugadores) {
     List<Equipo> equipos = new ArrayList<>();
     int indiceEntrenador = 0;
@@ -204,7 +213,7 @@ public static List<Equipo> crearEquipos(List<Entrenador> entrenadores, List<Port
                 }
                 int mediaStats = sumaStats / jugadoresEquipo.size();
                 
-                Equipo equipo = new Equipo(linea.trim(), nombreEntrenador, jugadoresEquipo, 0, 0, 0, mediaStats, 0, null);
+                Equipo equipo = new Equipo(linea.trim(), nombreEntrenador, jugadoresEquipo, 0, 0, 0, mediaStats, 0, null, 0);
                 equipos.add(equipo);
                 indiceEntrenador++;
             }
@@ -229,7 +238,7 @@ public static List<Equipo> crearEquipos(List<Entrenador> entrenadores, List<Port
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Equipo equipo = (Equipo) o;
-        return golesAfavor == equipo.golesAfavor && golesEnContra == equipo.golesEnContra && diferenciaGoles == equipo.diferenciaGoles && mediaStatsEquipo == equipo.mediaStatsEquipo && puntos == equipo.puntos && Objects.equals(nombre, equipo.nombre) && Objects.deepEquals(jugadores, equipo.jugadores) && Objects.deepEquals(partidos, equipo.partidos);
+        return golesAfavor == equipo.golesAfavor && golesEnContra == equipo.golesEnContra && diferenciaGoles == equipo.diferenciaGoles && mediaStatsEquipo == equipo.mediaStatsEquipo && puntos == equipo.puntos && Objects.equals(nombre, equipo.nombre) && Objects.deepEquals(jugadores, equipo.jugadores) && Objects.deepEquals(partidos, equipo.partidos) && partidosJugados == equipo.partidosJugados;
     }
 
     @Override
@@ -247,7 +256,8 @@ public static List<Equipo> crearEquipos(List<Entrenador> entrenadores, List<Port
                "\nDiferencia de goles: " + diferenciaGoles +
                "\nMedia stats equipo: " + mediaStatsEquipo +
                "\nPuntos: " + puntos +
-               "\nPartidos: " + Arrays.toString(partidos);
+               "\nPartidos: " + Arrays.toString(partidos) +
+               "\nPartidos jugados: " + partidosJugados;
     }
 }
 

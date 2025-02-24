@@ -32,6 +32,7 @@ public class Main {
 
         Liga liga = new Liga("Liga 1", equipos);
         liga.jugarLiga();
+        
 
 
 

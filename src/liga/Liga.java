@@ -104,7 +104,7 @@ public void VerClasificacion(){
 
     for (int i = 0; i < equipos.size(); i++) {
         Equipo e = equipos.get(i);
-        int partidosJugados = e.getPartidos() != null ? e.getPartidos().length : 0;
+        int partidosJugados = e.getPartidosJugados();
         int partidosGanados = e.getPuntos() / 3;
         int partidosEmpatados = e.getPuntos() % 3;
         int partidosPerdidos = partidosJugados - partidosGanados - partidosEmpatados;
