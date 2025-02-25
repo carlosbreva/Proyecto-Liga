@@ -4,7 +4,7 @@ import personal.Persona;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Objects;
-
+import personal.*;
 
 public class Liga {
 
@@ -67,8 +67,21 @@ public class Liga {
 
     /*Metodos y funciones  */
 
+    public static Liga crearLiga(String nombreLiga){
+        String Entrenadores = "src/Documentos_Ligas/" + nombreLiga + "/Entrenadores_" + nombreLiga + ".txt";
+        String Porteros = "src/Documentos_Ligas/" + nombreLiga + "/Porteros_" + nombreLiga + ".txt";
+        String Jugadores = "src/Documentos_Ligas/" + nombreLiga + "/RestoDeJugadores_" + nombreLiga + ".txt";
+        String Nombres_Equipos = "src/Documentos_Ligas/" + nombreLiga + "/Equipos_" + nombreLiga + ".txt";
+        List<Entrenador> entrenadores = Entrenador.crearEntrenadores(Entrenadores);
+        List<Portero> porteros = Portero.crearPorteros(Porteros);
+        List<Jugador> jugadores = Jugador.crearJugadores(Jugadores);
+        List<Equipo> equipos = Equipo.crearEquipos(Nombres_Equipos, entrenadores, porteros, jugadores);
+        Liga liga = new Liga(nombreLiga, equipos);
+        return liga;
+    }
 
-    public void jugarLiga(String rutaFichero) {
+
+    public void jugarLiga() {
         if (equipos == null || equipos.isEmpty()) {
             System.out.println("No hay equipos suficientes para jugar la jornada.");
             return;
@@ -77,7 +90,7 @@ public class Liga {
         System.out.println("\n=== INICIO DE LA LIGA ===\n");
         for (Jornada jornada : jornadas) {
             System.out.println("\n=== JORNADA " + jornada.getNumeroJornada() + " ===\n");
-            jornada.jugarPartidos(equipos, rutaFichero);
+            jornada.jugarPartidos(equipos);
             if (jornada.getNumeroJornada() < jornadas.length) {
                 System.out.println("\n=== CLASIFICACIÓN TRAS LA JORNADA " + jornada.getNumeroJornada() + " ===");
                 VerClasificacion();

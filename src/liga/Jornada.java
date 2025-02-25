@@ -38,7 +38,8 @@ public class Jornada {
     }
 
     /*Metodos y funciones  */
-    public static String leerFichero(int i, String rutaFichero) {
+    public  String leerFichero(int i) {
+        String rutaFichero = "src/Documentos_Ligas/" + liga.getNombre() + "/Calendario_Partidos_" + liga.getNombre() + ".txt";
         try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {
             String linea;
             int contador = 0;
@@ -59,7 +60,7 @@ public class Jornada {
         }
     }
 
-    public void jugarPartidos(List<Equipo> equipos, String rutaFichero) {
+    public void jugarPartidos(List<Equipo> equipos) {
         if (equipos == null || equipos.size() < 2) {
             System.out.println("No hay suficientes equipos para jugar los partidos.");
             return;
@@ -70,8 +71,8 @@ public class Jornada {
         
         for (int i = 0; i < numeroPartidosenJornada; i++) {
             System.out.println("\nPartido " + (i+1) + ":");
-            String nombreEquipoLocal = leerFichero(offset + i*2, rutaFichero);
-            String nombreEquipoVisitante = leerFichero(offset + i*2 + 1, rutaFichero);
+            String nombreEquipoLocal = leerFichero(offset + i*2);
+            String nombreEquipoVisitante = leerFichero(offset + i*2 + 1);
             
             // Buscar los equipos por nombre
             Equipo equipoLocal = null;

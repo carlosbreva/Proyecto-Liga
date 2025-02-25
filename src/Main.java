@@ -3,94 +3,127 @@ import liga.*;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);  // Un solo Scanner para toda la aplicación
         boolean seguirJugando = true;
-        List<Equipo> EquiposEuropa= new ArrayList<>();
-        List<Equipo> equiposeuropaBundesliga = new ArrayList<>();
-        List<Equipo> equiposeuropaLaliga = new ArrayList<>();
+        List<Equipo> equiposEuropa = new ArrayList<>(Arrays.asList(new Equipo[32])); // Inicializar con 32 espacios nulos
+        
+        // Definir índices para cada liga (4 equipos por liga)
+        final int BUNDESLIGA_START = 0;   // 0-3
+        final int LALIGA_START = 4;       // 4-7
+        final int SERIEA_START = 8;       // 8-11
+        final int LIGUE1_START = 12;      // 12-15
+        final int PREMIER_START = 16;     // 16-19
+        final int PRIMEIRA_START = 20;    // 20-23
+        final int EREDIVISIE_START = 24;  // 24-27
+        final int BELGIAN_START = 28;     // 28-31
 
-        while (seguirJugando && EquiposEuropa.size() < 8) {
-            System.out.println("=== XTART FURBOL SIMULATOR ===\n");
+        while (seguirJugando) {
+            System.out.println("=== XTART fÚTBOL  SIMULATOR ===\n");
             System.out.println("=== OPCIONES DISPONIBLES (Recomendamos jugar todas las ligas para obtener una experiencia sorpresa...): ===\n");
-            System.out.println("1. Bundesliga");
-            System.out.println("2. La Liga");
-            System.out.println("3. Serie A");
-            System.out.println("4. Ligue 1");
-            System.out.println("5. Salir");
-
+            System.out.println("1. Bundesliga (Alemania)");
+            System.out.println("2. La Liga (España)");
+            System.out.println("3. Serie A (Italia)");
+            System.out.println("4. Ligue 1 (Francia)");
+            System.out.println("5. Premier League (Inglaterra)");
+            System.out.println("6. Primeira Liga (Portugal)");
+            System.out.println("7. Eredivisie (Holanda)");
+            System.out.println("8. Belgian Pro League (Bélgica)");
+            System.out.println("9. Salir");
 
             int opcion = scanner.nextInt();
             scanner.nextLine(); // Consumir el salto de línea
 
+            Liga ligaActual = null;
+            int startIndex = 0;
+
             switch (opcion) {
                 case 1:
-                    equiposeuropaBundesliga.clear();
                     System.out.println("Has seleccionado la Bundesliga");
-                    String Entrenadores_Bundesliga = "src/Documentos_Ligas/Bundesliga/Entrenadores_Bundesliga.txt";
-                    String Porteros_Bundesliga = "src/Documentos_Ligas/Bundesliga/Porteros_Bundesliga.txt";
-                    String Jugadores_Bundesliga = "src/Documentos_Ligas/Bundesliga/RestoDeJugadores_Bundesliga.txt";
-                    String Nombres_Equipos_Bundesliga = "src/Documentos_Ligas/Bundesliga/Equipos_Bundesliga.txt";
-                    String Calendario_Partidos_Bundesliga = "src/Documentos_Ligas/Bundesliga/Calendario_Partidos_Bundesliga.txt";
-                    List<Entrenador> entrenadores_bundesliga = Entrenador.crearEntrenadores(Entrenadores_Bundesliga);
-                    List<Portero> porteros_bundesliga = Portero.crearPorteros(Porteros_Bundesliga);
-                    List<Jugador> jugadores_bundesliga = Jugador.crearJugadores(Jugadores_Bundesliga);
-                    List<Equipo> equipos_bundesliga = Equipo.crearEquipos(Nombres_Equipos_Bundesliga, entrenadores_bundesliga, porteros_bundesliga, jugadores_bundesliga);
-                    Liga liga_bundesliga = new Liga("Bundesliga", equipos_bundesliga);
-                    liga_bundesliga.jugarLiga(Calendario_Partidos_Bundesliga);
-                    Premios.darPremios(jugadores_bundesliga, equipos_bundesliga, porteros_bundesliga);
-                    equiposeuropaBundesliga = Premios.EquiposAEuropa(equipos_bundesliga);
-
-                    
-                    System.out.println("¿Quieres jugar otra liga? (1. Si 2. No)");
-                    int respuesta = scanner.nextInt();
-                    scanner.nextLine(); // Consumir el salto de línea
-                    
-                    if (respuesta != 1) {
-                        seguirJugando = false;
-                        System.out.println("Gracias por jugar");
-                    } else {
-                        continue; // Volver al menú principal
-                    }
+                    ligaActual = Liga.crearLiga("Bundesliga");
+                    startIndex = BUNDESLIGA_START;
                     break;
-
                 case 2:
-                    equiposeuropaLaliga.clear();
                     System.out.println("Has seleccionado la La Liga");
-                    String Entrenadores_LaLiga = "src/Documentos_Ligas/LaLiga/Entrenadores_LaLiga.txt";
-                    String Porteros_LaLiga = "src/Documentos_Ligas/LaLiga/Porteros_LaLiga.txt";
-                    String Jugadores_LaLiga = "src/Documentos_Ligas/LaLiga/RestoDeJugadores_LaLiga.txt";
-                    String Nombres_Equipos_LaLiga = "src/Documentos_Ligas/LaLiga/Equipos_LaLiga.txt";
-                    String Calendario_Partidos_LaLiga = "src/Documentos_Ligas/LaLiga/Calendario_Partidos_LaLiga.txt";
-                    List<Entrenador> entrenadores_laliga = Entrenador.crearEntrenadores(Entrenadores_LaLiga);
-                    List<Portero> porteros_laliga = Portero.crearPorteros(Porteros_LaLiga);
-                    List<Jugador> jugadores_laliga = Jugador.crearJugadores(Jugadores_LaLiga);
-                    List<Equipo> equipos_laliga = Equipo.crearEquipos(Nombres_Equipos_LaLiga, entrenadores_laliga, porteros_laliga, jugadores_laliga);
-                    Liga liga_laliga = new Liga("La Liga", equipos_laliga);
-                    liga_laliga.jugarLiga(Calendario_Partidos_LaLiga);
-                    Premios.darPremios(jugadores_laliga, equipos_laliga, porteros_laliga);
-                    equiposeuropaLaliga = Premios.EquiposAEuropa(equipos_laliga);
-                    System.out.println("¿Quieres jugar otra liga? (1. Si 2. No)");
-                    int respuesta2 = scanner.nextInt();
-                    scanner.nextLine(); // Consumir el salto de línea
-                    
-                    if (respuesta2 != 1) {
-                        seguirJugando = false;
-                        System.out.println("Gracias por jugar");
-                    } else {
-                        continue; // Volver al menú principal
-                    }
+                    ligaActual = Liga.crearLiga("LaLiga");
+                    startIndex = LALIGA_START;
                     break;
-
+                case 3:
+                    System.out.println("Has seleccionado la Serie A");
+                    ligaActual = Liga.crearLiga("SerieA");
+                    startIndex = SERIEA_START;
+                    break;
+                case 4:
+                    System.out.println("Has seleccionado la Ligue 1");
+                    ligaActual = Liga.crearLiga("Ligue1");
+                    startIndex = LIGUE1_START;
+                    break;
+                case 5:
+                    System.out.println("Has seleccionado la Premier League");
+                    ligaActual = Liga.crearLiga("PremierLeague");
+                    startIndex = PREMIER_START;
+                    break;
                 case 6:
+                    System.out.println("Has seleccionado la Primeira Liga");
+                    ligaActual = Liga.crearLiga("PrimeiraLiga");
+                    startIndex = PRIMEIRA_START;
+                    break;
+                case 7:
+                    System.out.println("Has seleccionado la Eredivisie");
+                    ligaActual = Liga.crearLiga("Eredivisie");
+                    startIndex = EREDIVISIE_START;
+                    break;
+                case 8:
+                    System.out.println("Has seleccionado la Belgian Pro League");
+                    ligaActual = Liga.crearLiga("BelgianProLeague");
+                    startIndex = BELGIAN_START;
+                    break;
+                case 9:
                     seguirJugando = false;
-                    System.out.println("Gracias por jugar");
+                    System.out.println("Gracias por jugar!");
                     break;
             }
-            scanner.close();
 
-        } 
+            if (ligaActual != null) {
+                ligaActual.jugarLiga();
+                List<Equipo> equipos = ligaActual.getEquipos();
+                List<Jugador> jugadores = new ArrayList<>();
+                List<Portero> porteros = new ArrayList<>();
+                
+                // Separar jugadores y porteros del equipo
+                for (Equipo equipo : equipos) {
+                    for (Jugador jugador : equipo.getJugadores()) {
+                        if (jugador instanceof Portero) {
+                            porteros.add((Portero) jugador);
+                        } else {
+                            jugadores.add(jugador);
+                        }
+                    }
+                }
+                
+                // Dar premios y obtener equipos para Europa
+                Premios.darPremios(jugadores, equipos, porteros);
+                List<Equipo> equiposParaEuropa = Premios.EquiposAEuropa(equipos);
+                
+                // Asegurar exactamente 4 equipos para Europa
+                for (int i = 0; i < 4 && i < equiposParaEuropa.size(); i++) {
+                    equiposEuropa.set(startIndex + i, equiposParaEuropa.get(i));
+                }
+            }
+
+            if (seguirJugando) {
+                System.out.println("¿Quieres jugar otra liga? (1. Si 2. No)");
+                int respuesta = scanner.nextInt();
+                scanner.nextLine();
+                if (respuesta != 1) {
+                    seguirJugando = false;
+                }
             }
         }
+        scanner.close();
+    }
+}
  

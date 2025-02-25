@@ -1,0 +1,612 @@
+Montpellier Tigres
+Toulouse Corsaires
+Saint-Étienne Vikings
+Lyon Dragons
+Le Havre Aigles
+Montpellier Hurricanes
+Grenoble Tigres
+Reims Tempêtes
+Strasbourg Loups
+Grenoble Dragons
+Grenoble Panthères
+Lille Hurricanes
+Nice Éperviers
+Marseille Tempêtes
+Le Havre Hurricanes
+Nîmes Hurricanes
+Toulouse Loups
+Grenoble Flammes
+Montpellier Tigres
+Lyon Dragons
+Toulouse Corsaires
+Montpellier Hurricanes
+Saint-Étienne Vikings
+Reims Tempêtes
+Le Havre Aigles
+Grenoble Dragons
+Grenoble Tigres
+Lille Hurricanes
+Strasbourg Loups
+Marseille Tempêtes
+Grenoble Panthères
+Nîmes Hurricanes
+Nice Éperviers
+Grenoble Flammes
+Le Havre Hurricanes
+Toulouse Loups
+Montpellier Tigres
+Montpellier Hurricanes
+Lyon Dragons
+Reims Tempêtes
+Toulouse Corsaires
+Grenoble Dragons
+Saint-Étienne Vikings
+Lille Hurricanes
+Le Havre Aigles
+Marseille Tempêtes
+Grenoble Tigres
+Nîmes Hurricanes
+Strasbourg Loups
+Grenoble Flammes
+Grenoble Panthères
+Toulouse Loups
+Nice Éperviers
+Le Havre Hurricanes
+Montpellier Tigres
+Reims Tempêtes
+Montpellier Hurricanes
+Grenoble Dragons
+Lyon Dragons
+Lille Hurricanes
+Toulouse Corsaires
+Marseille Tempêtes
+Saint-Étienne Vikings
+Nîmes Hurricanes
+Le Havre Aigles
+Grenoble Flammes
+Grenoble Tigres
+Toulouse Loups
+Strasbourg Loups
+Le Havre Hurricanes
+Grenoble Panthères
+Nice Éperviers
+Montpellier Tigres
+Grenoble Dragons
+Reims Tempêtes
+Lille Hurricanes
+Montpellier Hurricanes
+Marseille Tempêtes
+Lyon Dragons
+Nîmes Hurricanes
+Toulouse Corsaires
+Grenoble Flammes
+Saint-Étienne Vikings
+Toulouse Loups
+Le Havre Aigles
+Le Havre Hurricanes
+Grenoble Tigres
+Nice Éperviers
+Strasbourg Loups
+Grenoble Panthères
+Montpellier Tigres
+Lille Hurricanes
+Grenoble Dragons
+Marseille Tempêtes
+Reims Tempêtes
+Nîmes Hurricanes
+Montpellier Hurricanes
+Grenoble Flammes
+Lyon Dragons
+Toulouse Loups
+Toulouse Corsaires
+Le Havre Hurricanes
+Saint-Étienne Vikings
+Nice Éperviers
+Le Havre Aigles
+Grenoble Panthères
+Grenoble Tigres
+Strasbourg Loups
+Montpellier Tigres
+Marseille Tempêtes
+Lille Hurricanes
+Nîmes Hurricanes
+Grenoble Dragons
+Grenoble Flammes
+Reims Tempêtes
+Toulouse Loups
+Montpellier Hurricanes
+Le Havre Hurricanes
+Lyon Dragons
+Nice Éperviers
+Toulouse Corsaires
+Grenoble Panthères
+Saint-Étienne Vikings
+Strasbourg Loups
+Le Havre Aigles
+Grenoble Tigres
+Montpellier Tigres
+Nîmes Hurricanes
+Marseille Tempêtes
+Grenoble Flammes
+Lille Hurricanes
+Toulouse Loups
+Grenoble Dragons
+Le Havre Hurricanes
+Reims Tempêtes
+Nice Éperviers
+Montpellier Hurricanes
+Grenoble Panthères
+Lyon Dragons
+Strasbourg Loups
+Toulouse Corsaires
+Grenoble Tigres
+Saint-Étienne Vikings
+Le Havre Aigles
+Montpellier Tigres
+Grenoble Flammes
+Nîmes Hurricanes
+Toulouse Loups
+Marseille Tempêtes
+Le Havre Hurricanes
+Lille Hurricanes
+Nice Éperviers
+Grenoble Dragons
+Grenoble Panthères
+Reims Tempêtes
+Strasbourg Loups
+Montpellier Hurricanes
+Grenoble Tigres
+Lyon Dragons
+Le Havre Aigles
+Toulouse Corsaires
+Saint-Étienne Vikings
+Montpellier Tigres
+Toulouse Loups
+Grenoble Flammes
+Le Havre Hurricanes
+Nîmes Hurricanes
+Nice Éperviers
+Marseille Tempêtes
+Grenoble Panthères
+Lille Hurricanes
+Strasbourg Loups
+Grenoble Dragons
+Grenoble Tigres
+Reims Tempêtes
+Le Havre Aigles
+Montpellier Hurricanes
+Saint-Étienne Vikings
+Lyon Dragons
+Toulouse Corsaires
+Montpellier Tigres
+Le Havre Hurricanes
+Toulouse Loups
+Nice Éperviers
+Grenoble Flammes
+Grenoble Panthères
+Nîmes Hurricanes
+Strasbourg Loups
+Marseille Tempêtes
+Grenoble Tigres
+Lille Hurricanes
+Le Havre Aigles
+Grenoble Dragons
+Saint-Étienne Vikings
+Reims Tempêtes
+Toulouse Corsaires
+Montpellier Hurricanes
+Lyon Dragons
+Montpellier Tigres
+Nice Éperviers
+Le Havre Hurricanes
+Grenoble Panthères
+Toulouse Loups
+Strasbourg Loups
+Grenoble Flammes
+Grenoble Tigres
+Nîmes Hurricanes
+Le Havre Aigles
+Marseille Tempêtes
+Saint-Étienne Vikings
+Lille Hurricanes
+Toulouse Corsaires
+Grenoble Dragons
+Lyon Dragons
+Reims Tempêtes
+Montpellier Hurricanes
+Montpellier Tigres
+Grenoble Panthères
+Nice Éperviers
+Strasbourg Loups
+Le Havre Hurricanes
+Grenoble Tigres
+Toulouse Loups
+Le Havre Aigles
+Grenoble Flammes
+Saint-Étienne Vikings
+Nîmes Hurricanes
+Toulouse Corsaires
+Marseille Tempêtes
+Lyon Dragons
+Lille Hurricanes
+Montpellier Hurricanes
+Grenoble Dragons
+Reims Tempêtes
+Montpellier Tigres
+Strasbourg Loups
+Grenoble Panthères
+Grenoble Tigres
+Nice Éperviers
+Le Havre Aigles
+Le Havre Hurricanes
+Saint-Étienne Vikings
+Toulouse Loups
+Toulouse Corsaires
+Grenoble Flammes
+Lyon Dragons
+Nîmes Hurricanes
+Montpellier Hurricanes
+Marseille Tempêtes
+Reims Tempêtes
+Lille Hurricanes
+Grenoble Dragons
+Montpellier Tigres
+Grenoble Tigres
+Strasbourg Loups
+Le Havre Aigles
+Grenoble Panthères
+Saint-Étienne Vikings
+Nice Éperviers
+Toulouse Corsaires
+Le Havre Hurricanes
+Lyon Dragons
+Toulouse Loups
+Montpellier Hurricanes
+Grenoble Flammes
+Reims Tempêtes
+Nîmes Hurricanes
+Grenoble Dragons
+Marseille Tempêtes
+Lille Hurricanes
+Montpellier Tigres
+Le Havre Aigles
+Grenoble Tigres
+Saint-Étienne Vikings
+Strasbourg Loups
+Toulouse Corsaires
+Grenoble Panthères
+Lyon Dragons
+Nice Éperviers
+Montpellier Hurricanes
+Le Havre Hurricanes
+Reims Tempêtes
+Toulouse Loups
+Grenoble Dragons
+Grenoble Flammes
+Lille Hurricanes
+Nîmes Hurricanes
+Marseille Tempêtes
+Montpellier Tigres
+Saint-Étienne Vikings
+Le Havre Aigles
+Toulouse Corsaires
+Grenoble Tigres
+Lyon Dragons
+Strasbourg Loups
+Montpellier Hurricanes
+Grenoble Panthères
+Reims Tempêtes
+Nice Éperviers
+Grenoble Dragons
+Le Havre Hurricanes
+Lille Hurricanes
+Toulouse Loups
+Marseille Tempêtes
+Grenoble Flammes
+Nîmes Hurricanes
+Toulouse Corsaires
+Montpellier Tigres
+Lyon Dragons
+Saint-Étienne Vikings
+Montpellier Hurricanes
+Le Havre Aigles
+Reims Tempêtes
+Grenoble Tigres
+Grenoble Dragons
+Strasbourg Loups
+Lille Hurricanes
+Grenoble Panthères
+Marseille Tempêtes
+Nice Éperviers
+Nîmes Hurricanes
+Le Havre Hurricanes
+Grenoble Flammes
+Toulouse Loups
+Lyon Dragons
+Montpellier Tigres
+Montpellier Hurricanes
+Toulouse Corsaires
+Reims Tempêtes
+Saint-Étienne Vikings
+Grenoble Dragons
+Le Havre Aigles
+Lille Hurricanes
+Grenoble Tigres
+Marseille Tempêtes
+Strasbourg Loups
+Nîmes Hurricanes
+Grenoble Panthères
+Grenoble Flammes
+Nice Éperviers
+Toulouse Loups
+Le Havre Hurricanes
+Montpellier Hurricanes
+Montpellier Tigres
+Reims Tempêtes
+Lyon Dragons
+Grenoble Dragons
+Toulouse Corsaires
+Lille Hurricanes
+Saint-Étienne Vikings
+Marseille Tempêtes
+Le Havre Aigles
+Nîmes Hurricanes
+Grenoble Tigres
+Grenoble Flammes
+Strasbourg Loups
+Toulouse Loups
+Grenoble Panthères
+Le Havre Hurricanes
+Nice Éperviers
+Reims Tempêtes
+Montpellier Tigres
+Grenoble Dragons
+Montpellier Hurricanes
+Lille Hurricanes
+Lyon Dragons
+Marseille Tempêtes
+Toulouse Corsaires
+Nîmes Hurricanes
+Saint-Étienne Vikings
+Grenoble Flammes
+Le Havre Aigles
+Toulouse Loups
+Grenoble Tigres
+Le Havre Hurricanes
+Strasbourg Loups
+Nice Éperviers
+Grenoble Panthères
+Grenoble Dragons
+Montpellier Tigres
+Lille Hurricanes
+Reims Tempêtes
+Marseille Tempêtes
+Montpellier Hurricanes
+Nîmes Hurricanes
+Lyon Dragons
+Grenoble Flammes
+Toulouse Corsaires
+Toulouse Loups
+Saint-Étienne Vikings
+Le Havre Hurricanes
+Le Havre Aigles
+Nice Éperviers
+Grenoble Tigres
+Grenoble Panthères
+Strasbourg Loups
+Lille Hurricanes
+Montpellier Tigres
+Marseille Tempêtes
+Grenoble Dragons
+Nîmes Hurricanes
+Reims Tempêtes
+Grenoble Flammes
+Montpellier Hurricanes
+Toulouse Loups
+Lyon Dragons
+Le Havre Hurricanes
+Toulouse Corsaires
+Nice Éperviers
+Saint-Étienne Vikings
+Grenoble Panthères
+Le Havre Aigles
+Strasbourg Loups
+Grenoble Tigres
+Marseille Tempêtes
+Montpellier Tigres
+Nîmes Hurricanes
+Lille Hurricanes
+Grenoble Flammes
+Grenoble Dragons
+Toulouse Loups
+Reims Tempêtes
+Le Havre Hurricanes
+Montpellier Hurricanes
+Nice Éperviers
+Lyon Dragons
+Grenoble Panthères
+Toulouse Corsaires
+Strasbourg Loups
+Saint-Étienne Vikings
+Grenoble Tigres
+Le Havre Aigles
+Nîmes Hurricanes
+Montpellier Tigres
+Grenoble Flammes
+Marseille Tempêtes
+Toulouse Loups
+Lille Hurricanes
+Le Havre Hurricanes
+Grenoble Dragons
+Nice Éperviers
+Reims Tempêtes
+Grenoble Panthères
+Montpellier Hurricanes
+Strasbourg Loups
+Lyon Dragons
+Grenoble Tigres
+Toulouse Corsaires
+Le Havre Aigles
+Saint-Étienne Vikings
+Grenoble Flammes
+Montpellier Tigres
+Toulouse Loups
+Nîmes Hurricanes
+Le Havre Hurricanes
+Marseille Tempêtes
+Nice Éperviers
+Lille Hurricanes
+Grenoble Panthères
+Grenoble Dragons
+Strasbourg Loups
+Reims Tempêtes
+Grenoble Tigres
+Montpellier Hurricanes
+Le Havre Aigles
+Lyon Dragons
+Saint-Étienne Vikings
+Toulouse Corsaires
+Toulouse Loups
+Montpellier Tigres
+Le Havre Hurricanes
+Grenoble Flammes
+Nice Éperviers
+Nîmes Hurricanes
+Grenoble Panthères
+Marseille Tempêtes
+Strasbourg Loups
+Lille Hurricanes
+Grenoble Tigres
+Grenoble Dragons
+Le Havre Aigles
+Reims Tempêtes
+Saint-Étienne Vikings
+Montpellier Hurricanes
+Toulouse Corsaires
+Lyon Dragons
+Le Havre Hurricanes
+Montpellier Tigres
+Nice Éperviers
+Toulouse Loups
+Grenoble Panthères
+Grenoble Flammes
+Strasbourg Loups
+Nîmes Hurricanes
+Grenoble Tigres
+Marseille Tempêtes
+Le Havre Aigles
+Lille Hurricanes
+Saint-Étienne Vikings
+Grenoble Dragons
+Toulouse Corsaires
+Reims Tempêtes
+Lyon Dragons
+Montpellier Hurricanes
+Nice Éperviers
+Montpellier Tigres
+Grenoble Panthères
+Le Havre Hurricanes
+Strasbourg Loups
+Toulouse Loups
+Grenoble Tigres
+Grenoble Flammes
+Le Havre Aigles
+Nîmes Hurricanes
+Saint-Étienne Vikings
+Marseille Tempêtes
+Toulouse Corsaires
+Lille Hurricanes
+Lyon Dragons
+Grenoble Dragons
+Montpellier Hurricanes
+Reims Tempêtes
+Grenoble Panthères
+Montpellier Tigres
+Strasbourg Loups
+Nice Éperviers
+Grenoble Tigres
+Le Havre Hurricanes
+Le Havre Aigles
+Toulouse Loups
+Saint-Étienne Vikings
+Grenoble Flammes
+Toulouse Corsaires
+Nîmes Hurricanes
+Lyon Dragons
+Marseille Tempêtes
+Montpellier Hurricanes
+Lille Hurricanes
+Reims Tempêtes
+Grenoble Dragons
+Strasbourg Loups
+Montpellier Tigres
+Grenoble Tigres
+Grenoble Panthères
+Le Havre Aigles
+Nice Éperviers
+Saint-Étienne Vikings
+Le Havre Hurricanes
+Toulouse Corsaires
+Toulouse Loups
+Lyon Dragons
+Grenoble Flammes
+Montpellier Hurricanes
+Nîmes Hurricanes
+Reims Tempêtes
+Marseille Tempêtes
+Grenoble Dragons
+Lille Hurricanes
+Grenoble Tigres
+Montpellier Tigres
+Le Havre Aigles
+Strasbourg Loups
+Saint-Étienne Vikings
+Grenoble Panthères
+Toulouse Corsaires
+Nice Éperviers
+Lyon Dragons
+Le Havre Hurricanes
+Montpellier Hurricanes
+Toulouse Loups
+Reims Tempêtes
+Grenoble Flammes
+Grenoble Dragons
+Nîmes Hurricanes
+Lille Hurricanes
+Marseille Tempêtes
+Le Havre Aigles
+Montpellier Tigres
+Saint-Étienne Vikings
+Grenoble Tigres
+Toulouse Corsaires
+Strasbourg Loups
+Lyon Dragons
+Grenoble Panthères
+Montpellier Hurricanes
+Nice Éperviers
+Reims Tempêtes
+Le Havre Hurricanes
+Grenoble Dragons
+Toulouse Loups
+Lille Hurricanes
+Grenoble Flammes
+Marseille Tempêtes
+Nîmes Hurricanes
+Saint-Étienne Vikings
+Montpellier Tigres
+Toulouse Corsaires
+Le Havre Aigles
+Lyon Dragons
+Grenoble Tigres
+Montpellier Hurricanes
+Strasbourg Loups
+Reims Tempêtes
+Grenoble Panthères
+Grenoble Dragons
+Nice Éperviers
+Lille Hurricanes
+Le Havre Hurricanes
+Marseille Tempêtes
+Toulouse Loups
+Nîmes Hurricanes
+Grenoble Flammes

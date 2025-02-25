@@ -1,0 +1,612 @@
+Faro Águias
+Lisboa Lobos
+Porto Raposas
+Aveiro Cavaleiros
+Coimbra Cavaleiros
+Tomar Panteras
+Braga Relâmpagos
+Porto Leões
+Ponta Delgada Tempestades
+Ponta Delgada Cavaleiros
+Braga Furacões
+Funchal Águias
+Lisboa Touros
+Cascais Panteras
+Beja Raposas
+Évora Lobos
+Tomar Guerreiros
+Porto Grifos
+Faro Águias
+Aveiro Cavaleiros
+Lisboa Lobos
+Tomar Panteras
+Porto Raposas
+Porto Leões
+Coimbra Cavaleiros
+Ponta Delgada Cavaleiros
+Braga Relâmpagos
+Funchal Águias
+Ponta Delgada Tempestades
+Cascais Panteras
+Braga Furacões
+Évora Lobos
+Lisboa Touros
+Porto Grifos
+Beja Raposas
+Tomar Guerreiros
+Faro Águias
+Tomar Panteras
+Aveiro Cavaleiros
+Porto Leões
+Lisboa Lobos
+Ponta Delgada Cavaleiros
+Porto Raposas
+Funchal Águias
+Coimbra Cavaleiros
+Cascais Panteras
+Braga Relâmpagos
+Évora Lobos
+Ponta Delgada Tempestades
+Porto Grifos
+Braga Furacões
+Tomar Guerreiros
+Lisboa Touros
+Beja Raposas
+Faro Águias
+Porto Leões
+Tomar Panteras
+Ponta Delgada Cavaleiros
+Aveiro Cavaleiros
+Funchal Águias
+Lisboa Lobos
+Cascais Panteras
+Porto Raposas
+Évora Lobos
+Coimbra Cavaleiros
+Porto Grifos
+Braga Relâmpagos
+Tomar Guerreiros
+Ponta Delgada Tempestades
+Beja Raposas
+Braga Furacões
+Lisboa Touros
+Faro Águias
+Ponta Delgada Cavaleiros
+Porto Leões
+Funchal Águias
+Tomar Panteras
+Cascais Panteras
+Aveiro Cavaleiros
+Évora Lobos
+Lisboa Lobos
+Porto Grifos
+Porto Raposas
+Tomar Guerreiros
+Coimbra Cavaleiros
+Beja Raposas
+Braga Relâmpagos
+Lisboa Touros
+Ponta Delgada Tempestades
+Braga Furacões
+Faro Águias
+Funchal Águias
+Ponta Delgada Cavaleiros
+Cascais Panteras
+Porto Leões
+Évora Lobos
+Tomar Panteras
+Porto Grifos
+Aveiro Cavaleiros
+Tomar Guerreiros
+Lisboa Lobos
+Beja Raposas
+Porto Raposas
+Lisboa Touros
+Coimbra Cavaleiros
+Braga Furacões
+Braga Relâmpagos
+Ponta Delgada Tempestades
+Faro Águias
+Cascais Panteras
+Funchal Águias
+Évora Lobos
+Ponta Delgada Cavaleiros
+Porto Grifos
+Porto Leões
+Tomar Guerreiros
+Tomar Panteras
+Beja Raposas
+Aveiro Cavaleiros
+Lisboa Touros
+Lisboa Lobos
+Braga Furacões
+Porto Raposas
+Ponta Delgada Tempestades
+Coimbra Cavaleiros
+Braga Relâmpagos
+Faro Águias
+Évora Lobos
+Cascais Panteras
+Porto Grifos
+Funchal Águias
+Tomar Guerreiros
+Ponta Delgada Cavaleiros
+Beja Raposas
+Porto Leões
+Lisboa Touros
+Tomar Panteras
+Braga Furacões
+Aveiro Cavaleiros
+Ponta Delgada Tempestades
+Lisboa Lobos
+Braga Relâmpagos
+Porto Raposas
+Coimbra Cavaleiros
+Faro Águias
+Porto Grifos
+Évora Lobos
+Tomar Guerreiros
+Cascais Panteras
+Beja Raposas
+Funchal Águias
+Lisboa Touros
+Ponta Delgada Cavaleiros
+Braga Furacões
+Porto Leões
+Ponta Delgada Tempestades
+Tomar Panteras
+Braga Relâmpagos
+Aveiro Cavaleiros
+Coimbra Cavaleiros
+Lisboa Lobos
+Porto Raposas
+Faro Águias
+Tomar Guerreiros
+Porto Grifos
+Beja Raposas
+Évora Lobos
+Lisboa Touros
+Cascais Panteras
+Braga Furacões
+Funchal Águias
+Ponta Delgada Tempestades
+Ponta Delgada Cavaleiros
+Braga Relâmpagos
+Porto Leões
+Coimbra Cavaleiros
+Tomar Panteras
+Porto Raposas
+Aveiro Cavaleiros
+Lisboa Lobos
+Faro Águias
+Beja Raposas
+Tomar Guerreiros
+Lisboa Touros
+Porto Grifos
+Braga Furacões
+Évora Lobos
+Ponta Delgada Tempestades
+Cascais Panteras
+Braga Relâmpagos
+Funchal Águias
+Coimbra Cavaleiros
+Ponta Delgada Cavaleiros
+Porto Raposas
+Porto Leões
+Lisboa Lobos
+Tomar Panteras
+Aveiro Cavaleiros
+Faro Águias
+Lisboa Touros
+Beja Raposas
+Braga Furacões
+Tomar Guerreiros
+Ponta Delgada Tempestades
+Porto Grifos
+Braga Relâmpagos
+Évora Lobos
+Coimbra Cavaleiros
+Cascais Panteras
+Porto Raposas
+Funchal Águias
+Lisboa Lobos
+Ponta Delgada Cavaleiros
+Aveiro Cavaleiros
+Porto Leões
+Tomar Panteras
+Faro Águias
+Braga Furacões
+Lisboa Touros
+Ponta Delgada Tempestades
+Beja Raposas
+Braga Relâmpagos
+Tomar Guerreiros
+Coimbra Cavaleiros
+Porto Grifos
+Porto Raposas
+Évora Lobos
+Lisboa Lobos
+Cascais Panteras
+Aveiro Cavaleiros
+Funchal Águias
+Tomar Panteras
+Ponta Delgada Cavaleiros
+Porto Leões
+Faro Águias
+Ponta Delgada Tempestades
+Braga Furacões
+Braga Relâmpagos
+Lisboa Touros
+Coimbra Cavaleiros
+Beja Raposas
+Porto Raposas
+Tomar Guerreiros
+Lisboa Lobos
+Porto Grifos
+Aveiro Cavaleiros
+Évora Lobos
+Tomar Panteras
+Cascais Panteras
+Porto Leões
+Funchal Águias
+Ponta Delgada Cavaleiros
+Faro Águias
+Braga Relâmpagos
+Ponta Delgada Tempestades
+Coimbra Cavaleiros
+Braga Furacões
+Porto Raposas
+Lisboa Touros
+Lisboa Lobos
+Beja Raposas
+Aveiro Cavaleiros
+Tomar Guerreiros
+Tomar Panteras
+Porto Grifos
+Porto Leões
+Évora Lobos
+Ponta Delgada Cavaleiros
+Cascais Panteras
+Funchal Águias
+Faro Águias
+Coimbra Cavaleiros
+Braga Relâmpagos
+Porto Raposas
+Ponta Delgada Tempestades
+Lisboa Lobos
+Braga Furacões
+Aveiro Cavaleiros
+Lisboa Touros
+Tomar Panteras
+Beja Raposas
+Porto Leões
+Tomar Guerreiros
+Ponta Delgada Cavaleiros
+Porto Grifos
+Funchal Águias
+Évora Lobos
+Cascais Panteras
+Faro Águias
+Porto Raposas
+Coimbra Cavaleiros
+Lisboa Lobos
+Braga Relâmpagos
+Aveiro Cavaleiros
+Ponta Delgada Tempestades
+Tomar Panteras
+Braga Furacões
+Porto Leões
+Lisboa Touros
+Ponta Delgada Cavaleiros
+Beja Raposas
+Funchal Águias
+Tomar Guerreiros
+Cascais Panteras
+Porto Grifos
+Évora Lobos
+Lisboa Lobos
+Faro Águias
+Aveiro Cavaleiros
+Porto Raposas
+Tomar Panteras
+Coimbra Cavaleiros
+Porto Leões
+Braga Relâmpagos
+Ponta Delgada Cavaleiros
+Ponta Delgada Tempestades
+Funchal Águias
+Braga Furacões
+Cascais Panteras
+Lisboa Touros
+Évora Lobos
+Beja Raposas
+Porto Grifos
+Tomar Guerreiros
+Aveiro Cavaleiros
+Faro Águias
+Tomar Panteras
+Lisboa Lobos
+Porto Leões
+Porto Raposas
+Ponta Delgada Cavaleiros
+Coimbra Cavaleiros
+Funchal Águias
+Braga Relâmpagos
+Cascais Panteras
+Ponta Delgada Tempestades
+Évora Lobos
+Braga Furacões
+Porto Grifos
+Lisboa Touros
+Tomar Guerreiros
+Beja Raposas
+Tomar Panteras
+Faro Águias
+Porto Leões
+Aveiro Cavaleiros
+Ponta Delgada Cavaleiros
+Lisboa Lobos
+Funchal Águias
+Porto Raposas
+Cascais Panteras
+Coimbra Cavaleiros
+Évora Lobos
+Braga Relâmpagos
+Porto Grifos
+Ponta Delgada Tempestades
+Tomar Guerreiros
+Braga Furacões
+Beja Raposas
+Lisboa Touros
+Porto Leões
+Faro Águias
+Ponta Delgada Cavaleiros
+Tomar Panteras
+Funchal Águias
+Aveiro Cavaleiros
+Cascais Panteras
+Lisboa Lobos
+Évora Lobos
+Porto Raposas
+Porto Grifos
+Coimbra Cavaleiros
+Tomar Guerreiros
+Braga Relâmpagos
+Beja Raposas
+Ponta Delgada Tempestades
+Lisboa Touros
+Braga Furacões
+Ponta Delgada Cavaleiros
+Faro Águias
+Funchal Águias
+Porto Leões
+Cascais Panteras
+Tomar Panteras
+Évora Lobos
+Aveiro Cavaleiros
+Porto Grifos
+Lisboa Lobos
+Tomar Guerreiros
+Porto Raposas
+Beja Raposas
+Coimbra Cavaleiros
+Lisboa Touros
+Braga Relâmpagos
+Braga Furacões
+Ponta Delgada Tempestades
+Funchal Águias
+Faro Águias
+Cascais Panteras
+Ponta Delgada Cavaleiros
+Évora Lobos
+Porto Leões
+Porto Grifos
+Tomar Panteras
+Tomar Guerreiros
+Aveiro Cavaleiros
+Beja Raposas
+Lisboa Lobos
+Lisboa Touros
+Porto Raposas
+Braga Furacões
+Coimbra Cavaleiros
+Ponta Delgada Tempestades
+Braga Relâmpagos
+Cascais Panteras
+Faro Águias
+Évora Lobos
+Funchal Águias
+Porto Grifos
+Ponta Delgada Cavaleiros
+Tomar Guerreiros
+Porto Leões
+Beja Raposas
+Tomar Panteras
+Lisboa Touros
+Aveiro Cavaleiros
+Braga Furacões
+Lisboa Lobos
+Ponta Delgada Tempestades
+Porto Raposas
+Braga Relâmpagos
+Coimbra Cavaleiros
+Évora Lobos
+Faro Águias
+Porto Grifos
+Cascais Panteras
+Tomar Guerreiros
+Funchal Águias
+Beja Raposas
+Ponta Delgada Cavaleiros
+Lisboa Touros
+Porto Leões
+Braga Furacões
+Tomar Panteras
+Ponta Delgada Tempestades
+Aveiro Cavaleiros
+Braga Relâmpagos
+Lisboa Lobos
+Coimbra Cavaleiros
+Porto Raposas
+Porto Grifos
+Faro Águias
+Tomar Guerreiros
+Évora Lobos
+Beja Raposas
+Cascais Panteras
+Lisboa Touros
+Funchal Águias
+Braga Furacões
+Ponta Delgada Cavaleiros
+Ponta Delgada Tempestades
+Porto Leões
+Braga Relâmpagos
+Tomar Panteras
+Coimbra Cavaleiros
+Aveiro Cavaleiros
+Porto Raposas
+Lisboa Lobos
+Tomar Guerreiros
+Faro Águias
+Beja Raposas
+Porto Grifos
+Lisboa Touros
+Évora Lobos
+Braga Furacões
+Cascais Panteras
+Ponta Delgada Tempestades
+Funchal Águias
+Braga Relâmpagos
+Ponta Delgada Cavaleiros
+Coimbra Cavaleiros
+Porto Leões
+Porto Raposas
+Tomar Panteras
+Lisboa Lobos
+Aveiro Cavaleiros
+Beja Raposas
+Faro Águias
+Lisboa Touros
+Tomar Guerreiros
+Braga Furacões
+Porto Grifos
+Ponta Delgada Tempestades
+Évora Lobos
+Braga Relâmpagos
+Cascais Panteras
+Coimbra Cavaleiros
+Funchal Águias
+Porto Raposas
+Ponta Delgada Cavaleiros
+Lisboa Lobos
+Porto Leões
+Aveiro Cavaleiros
+Tomar Panteras
+Lisboa Touros
+Faro Águias
+Braga Furacões
+Beja Raposas
+Ponta Delgada Tempestades
+Tomar Guerreiros
+Braga Relâmpagos
+Porto Grifos
+Coimbra Cavaleiros
+Évora Lobos
+Porto Raposas
+Cascais Panteras
+Lisboa Lobos
+Funchal Águias
+Aveiro Cavaleiros
+Ponta Delgada Cavaleiros
+Tomar Panteras
+Porto Leões
+Braga Furacões
+Faro Águias
+Ponta Delgada Tempestades
+Lisboa Touros
+Braga Relâmpagos
+Beja Raposas
+Coimbra Cavaleiros
+Tomar Guerreiros
+Porto Raposas
+Porto Grifos
+Lisboa Lobos
+Évora Lobos
+Aveiro Cavaleiros
+Cascais Panteras
+Tomar Panteras
+Funchal Águias
+Porto Leões
+Ponta Delgada Cavaleiros
+Ponta Delgada Tempestades
+Faro Águias
+Braga Relâmpagos
+Braga Furacões
+Coimbra Cavaleiros
+Lisboa Touros
+Porto Raposas
+Beja Raposas
+Lisboa Lobos
+Tomar Guerreiros
+Aveiro Cavaleiros
+Porto Grifos
+Tomar Panteras
+Évora Lobos
+Porto Leões
+Cascais Panteras
+Ponta Delgada Cavaleiros
+Funchal Águias
+Braga Relâmpagos
+Faro Águias
+Coimbra Cavaleiros
+Ponta Delgada Tempestades
+Porto Raposas
+Braga Furacões
+Lisboa Lobos
+Lisboa Touros
+Aveiro Cavaleiros
+Beja Raposas
+Tomar Panteras
+Tomar Guerreiros
+Porto Leões
+Porto Grifos
+Ponta Delgada Cavaleiros
+Évora Lobos
+Funchal Águias
+Cascais Panteras
+Coimbra Cavaleiros
+Faro Águias
+Porto Raposas
+Braga Relâmpagos
+Lisboa Lobos
+Ponta Delgada Tempestades
+Aveiro Cavaleiros
+Braga Furacões
+Tomar Panteras
+Lisboa Touros
+Porto Leões
+Beja Raposas
+Ponta Delgada Cavaleiros
+Tomar Guerreiros
+Funchal Águias
+Porto Grifos
+Cascais Panteras
+Évora Lobos
+Porto Raposas
+Faro Águias
+Lisboa Lobos
+Coimbra Cavaleiros
+Aveiro Cavaleiros
+Braga Relâmpagos
+Tomar Panteras
+Ponta Delgada Tempestades
+Porto Leões
+Braga Furacões
+Ponta Delgada Cavaleiros
+Lisboa Touros
+Funchal Águias
+Beja Raposas
+Cascais Panteras
+Tomar Guerreiros
+Évora Lobos
+Porto Grifos
