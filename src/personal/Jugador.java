@@ -1,6 +1,5 @@
 package personal;
 
-import java.util.Objects;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedReader;
@@ -17,7 +16,6 @@ public class Jugador extends Persona {
     private int tarjetasRojas;
     private int golesAnotados;
     private int velocidad;
-    private static String rutaFichero;
     private static Random random = new Random();
     //Estadísticas de Jugador de Campo
     private int ritmo;
@@ -184,6 +182,9 @@ public class Jugador extends Persona {
                     break;
                 case DELANTERO:
                     delanterosNecesarios--;
+                    break;
+                case PORTERO:
+                    // Los porteros se manejan en una clase separada
                     break;
             }
 

@@ -4,9 +4,7 @@ import personal.Persona;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.ArrayList;
-import java.util.Random;
-import java.io.IOException;
+
 
 public class Liga {
 
@@ -15,22 +13,21 @@ public class Liga {
     private List<Equipo> equipos;
     private Jornada[] jornadas;
     private Persona[] jugadores;
-    private static String rutaFichero;
 
 //Constructor//
- public Liga(String nombre, List<Equipo> equipos, String rutaFichero){
+ public Liga(String nombre, List<Equipo> equipos){
     this.nombre = nombre;
     this.equipos = equipos;
-    this.rutaFichero = rutaFichero;
     // Crear jornadas (cada equipo juega contra todos los demás una vez)
     int numeroJornadas = (equipos.size() * 2) - 2; // Multiplicado por 2 para ida y vuelta
     this.jornadas = new Jornada[numeroJornadas];
     for (int i = 0; i < numeroJornadas; i++) {
-        this.jornadas[i] = new Jornada(i + 1);
+        this.jornadas[i] = new Jornada(i + 1, this);
     }
  }
 
-
+  public Liga(){
+  }
 
 
 
@@ -71,7 +68,7 @@ public class Liga {
     /*Metodos y funciones  */
 
 
-    public void jugarLiga() {
+    public void jugarLiga(String rutaFichero) {
         if (equipos == null || equipos.isEmpty()) {
             System.out.println("No hay equipos suficientes para jugar la jornada.");
             return;

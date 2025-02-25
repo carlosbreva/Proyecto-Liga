@@ -3,24 +3,21 @@ package liga;
 import java.util.Arrays;
 import java.util.Objects;
 import personal.Equipo;
-import liga.Partido;
 import java.util.List;
-import personal.Jugador;
 import java.io.*;
 import java.util.ArrayList;
-import liga.Liga;
 
 public class Jornada {
     /* Variables generales*/
     private int numeroJornada;
     private List<Partido> partidos;
-
-
+    private Liga liga;
 
     /* Constructor*/
-    public Jornada(int numeroJornada) {
+    public Jornada(int numeroJornada, Liga liga) {
         this.numeroJornada = numeroJornada;
         this.partidos = new ArrayList<>();
+        this.liga = liga;
     }
 
     /* Getters y Setters*/
@@ -68,7 +65,6 @@ public class Jornada {
             return;
         }
 
-
         int numeroPartidosenJornada = equipos.size()/2;
         int offset = (numeroJornada - 1) * numeroPartidosenJornada * 2;
         
@@ -94,6 +90,11 @@ public class Jornada {
                 Partido partido = new Partido(equipoLocal, equipoVisitante, new int[]{0, 0}, 0);
                 partido.simularPartido(equipoLocal, equipoVisitante);
                 partidos.add(partido);
+                System.out.println("¿Quieres ver la clasificación? (s/n)");
+                String respuesta = System.console().readLine();
+                if (respuesta.equals("s")) {
+                    liga.VerClasificacion();
+                }
             } else {
                 System.out.println("Error: No se encontraron los equipos " + nombreEquipoLocal + " y/o " + nombreEquipoVisitante);
             }

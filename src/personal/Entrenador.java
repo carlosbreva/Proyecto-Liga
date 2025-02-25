@@ -1,6 +1,5 @@
 package personal;
 
-import java.util.Objects;
 import java.util.ArrayList;
 import java.util.Random;
 import java.io.BufferedReader;
@@ -34,9 +33,7 @@ public class Entrenador extends Persona {
         return rutaFichero;
     }
 
-    public void setRutaFichero(String rutaFichero) {
-        this.rutaFichero = rutaFichero;
-    }
+
 
 
 

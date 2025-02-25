@@ -11,8 +11,6 @@ import java.util.TimerTask;
 import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Scanner;
-import liga.Liga;
 public class Partido {
     // Variables declaradas
     private Equipo equipoLocal;
@@ -147,9 +145,11 @@ public class Partido {
         final int[] golesVisitante = {0};
         final int[] paradasLocal = {0};
         final int[] paradasVisitante = {0};
+        final int[] tarjetasAmarillas = {0};
         final List<Jugador> jugadoresExpulsados = new ArrayList<>();
-        double probabilidadLocal = calcularProbabilidadLocal(equipoLocal);
-        double probabilidadVisitante = calcularProbabilidadVisitante(equipoVisitante);
+        final int[] tarjetasRojas = {0};
+        final double[] probabilidadLocal = {calcularProbabilidadLocal(equipoLocal)};
+        final double[] probabilidadVisitante = {calcularProbabilidadVisitante(equipoVisitante)};
         Random random = new Random();
         Timer timer = new Timer();
         
@@ -170,22 +170,26 @@ public class Partido {
                     // Comprobar tarjetas para equipo local
                     for (Jugador j : titularesLocal) {
                         if (!jugadoresExpulsados.contains(j)) {
-                            // 5% de probabilidad de tarjeta amarilla
-                            if (random.nextDouble() < 0.05) {
+                            // 0.5% de probabilidad de tarjeta amarilla
+                            if (random.nextDouble() < 0.005) {
                                 j.setTarjetasAmarillas(j.getTarjetasAmarillas() + 1);
                                 System.out.println("¡TARJETA AMARILLA! para " + j.getNombre() + " del " + equipoLocal.getNombre());
+                                tarjetasAmarillas[0]++;
                                 
                                 // Si tiene 2 amarillas, expulsión
-                                if (j.getTarjetasAmarillas() == 2) {
+                                if (tarjetasAmarillas[0] == 2) {
                                     System.out.println("¡EXPULSIÓN! " + j.getNombre() + " del " + equipoLocal.getNombre() + " por doble amarilla");
                                     jugadoresExpulsados.add(j);
+                                    
                                 }
                             }
-                            // 1% de probabilidad de roja directa
-                            else if (random.nextDouble() < 0.01) {
+                            // 0.1% de probabilidad de roja directa
+                            else if (random.nextDouble() < 0.001) {
                                 j.setTarjetasRojas(j.getTarjetasRojas() + 1);
                                 System.out.println("¡TARJETA ROJA DIRECTA! para " + j.getNombre() + " del " + equipoLocal.getNombre());
                                 jugadoresExpulsados.add(j);
+                                tarjetasRojas[0]++;
+                                
                             }
                         }
                     }
@@ -193,28 +197,30 @@ public class Partido {
                     // Comprobar tarjetas para equipo visitante
                     for (Jugador j : titularesVisitante) {
                         if (!jugadoresExpulsados.contains(j)) {
-                            // 5% de probabilidad de tarjeta amarilla
-                            if (random.nextDouble() < 0.05) {
+                            // 0.5% de probabilidad de tarjeta amarilla
+                            if (random.nextDouble() < 0.005) {
                                 j.setTarjetasAmarillas(j.getTarjetasAmarillas() + 1);
                                 System.out.println("¡TARJETA AMARILLA! para " + j.getNombre() + " del " + equipoVisitante.getNombre());
-                                
+                                tarjetasAmarillas[0]++;
                                 // Si tiene 2 amarillas, expulsión
                                 if (j.getTarjetasAmarillas() == 2) {
                                     System.out.println("¡EXPULSIÓN! " + j.getNombre() + " del " + equipoVisitante.getNombre() + " por doble amarilla");
                                     jugadoresExpulsados.add(j);
+                                    tarjetasAmarillas[0]++;
                                 }
                             }
-                            // 1% de probabilidad de roja directa
-                            else if (random.nextDouble() < 0.01) {
+                            // 0.1% de probabilidad de roja directa
+                            else if (random.nextDouble() < 0.001) {
                                 j.setTarjetasRojas(j.getTarjetasRojas() + 1);
                                 System.out.println("¡TARJETA ROJA DIRECTA! para " + j.getNombre() + " del " + equipoVisitante.getNombre());
                                 jugadoresExpulsados.add(j);
+                                tarjetasRojas[0]++;
                             }
                         }
                     }
 
                     // Intento de gol del equipo local
-                    if (probabilidadLocal > random.nextDouble() * 1.0) {
+                    if (probabilidadLocal[0] > random.nextDouble() * 1.0) {
                         // Comprobar si el portero visitante realiza una parada
                         boolean parada = false;
                         if (porteroVisitanteFinal != null) {
@@ -231,13 +237,22 @@ public class Partido {
                         
                         if (!parada) {
                             List<Jugador> posiblesGoleadores = new ArrayList<>();
+                            int jugadoresLocalesExpulsados = 0;
                             for (Jugador j : titularesLocal) {
+                                if (jugadoresExpulsados.contains(j)) {
+                                    jugadoresLocalesExpulsados++;
+                                    continue;
+                                }
                                 if (j.getPosicion() == Posicion.DELANTERO || j.getPosicion() == Posicion.MEDIOCENTRO) {
-                                    if (!jugadoresExpulsados.contains(j)) {
-                                        posiblesGoleadores.add(j);
-                                    }
+                                    posiblesGoleadores.add(j);
                                 }
                             }
+
+                            // Reducir probabilidad de gol según jugadores expulsados
+                            if (jugadoresLocalesExpulsados > 0) {
+                                probabilidadLocal[0] *= (11.0 - jugadoresLocalesExpulsados) / 11.0;
+                            }
+
                             if (!posiblesGoleadores.isEmpty()) {
                                 Jugador goleador = posiblesGoleadores.get(random.nextInt(posiblesGoleadores.size()));
                                 golesLocal[0]++;
@@ -247,7 +262,7 @@ public class Partido {
                     }
 
                     // Intento de gol del equipo visitante
-                    if (probabilidadVisitante > random.nextDouble() * 1.0) {
+                    if (probabilidadVisitante[0] > random.nextDouble() * 1.0) {
                         // Comprobar si el portero local realiza una parada
                         boolean parada = false;
                         if (porteroLocalFinal != null) {
@@ -264,13 +279,22 @@ public class Partido {
                         
                         if (!parada) {
                             List<Jugador> posiblesGoleadores = new ArrayList<>();
+                            int jugadoresVisitantesExpulsados = 0;
                             for (Jugador j : titularesVisitante) {
+                                if (jugadoresExpulsados.contains(j)) {
+                                    jugadoresVisitantesExpulsados++;
+                                    continue;
+                                }
                                 if (j.getPosicion() == Posicion.DELANTERO || j.getPosicion() == Posicion.MEDIOCENTRO) {
-                                    if (!jugadoresExpulsados.contains(j)) {
-                                        posiblesGoleadores.add(j);
-                                    }
+                                    posiblesGoleadores.add(j);
                                 }
                             }
+
+                            // Reducir probabilidad de gol según jugadores expulsados
+                            if (jugadoresVisitantesExpulsados > 0) {
+                                probabilidadVisitante[0] *= (11.0 - jugadoresVisitantesExpulsados) / 11.0;
+                            }
+
                             if (!posiblesGoleadores.isEmpty()) {
                                 Jugador goleador = posiblesGoleadores.get(random.nextInt(posiblesGoleadores.size()));
                                 golesVisitante[0]++;

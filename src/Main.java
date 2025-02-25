@@ -8,6 +8,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);  // Un solo Scanner para toda la aplicación
         boolean seguirJugando = true;
         List<Equipo> EquiposEuropa= new ArrayList<>();
+        List<Equipo> equiposeuropaBundesliga = new ArrayList<>();
+        List<Equipo> equiposeuropaLaliga = new ArrayList<>();
 
         while (seguirJugando && EquiposEuropa.size() < 8) {
             System.out.println("=== XTART FURBOL SIMULATOR ===\n");
@@ -24,6 +26,7 @@ public class Main {
 
             switch (opcion) {
                 case 1:
+                    equiposeuropaBundesliga.clear();
                     System.out.println("Has seleccionado la Bundesliga");
                     String Entrenadores_Bundesliga = "src/Documentos_Ligas/Bundesliga/Entrenadores_Bundesliga.txt";
                     String Porteros_Bundesliga = "src/Documentos_Ligas/Bundesliga/Porteros_Bundesliga.txt";
@@ -34,9 +37,10 @@ public class Main {
                     List<Portero> porteros_bundesliga = Portero.crearPorteros(Porteros_Bundesliga);
                     List<Jugador> jugadores_bundesliga = Jugador.crearJugadores(Jugadores_Bundesliga);
                     List<Equipo> equipos_bundesliga = Equipo.crearEquipos(Nombres_Equipos_Bundesliga, entrenadores_bundesliga, porteros_bundesliga, jugadores_bundesliga);
-                    Liga liga_bundesliga = new Liga("Bundesliga", equipos_bundesliga, Calendario_Partidos_Bundesliga);
-                    liga_bundesliga.jugarLiga();
+                    Liga liga_bundesliga = new Liga("Bundesliga", equipos_bundesliga);
+                    liga_bundesliga.jugarLiga(Calendario_Partidos_Bundesliga);
                     Premios.darPremios(jugadores_bundesliga, equipos_bundesliga, porteros_bundesliga);
+                    equiposeuropaBundesliga = Premios.EquiposAEuropa(equipos_bundesliga);
 
                     
                     System.out.println("¿Quieres jugar otra liga? (1. Si 2. No)");
@@ -52,6 +56,7 @@ public class Main {
                     break;
 
                 case 2:
+                    equiposeuropaLaliga.clear();
                     System.out.println("Has seleccionado la La Liga");
                     String Entrenadores_LaLiga = "src/Documentos_Ligas/LaLiga/Entrenadores_LaLiga.txt";
                     String Porteros_LaLiga = "src/Documentos_Ligas/LaLiga/Porteros_LaLiga.txt";
@@ -62,10 +67,10 @@ public class Main {
                     List<Portero> porteros_laliga = Portero.crearPorteros(Porteros_LaLiga);
                     List<Jugador> jugadores_laliga = Jugador.crearJugadores(Jugadores_LaLiga);
                     List<Equipo> equipos_laliga = Equipo.crearEquipos(Nombres_Equipos_LaLiga, entrenadores_laliga, porteros_laliga, jugadores_laliga);
-                    Liga liga_laliga = new Liga("La Liga", equipos_laliga, Calendario_Partidos_LaLiga);
-                    liga_laliga.jugarLiga();
+                    Liga liga_laliga = new Liga("La Liga", equipos_laliga);
+                    liga_laliga.jugarLiga(Calendario_Partidos_LaLiga);
                     Premios.darPremios(jugadores_laliga, equipos_laliga, porteros_laliga);
-
+                    equiposeuropaLaliga = Premios.EquiposAEuropa(equipos_laliga);
                     System.out.println("¿Quieres jugar otra liga? (1. Si 2. No)");
                     int respuesta2 = scanner.nextInt();
                     scanner.nextLine(); // Consumir el salto de línea
@@ -83,6 +88,7 @@ public class Main {
                     System.out.println("Gracias por jugar");
                     break;
             }
+            scanner.close();
 
         } 
             }

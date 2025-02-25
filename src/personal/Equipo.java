@@ -1,7 +1,6 @@
 package personal;
 
 import liga.Partido;
-import personal.Entrenador;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.ArrayList;
@@ -9,10 +8,8 @@ import java.util.List;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Random;
 import java.io.FileNotFoundException;
-import personal.Jugador;
-import personal.Portero;
+
 
 public class Equipo {
     private String nombre;
@@ -24,8 +21,6 @@ public class Equipo {
     private int mediaStatsEquipo;
     private int puntos;
     private Partido[] partidos;
-    private static String rutaFichero;
-    private static Random random = new Random();
     private int partidosJugados;
 
     public Equipo(String nombre, String nombreEntrenador, List<Jugador> jugadores, int golesAfavor, int golesEnContra, int diferenciaGoles, int mediaStatsEquipo, int puntos, Partido[] partidos, int partidosJugados) {
@@ -128,7 +123,6 @@ public class Equipo {
 public static List<Equipo> crearEquipos(String rutaFichero, List<Entrenador> entrenadores, List<Portero> porteros, List<Jugador> jugadores) {
     List<Equipo> equipos = new ArrayList<>();
     int indiceEntrenador = 0;
-    int indiceJugador = 0;
     
     try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {
         String linea;

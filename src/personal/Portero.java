@@ -1,6 +1,5 @@
 package personal;
 
-import java.util.Objects;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedReader;
@@ -16,7 +15,6 @@ public class Portero extends Jugador {
     private int saqueLargo;
     private int reflejos;
     private int posicionamiento;
-    private static String rutaFichero;
     private static Random random = new Random();
 
     public Portero(String nombre, int edad, Posicion posicion, int numeroDeParadas, int estirada, int agarre, int saqueLargo, int reflejos, int posicionamiento, int statMediaJugador) {

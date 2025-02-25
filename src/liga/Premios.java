@@ -3,6 +3,7 @@ import java.util.List;
 import personal.Jugador;
 import personal.Equipo;
 import personal.Portero;
+import java.util.ArrayList;
 public class Premios  {
     
     private String MVP;
@@ -95,12 +96,31 @@ public class Premios  {
 
     }
 
-
-
-
-
-
-
+    public static List<Equipo> EquiposAEuropa(List<Equipo> equipos) {
+        List<Equipo> equiposEuropa = new ArrayList<>();
+        Equipo primerEquipoEuropa = equipos.get(0);
+        Equipo segundoEquipoEuropa = equipos.get(0);
+        Equipo tercerEquipoEuropa = equipos.get(0);
+        for (Equipo equipo : equipos) {
+            if (equipo.getPuntos() > primerEquipoEuropa.getPuntos()) {
+                primerEquipoEuropa = equipo;
+            }
+        }
+        equiposEuropa.add(primerEquipoEuropa);
+        for (Equipo equipo : equipos) {
+            if (equipo.getPuntos() > segundoEquipoEuropa.getPuntos() && equipo != primerEquipoEuropa) {
+                segundoEquipoEuropa = equipo;
+            }
+        }
+        equiposEuropa.add(segundoEquipoEuropa);
+        for (Equipo equipo : equipos) {
+            if (equipo.getPuntos() > tercerEquipoEuropa.getPuntos() && equipo != primerEquipoEuropa && equipo != segundoEquipoEuropa) {
+                tercerEquipoEuropa = equipo;
+            }
+        }
+        equiposEuropa.add(tercerEquipoEuropa);
+        return equiposEuropa;
+    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
