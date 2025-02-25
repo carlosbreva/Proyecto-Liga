@@ -20,6 +20,7 @@ public class Main {
         final int PRIMEIRA_START = 20;    // 20-23
         final int EREDIVISIE_START = 24;  // 24-27
         final int BELGIAN_START = 28;     // 28-31
+        final int BUNDESLIGA_AUSTRALIA_START = 32; // 32-35
 
         while (seguirJugando) {
             System.out.println("=== XTART fÚTBOL  SIMULATOR ===\n");
@@ -32,7 +33,8 @@ public class Main {
             System.out.println("6. Primeira Liga (Portugal)");
             System.out.println("7. Eredivisie (Holanda)");
             System.out.println("8. Belgian Pro League (Bélgica)");
-            System.out.println("9. Salir");
+            System.out.println("9. Bundesliga De Australia");
+            System.out.println("10. Salir");
 
             int opcion = scanner.nextInt();
             scanner.nextLine(); // Consumir el salto de línea
@@ -82,6 +84,11 @@ public class Main {
                     startIndex = BELGIAN_START;
                     break;
                 case 9:
+                    System.out.println("Has seleccionado la Bundesliga De Australia");
+                    ligaActual = Liga.crearLiga("BundesligaDeAustralia");
+                    startIndex = BUNDESLIGA_AUSTRALIA_START;
+                    break;
+                case 10:
                     seguirJugando = false;
                     System.out.println("Gracias por jugar!");
                     break;
