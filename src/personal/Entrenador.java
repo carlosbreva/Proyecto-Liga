@@ -17,8 +17,8 @@ public class Entrenador extends Persona {
     
     
 
-    public Entrenador(String nombre, int edad, int añosDeExperiencia) {
-        super(nombre, edad);
+    public Entrenador(String nombre, int edad, int añosDeExperiencia, Paises pais) {
+        super(nombre, edad, pais);
         this.añosDeExperiencia = añosDeExperiencia;
     }
 
@@ -38,7 +38,7 @@ public class Entrenador extends Persona {
 
 
     // métodos 
-    public static List<Entrenador> crearEntrenadores(String rutaFichero) {
+    public static List<Entrenador> crearEntrenadores(String rutaFichero, Paises pais) {
         List<Entrenador> entrenadores = new ArrayList<>();
         
         try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {
@@ -47,7 +47,7 @@ public class Entrenador extends Persona {
                 if (!linea.trim().isEmpty()) {
                     int añosExperiencia = 5 + random.nextInt(10); // Entre 5 y 14 años de experiencia
                     int edad = 30 + random.nextInt(30); // Entre 30 y 59 años
-                    Entrenador entrenador = new Entrenador(linea.trim(), edad, añosExperiencia);
+                    Entrenador entrenador = new Entrenador(linea.trim(), edad, añosExperiencia, pais);
                     entrenadores.add(entrenador);
                 }
             }

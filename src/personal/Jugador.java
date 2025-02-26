@@ -27,8 +27,8 @@ public class Jugador extends Persona {
 
 
 
-    public Jugador(String nombre, int edad, Posicion posicion, int tarjetasAmarillas, int tarjetasRojas, int golesAnotados, int velocidad, int ritmo, int pase, int tiros, int defensa, int regate, int fisico,int statMediaJugador) {
-        super(nombre, edad);
+    public Jugador(String nombre, int edad, Posicion posicion, int tarjetasAmarillas, int tarjetasRojas, int golesAnotados, int velocidad, int ritmo, int pase, int tiros, int defensa, int regate, int fisico,int statMediaJugador, Paises pais) {
+        super(nombre, edad, pais);
         this.posicion = posicion;
         this.statMediaJugador = statMediaJugador;
         this.tarjetasAmarillas = tarjetasAmarillas;
@@ -126,7 +126,7 @@ public class Jugador extends Persona {
         this.statMediaJugador = statMediaJugador;
     }
 
-    public static List<Jugador> crearJugadores(String rutaFichero) {
+    public static List<Jugador> crearJugadores(String rutaFichero, Paises pais) {
         List<Jugador> jugadores = new ArrayList<>();
         List<String> nombresJugadores = new ArrayList<>();
         
@@ -211,7 +211,8 @@ public class Jugador extends Persona {
                 defensa,
                 regate,
                 fisico,
-                statMediaJugador
+                statMediaJugador,
+                pais
             );
             
             jugadores.add(jugador);

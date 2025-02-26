@@ -5,14 +5,15 @@ public class Persona {
     /* Variables*/
     private int edad;
     private String nombre;
-
+    private Paises pais;
 
 
 
     /* Constructor */
-    public Persona(String nombre, int edad) {
+    public Persona(String nombre, int edad, Paises pais) {
         this.nombre = nombre;
         this.edad = edad;
+        this.pais = pais;
     }
 
     public Persona(String nombre) {
@@ -36,8 +37,13 @@ public class Persona {
         this.nombre = nombre;
     }
 
+    public Paises getPais() {
+        return pais;
+    }
 
-
+    public void setPais(Paises pais) {
+        this.pais = pais;
+    }
 
 
     /* Equals y ToString */
@@ -45,12 +51,13 @@ public class Persona {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Persona jugador = (Persona) o;
-        return edad == jugador.edad && nombre == jugador.nombre;
+        return edad == jugador.edad && nombre == jugador.nombre && pais == jugador.pais;
     }
 
     @Override
     public String toString() {
         return "nombre=" + nombre +
-                ", edad=" + edad;
+                ", edad=" + edad +
+                ", pais=" + pais;
     }
 }

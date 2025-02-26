@@ -244,7 +244,10 @@ public class Fase_De_Grupos {
 
     public List<Equipo> getClasificadosOctavos() {
         List<Equipo> clasificados = new ArrayList<>();
+        List<Equipo> primeros = new ArrayList<>();
+        List<Equipo> segundos = new ArrayList<>();
         
+        // Primero separamos los primeros y segundos de cada grupo
         for (List<Equipo> grupo : Arrays.asList(grupoA, grupoB, grupoC, grupoD, grupoE, grupoF, grupoG, grupoH)) {
             if (grupo.size() >= 2) {
                 Collections.sort(grupo, (e1, e2) -> {
@@ -253,8 +256,21 @@ public class Fase_De_Grupos {
                     }
                     return e2.getDiferenciaGoles() - e1.getDiferenciaGoles();
                 });
-                clasificados.add(grupo.get(0));
-                clasificados.add(grupo.get(1));
+                primeros.add(grupo.get(0));
+                segundos.add(grupo.get(1));
+            }
+        }
+
+        // Reordenamos los segundos para evitar equipos del mismo país
+        for (Equipo primero : primeros) {
+            clasificados.add(primero);
+            // Buscamos un segundo de diferente país
+            for (Equipo segundo : segundos) {
+                if (!segundo.getPais().equals(primero.getPais())) {
+                    clasificados.add(segundo);
+                    segundos.remove(segundo);
+                    break;
+                }
             }
         }
         

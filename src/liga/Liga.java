@@ -73,9 +73,9 @@ public class Liga {
         String Porteros = "src/Documentos_Ligas/" + nombreLiga + "/Porteros_" + nombreLiga + ".txt";
         String Jugadores = "src/Documentos_Ligas/" + nombreLiga + "/RestoDeJugadores_" + nombreLiga + ".txt";
         String Nombres_Equipos = "src/Documentos_Ligas/" + nombreLiga + "/Equipos_" + nombreLiga + ".txt";
-        List<Entrenador> entrenadores = Entrenador.crearEntrenadores(Entrenadores);
-        List<Portero> porteros = Portero.crearPorteros(Porteros);
-        List<Jugador> jugadores = Jugador.crearJugadores(Jugadores);
+        List<Entrenador> entrenadores = Entrenador.crearEntrenadores(Entrenadores, pais);
+        List<Portero> porteros = Portero.crearPorteros(Porteros, pais);
+        List<Jugador> jugadores = Jugador.crearJugadores(Jugadores, pais);
         List<Equipo> equipos = Equipo.crearEquipos(Nombres_Equipos, entrenadores, porteros, jugadores, pais);
         Liga liga = new Liga(nombreLiga, equipos);
         return liga;

@@ -17,8 +17,8 @@ public class Portero extends Jugador {
     private int posicionamiento;
     private static Random random = new Random();
 
-    public Portero(String nombre, int edad, Posicion posicion, int numeroDeParadas, int estirada, int agarre, int saqueLargo, int reflejos, int posicionamiento, int statMediaJugador) {
-        super(nombre, edad, posicion, 0, 0, 0, reflejos, estirada, agarre, saqueLargo, posicionamiento, reflejos, agarre, statMediaJugador);
+    public Portero(String nombre, int edad, Posicion posicion, int numeroDeParadas, int estirada, int agarre, int saqueLargo, int reflejos, int posicionamiento, int statMediaJugador, Paises pais) {
+        super(nombre, edad, posicion, 0, 0, 0, reflejos, estirada, agarre, saqueLargo, posicionamiento, reflejos, agarre, statMediaJugador, pais);
         this.numeroDeParadas = numeroDeParadas;
         this.estirada = estirada;
         this.agarre = agarre;
@@ -76,7 +76,7 @@ public class Portero extends Jugador {
     }
 
 
-    public static List<Portero> crearPorteros(String rutaFichero) {
+    public static List<Portero> crearPorteros(String rutaFichero, Paises pais) {
         List<Portero> porteros = new ArrayList<>();
         
         try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {
@@ -103,7 +103,8 @@ public class Portero extends Jugador {
                         saqueLargo,
                         reflejos,
                         posicionamiento,
-                        statMedia
+                        statMedia,
+                        pais
                     );
                     porteros.add(portero);
                 } else {
