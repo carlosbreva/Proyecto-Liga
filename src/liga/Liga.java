@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.Objects;
 import personal.*;
+import java.util.Scanner;
 
 public class Liga {
 
@@ -87,6 +88,7 @@ public class Liga {
             return;
         }
 
+        Scanner scanner = new Scanner(System.in);
         System.out.println("\n=== INICIO DE LA LIGA ===\n");
         for (Jornada jornada : jornadas) {
             System.out.println("\n=== JORNADA " + jornada.getNumeroJornada() + " ===\n");
@@ -94,9 +96,13 @@ public class Liga {
             if (jornada.getNumeroJornada() < jornadas.length) {
                 System.out.println("\n=== CLASIFICACIÓN TRAS LA JORNADA " + jornada.getNumeroJornada() + " ===");
                 VerClasificacion();
+                System.out.println("\nPulsa ENTER para continuar...");
+                scanner.nextLine();
             } else {
                 System.out.println("\n=== CLASIFICACIÓN FINAL DE LA LIGA ===");
                 VerClasificacion();
+                System.out.println("\nPulsa ENTER para continuar...");
+                scanner.nextLine();
             }
         }
         System.out.println("\n=== FIN DE LA LIGA ===\n");

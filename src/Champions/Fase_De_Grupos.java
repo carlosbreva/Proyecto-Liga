@@ -104,51 +104,89 @@ public class Fase_De_Grupos {
     private void simularPartidosGrupo(List<Equipo> grupo) {
         if (grupo.size() < 4) return;
         
-        Scanner scanner = new Scanner(System.in);
-        boolean verClasificacion = false;
+        System.out.println("\n=== PARTIDOS DEL GRUPO ===");
         
-        // Cada equipo juega contra todos los demás dos veces (ida y vuelta)
+        // Primera vuelta (partidos de ida)
         for (int i = 0; i < grupo.size(); i++) {
-            for (int j = 0; j < grupo.size(); j++) {
-                if (i != j) {
-                    verClasificacion = false;
-                    Equipo local = grupo.get(i);
-                    Equipo visitante = grupo.get(j);
+            for (int j = i + 1; j < grupo.size(); j++) {
+                Equipo local = grupo.get(i);
+                Equipo visitante = grupo.get(j);
                 
-                    Partido partido = new Partido(local, visitante, new int[]{0, 0}, 0);
-                    partido.simularPartido(local, visitante);
-                    partidos.add(partido);
-
-                    if (!verClasificacion) {
-                        System.out.println("\n¿Quieres ver la clasificación? (s/n)");
-                        String respuesta = scanner.nextLine();
-                        verClasificacion = respuesta.equalsIgnoreCase("s");
-                    }
-                    
-                    if (verClasificacion) {
-                        System.out.println("\nClasificación actualizada después del partido " + 
-                                         local.getNombre() + " vs " + visitante.getNombre() + ":");
-                        VerClasificacion();
-                        System.out.println("\nPresiona Enter para continuar...");
-                        scanner.nextLine();
-
-                    }
-                }
+                System.out.println("\n--- Partido de IDA ---");
+                Partido partidoIda = new Partido(local, visitante, new int[]{0, 0}, 0);
+                partidoIda.simularPartido(local, visitante, this);
+                partidos.add(partidoIda);
+            }
+        }
+        
+        // Segunda vuelta (partidos de vuelta)
+        for (int i = 0; i < grupo.size(); i++) {
+            for (int j = i + 1; j < grupo.size(); j++) {
+                Equipo local = grupo.get(j);  // Invertimos local y visitante
+                Equipo visitante = grupo.get(i);
+                
+                System.out.println("\n--- Partido de VUELTA ---");
+                Partido partidoVuelta = new Partido(local, visitante, new int[]{0, 0}, 0);
+                partidoVuelta.simularPartido(local, visitante, this);
+                partidos.add(partidoVuelta);
             }
         }
     }
 
     public void JugarGrupos() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("\n=== INICIO DE LA FASE DE GRUPOS ===\n");
         
+        System.out.println("\n=== GRUPO A ===");
         simularPartidosGrupo(grupoA);
+        mostrarClasificacionGrupo("A", grupoA);
+        System.out.println("\nPresiona ENTER para continuar con el siguiente grupo...");
+        scanner.nextLine();
+        
+        System.out.println("\n=== GRUPO B ===");
         simularPartidosGrupo(grupoB);
+        mostrarClasificacionGrupo("B", grupoB);
+        System.out.println("\nPresiona ENTER para continuar con el siguiente grupo...");
+        scanner.nextLine();
+        
+        System.out.println("\n=== GRUPO C ===");
         simularPartidosGrupo(grupoC);
+        mostrarClasificacionGrupo("C", grupoC);
+        System.out.println("\nPresiona ENTER para continuar con el siguiente grupo...");
+        scanner.nextLine();
+        
+        System.out.println("\n=== GRUPO D ===");
         simularPartidosGrupo(grupoD);
+        mostrarClasificacionGrupo("D", grupoD);
+        System.out.println("\nPresiona ENTER para continuar con el siguiente grupo...");
+        scanner.nextLine();
+        
+        System.out.println("\n=== GRUPO E ===");
         simularPartidosGrupo(grupoE);
+        mostrarClasificacionGrupo("E", grupoE);
+        System.out.println("\nPresiona ENTER para continuar con el siguiente grupo...");
+        scanner.nextLine();
+        
+        System.out.println("\n=== GRUPO F ===");
         simularPartidosGrupo(grupoF);
+        mostrarClasificacionGrupo("F", grupoF);
+        System.out.println("\nPresiona ENTER para continuar con el siguiente grupo...");
+        scanner.nextLine();
+        
+        System.out.println("\n=== GRUPO G ===");
         simularPartidosGrupo(grupoG);
+        mostrarClasificacionGrupo("G", grupoG);
+        System.out.println("\nPresiona ENTER para continuar con el siguiente grupo...");
+        scanner.nextLine();
+        
+        System.out.println("\n=== GRUPO H ===");
         simularPartidosGrupo(grupoH);
+        mostrarClasificacionGrupo("H", grupoH);
+        System.out.println("\nPresiona ENTER para ver el resumen final de la fase de grupos...");
+        scanner.nextLine();
+        
+        System.out.println("\n=== RESUMEN FINAL DE LA FASE DE GRUPOS ===");
+        VerClasificacion();
         
         System.out.println("\n=== FIN DE LA FASE DE GRUPOS ===\n");
     }

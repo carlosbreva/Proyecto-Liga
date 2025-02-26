@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import Champions.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -122,8 +123,25 @@ public class Main {
                     seguirJugando = false;
                 }
             }
+        if (seguirJugando && equiposEuropa.size() == 32) {
+            System.out.println("Modo Europa desbloqueado!");
+            System.out.println("¿Quieres jugar la Champions League? (1. Si 2. No)");
+            int respuesta = scanner.nextInt();
+            scanner.nextLine();
+            if (respuesta == 1) {
+                System.out.println("Has seleccionado la Champions League");
+                Champions champions = new Champions(equiposEuropa);
+                champions.jugarChampions();
+                System.out.println("Esto es todo por ahora! Gracias por jugar!");
+                seguirJugando = false;
+            } else {
+                System.out.println("Gracias por jugar!");
+                seguirJugando = false;
+            }
         }
         scanner.close();
     }
+}
+ 
 }
  

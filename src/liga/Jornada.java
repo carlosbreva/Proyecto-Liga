@@ -6,6 +6,7 @@ import personal.Equipo;
 import java.util.List;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Jornada {
     /* Variables generales*/
@@ -68,6 +69,7 @@ public class Jornada {
 
         int numeroPartidosenJornada = equipos.size()/2;
         int offset = (numeroJornada - 1) * numeroPartidosenJornada * 2;
+        Scanner scanner = new Scanner(System.in);
         
         for (int i = 0; i < numeroPartidosenJornada; i++) {
             System.out.println("\nPartido " + (i+1) + ":");
@@ -89,13 +91,8 @@ public class Jornada {
             
             if (equipoLocal != null && equipoVisitante != null) {
                 Partido partido = new Partido(equipoLocal, equipoVisitante, new int[]{0, 0}, 0);
-                partido.simularPartido(equipoLocal, equipoVisitante);
+                partido.simularPartido(equipoLocal, equipoVisitante, liga);
                 partidos.add(partido);
-                System.out.println("¿Quieres ver la clasificación? (s/n)");
-                String respuesta = System.console().readLine();
-                if (respuesta.equals("s")) {
-                    liga.VerClasificacion();
-                }
             } else {
                 System.out.println("Error: No se encontraron los equipos " + nombreEquipoLocal + " y/o " + nombreEquipoVisitante);
             }
