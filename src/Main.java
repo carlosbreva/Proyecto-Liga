@@ -20,10 +20,9 @@ public class Main {
         final int PRIMEIRA_START = 20;    // 20-23
         final int EREDIVISIE_START = 24;  // 24-27
         final int BELGIAN_START = 28;     // 28-31
-        final int BUNDESLIGA_AUSTRALIA_START = 32; // 32-35
 
         while (seguirJugando) {
-            System.out.println("=== XTART fÚTBOL  SIMULATOR ===\n");
+            System.out.println("=== XTART FÚTBOL SIMULATOR ===\n");
             System.out.println("=== OPCIONES DISPONIBLES (Recomendamos jugar todas las ligas para obtener una experiencia sorpresa...): ===\n");
             System.out.println("1. Bundesliga (Alemania)");
             System.out.println("2. La Liga (España)");
@@ -33,8 +32,7 @@ public class Main {
             System.out.println("6. Primeira Liga (Portugal)");
             System.out.println("7. Eredivisie (Holanda)");
             System.out.println("8. Belgian Pro League (Bélgica)");
-            System.out.println("9. Bundesliga De Australia");
-            System.out.println("10. Salir");
+            System.out.println("9. Salir");
 
             int opcion = scanner.nextInt();
             scanner.nextLine(); // Consumir el salto de línea
@@ -45,50 +43,45 @@ public class Main {
             switch (opcion) {
                 case 1:
                     System.out.println("Has seleccionado la Bundesliga");
-                    ligaActual = Liga.crearLiga("Bundesliga");
+                    ligaActual = Liga.crearLiga("Bundesliga", Paises.ALEMANIA);
                     startIndex = BUNDESLIGA_START;
                     break;
                 case 2:
                     System.out.println("Has seleccionado la La Liga");
-                    ligaActual = Liga.crearLiga("LaLiga");
+                    ligaActual = Liga.crearLiga("LaLiga", Paises.ESPAÑA);
                     startIndex = LALIGA_START;
                     break;
                 case 3:
                     System.out.println("Has seleccionado la Serie A");
-                    ligaActual = Liga.crearLiga("SerieA");
+                    ligaActual = Liga.crearLiga("SerieA", Paises.ITALIA);
                     startIndex = SERIEA_START;
                     break;
                 case 4:
                     System.out.println("Has seleccionado la Ligue 1");
-                    ligaActual = Liga.crearLiga("Ligue1");
+                    ligaActual = Liga.crearLiga("Ligue1", Paises.FRANCIA);
                     startIndex = LIGUE1_START;
                     break;
                 case 5:
                     System.out.println("Has seleccionado la Premier League");
-                    ligaActual = Liga.crearLiga("PremierLeague");
+                    ligaActual = Liga.crearLiga("PremierLeague", Paises.INGLATERRA);
                     startIndex = PREMIER_START;
                     break;
                 case 6:
                     System.out.println("Has seleccionado la Primeira Liga");
-                    ligaActual = Liga.crearLiga("PrimeiraLiga");
+                    ligaActual = Liga.crearLiga("PrimeiraLiga", Paises.PORTUGAL);
                     startIndex = PRIMEIRA_START;
                     break;
                 case 7:
                     System.out.println("Has seleccionado la Eredivisie");
-                    ligaActual = Liga.crearLiga("Eredivisie");
+                    ligaActual = Liga.crearLiga("Eredivisie", Paises.HOLANDA);
                     startIndex = EREDIVISIE_START;
                     break;
                 case 8:
                     System.out.println("Has seleccionado la Belgian Pro League");
-                    ligaActual = Liga.crearLiga("BelgianProLeague");
+                    ligaActual = Liga.crearLiga("BelgianProLeague", Paises.BELGICA);
                     startIndex = BELGIAN_START;
                     break;
                 case 9:
-                    System.out.println("Has seleccionado la Bundesliga De Australia");
-                    ligaActual = Liga.crearLiga("BundesligaDeAustralia");
-                    startIndex = BUNDESLIGA_AUSTRALIA_START;
-                    break;
-                case 10:
                     seguirJugando = false;
                     System.out.println("Gracias por jugar!");
                     break;

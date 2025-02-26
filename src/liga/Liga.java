@@ -67,7 +67,7 @@ public class Liga {
 
     /*Metodos y funciones  */
 
-    public static Liga crearLiga(String nombreLiga){
+    public static Liga crearLiga(String nombreLiga, Paises pais){
         String Entrenadores = "src/Documentos_Ligas/" + nombreLiga + "/Entrenadores_" + nombreLiga + ".txt";
         String Porteros = "src/Documentos_Ligas/" + nombreLiga + "/Porteros_" + nombreLiga + ".txt";
         String Jugadores = "src/Documentos_Ligas/" + nombreLiga + "/RestoDeJugadores_" + nombreLiga + ".txt";
@@ -75,7 +75,7 @@ public class Liga {
         List<Entrenador> entrenadores = Entrenador.crearEntrenadores(Entrenadores);
         List<Portero> porteros = Portero.crearPorteros(Porteros);
         List<Jugador> jugadores = Jugador.crearJugadores(Jugadores);
-        List<Equipo> equipos = Equipo.crearEquipos(Nombres_Equipos, entrenadores, porteros, jugadores);
+        List<Equipo> equipos = Equipo.crearEquipos(Nombres_Equipos, entrenadores, porteros, jugadores, pais);
         Liga liga = new Liga(nombreLiga, equipos);
         return liga;
     }

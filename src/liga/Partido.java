@@ -162,7 +162,7 @@ public class Partido {
         
         TimerTask task = new TimerTask() {
             private int loQueLleva = 0;
-            final int tiempoMax = (int) (0.3/0.05); // Reducido a 0.3 segundos total
+            final int tiempoMax = (int) (1.0/0.05); // Aumentado a 1 segundo total
 
             @Override
             public void run() {

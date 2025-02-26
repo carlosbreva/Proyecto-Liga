@@ -84,13 +84,13 @@ public class Premios  {
         System.out.println("Goleador: " + goleador.getNombre());
 
         // Portero del torneo
-        Portero mejorPortero = porteros.get(0);
+        Portero zamorano = porteros.get(0);
         for (Portero p : porteros) {
-            if (p.getNumeroDeParadas() > mejorPortero.getNumeroDeParadas()) {
-                mejorPortero = p;
+            if (p.getNumeroDeParadas() > zamorano.getNumeroDeParadas()) {
+                zamorano = p;
             }
         }
-        System.out.println("Portero del torneo: " + mejorPortero.getNombre());  
+        System.out.println("Portero del torneo: " + zamorano.getNombre());  
 
         
 

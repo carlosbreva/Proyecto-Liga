@@ -15,6 +15,7 @@ public class Equipo {
     private String nombre;
     private String nombreEntrenador;
     private List<Jugador> jugadores = new ArrayList<>();
+    private Paises pais;
     private int golesAfavor;
     private int golesEnContra;
     private int diferenciaGoles;
@@ -23,10 +24,11 @@ public class Equipo {
     private Partido[] partidos;
     private int partidosJugados;
 
-    public Equipo(String nombre, String nombreEntrenador, List<Jugador> jugadores, int golesAfavor, int golesEnContra, int diferenciaGoles, int mediaStatsEquipo, int puntos, Partido[] partidos, int partidosJugados) {
+    public Equipo(String nombre, String nombreEntrenador, List<Jugador> jugadores, Paises pais, int golesAfavor, int golesEnContra, int diferenciaGoles, int mediaStatsEquipo, int puntos, Partido[] partidos, int partidosJugados) {
         this.nombre = nombre;
         this.nombreEntrenador = nombreEntrenador;
         this.jugadores = jugadores;
+        this.pais = pais;
         this.golesAfavor = golesAfavor;
         this.golesEnContra = golesEnContra;
         this.diferenciaGoles = diferenciaGoles;
@@ -120,7 +122,15 @@ public class Equipo {
     public void setPartidosJugados(int partidosJugados) {
         this.partidosJugados = partidosJugados;
     }
-public static List<Equipo> crearEquipos(String rutaFichero, List<Entrenador> entrenadores, List<Portero> porteros, List<Jugador> jugadores) {
+
+    public Paises getPais() {
+        return pais;
+    }
+
+    public void setPais(Paises pais) {
+        this.pais = pais;
+    }
+public static List<Equipo> crearEquipos(String rutaFichero, List<Entrenador> entrenadores, List<Portero> porteros, List<Jugador> jugadores, Paises pais) {
     List<Equipo> equipos = new ArrayList<>();
     int indiceEntrenador = 0;
     
@@ -172,7 +182,7 @@ public static List<Equipo> crearEquipos(String rutaFichero, List<Entrenador> ent
                 }
                 int mediaStats = sumaStats / jugadoresEquipo.size();
                 
-                Equipo equipo = new Equipo(linea.trim(), nombreEntrenador, jugadoresEquipo, 0, 0, 0, mediaStats, 0, null, 0);
+                Equipo equipo = new Equipo(linea.trim(), nombreEntrenador, jugadoresEquipo, pais, 0, 0, 0, mediaStats, 0, null, 0);
                 equipos.add(equipo);
                 indiceEntrenador++;
 
