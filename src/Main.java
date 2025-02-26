@@ -33,7 +33,8 @@ public class Main {
             System.out.println("6. Primeira Liga (Portugal)");
             System.out.println("7. Eredivisie (Holanda)");
             System.out.println("8. Belgian Pro League (Bélgica)");
-            System.out.println("9. Salir");
+            System.out.println("9. Champions League");
+            System.out.println("10. Salir");
 
             int opcion = scanner.nextInt();
             scanner.nextLine(); // Consumir el salto de línea
@@ -83,6 +84,26 @@ public class Main {
                     startIndex = BELGIAN_START;
                     break;
                 case 9:
+                    // Contar equipos no nulos
+                    int equiposDisponibles = 0;
+                    for (Equipo equipo : equiposEuropa) {
+                        if (equipo != null) {
+                            equiposDisponibles++;
+                        }
+                    }
+                    
+                    if (equiposDisponibles == 32) {
+                        System.out.println("Has seleccionado la Champions League");
+                        Champions champions = new Champions(equiposEuropa);
+                        champions.jugarChampions();
+                        System.out.println("¡Esto es todo por ahora! ¡Gracias por jugar!");
+                        seguirJugando = false;
+                    } else {
+                        System.out.println("No tienes suficientes equipos para jugar la Champions League.");
+                        System.out.println("Necesitas completar todas las ligas primero (tienes " + equiposDisponibles + " de 32 equipos).");
+                    }
+                    break;
+                case 10:
                     seguirJugando = false;
                     System.out.println("Gracias por jugar!");
                     break;
@@ -123,25 +144,10 @@ public class Main {
                     seguirJugando = false;
                 }
             }
-        if (seguirJugando && equiposEuropa.size() == 32) {
-            System.out.println("Modo Europa desbloqueado!");
-            System.out.println("¿Quieres jugar la Champions League? (1. Si 2. No)");
-            int respuesta = scanner.nextInt();
-            scanner.nextLine();
-            if (respuesta == 1) {
-                System.out.println("Has seleccionado la Champions League");
-                Champions champions = new Champions(equiposEuropa);
-                champions.jugarChampions();
-                System.out.println("Esto es todo por ahora! Gracias por jugar!");
-                seguirJugando = false;
-            } else {
-                System.out.println("Gracias por jugar!");
-                seguirJugando = false;
-            }
         }
-        scanner.close();
     }
 }
  
-}
+
+ 
  
