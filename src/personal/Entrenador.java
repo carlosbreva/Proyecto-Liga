@@ -12,7 +12,6 @@ public class Entrenador extends Persona {
 
      /* Variables*/
     private int añosDeExperiencia;
-    private static String rutaFichero;
     private static Random random = new Random();
 
 

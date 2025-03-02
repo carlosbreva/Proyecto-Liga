@@ -91,7 +91,36 @@ public class Premios  {
         }
         System.out.println("Portero del torneo: " + zamorano.getNombre());  
 
+        /* Equipos descendidos */
+        List<Equipo> equiposDescendidos = new ArrayList<>();
+        Equipo primerEquipoDescendido = equipos.get(0);
+        Equipo segundoEquipoDescendido = equipos.get(0);
+        Equipo tercerEquipoDescendido = equipos.get(0);
+        for (Equipo equipo : equipos) {
+            if (equipo.getPuntos() < primerEquipoDescendido.getPuntos()) {
+                primerEquipoDescendido = equipo;
+            }
+        }
+        equiposDescendidos.add(primerEquipoDescendido);
+        for (Equipo equipo : equipos) {
+            if (equipo.getPuntos() < segundoEquipoDescendido.getPuntos() && equipo != primerEquipoDescendido) {
+                segundoEquipoDescendido = equipo;
+            }
+        }
+        equiposDescendidos.add(segundoEquipoDescendido);
+        for (Equipo equipo : equipos) {
+            if (equipo.getPuntos() < tercerEquipoDescendido.getPuntos() && equipo != primerEquipoDescendido && equipo != segundoEquipoDescendido) {
+                tercerEquipoDescendido = equipo;
+            }
+        }
+        equiposDescendidos.add(tercerEquipoDescendido);
+        System.out.println("Los equipos que descienden son: " + equiposDescendidos);
         
+        
+
+        
+        
+
 
     }
 

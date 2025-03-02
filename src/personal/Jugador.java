@@ -247,7 +247,7 @@ public class Jugador extends Persona {
         System.out.println("Mediocentros: " + (8 - mediocentrosNecesarios) + "/8");
         System.out.println("Delanteros: " + (4 - delanterosNecesarios) + "/4");
         //devuelve la lista de jugadores
-        return jugadores;
+        return jugadores;  
     }
 
     /* Equals y toString */

@@ -3,7 +3,7 @@ import liga.*;
 import java.util.List;
 import java.util.Scanner;
 
-import champions.*;
+import Champions.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -120,7 +120,7 @@ public class Main {
                     System.out.println("Opción inválida. Por favor, selecciona una opción válida.");
                     break; 
             } 
-            scanner.close();
+
             if (ligaActual != null) {
                 //jugar la liga
                 ligaActual.jugarLiga();
@@ -159,6 +159,7 @@ public class Main {
                 }
             }
         }
+        scanner.close(); 
     }
 }
  

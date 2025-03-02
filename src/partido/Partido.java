@@ -5,16 +5,14 @@ import personal.Jugador;
 import personal.Posicion;
 import personal.Portero;
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 import liga.Liga;
-import champions.Fase_De_Grupos;
-import champions.Fase_Final;
 import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Partido {
     
@@ -112,9 +110,10 @@ public class Partido {
         for (Jugador j : equipo.getJugadores()) {
             if (j.getPosicion() == Posicion.DEFENSA) {
                 defensas.add(j);
-            } else {
-                System.out.println("No hay defensas en el equipo " + equipo.getNombre());
             }
+        }
+        if (defensas.isEmpty()) {
+            System.out.println("No hay defensas en el equipo " + equipo.getNombre());
         }
         for (int i = 0; i < 4 && !defensas.isEmpty(); i++) {
             int index = random.nextInt(defensas.size());
@@ -127,9 +126,10 @@ public class Partido {
         for (Jugador j : equipo.getJugadores()) {
             if (j.getPosicion() == Posicion.MEDIOCENTRO) {
                 mediocentros.add(j);
-            } else {
-                System.out.println("No hay mediocentros en el equipo " + equipo.getNombre());
             }
+        }
+        if (mediocentros.isEmpty()) {
+            System.out.println("No hay mediocentros en el equipo " + equipo.getNombre());
         }
         for (int i = 0; i < 3 && !mediocentros.isEmpty(); i++) {
             int index = random.nextInt(mediocentros.size());
@@ -142,9 +142,10 @@ public class Partido {
         for (Jugador j : equipo.getJugadores()) {
             if (j.getPosicion() == Posicion.DELANTERO) {
                 delanteros.add(j);
-            } else {
-                System.out.println("No hay delanteros en el equipo " + equipo.getNombre());
             }
+        }
+        if (delanteros.isEmpty()) {
+            System.out.println("No hay delanteros en el equipo " + equipo.getNombre());
         }
         for (int i = 0; i < 3 && !delanteros.isEmpty(); i++) {
             int index = random.nextInt(delanteros.size());
@@ -317,15 +318,45 @@ public class Partido {
         }
     }
 
+    /* Método para validar que un equipo tenga suficientes jugadores */
+    private boolean validarEquipo(Equipo equipo) {
+        int porteros = 0;
+        int defensas = 0;
+        int mediocentros = 0;
+        int delanteros = 0;
+
+        for (Jugador j : equipo.getJugadores()) {
+            switch (j.getPosicion()) {
+                case PORTERO: porteros++; break;
+                case DEFENSA: defensas++; break;
+                case MEDIOCENTRO: mediocentros++; break;
+                case DELANTERO: delanteros++; break;
+            }
+        }
+
+        return porteros >= 1 && defensas >= 4 && mediocentros >= 3 && delanteros >= 3;
+    }
+
 
     /* Simular partido */
     public void simularPartido(Equipo equipoLocal, Equipo equipoVisitante, Object competicion) { 
+        // Validar que los equipos tengan suficientes jugadores
+        if (!validarEquipo(equipoLocal) || !validarEquipo(equipoVisitante)) {
+            System.out.println("No se puede jugar el partido: uno o ambos equipos no tienen suficientes jugadores");
+            return;
+        }
+
         System.out.println("\n=== INICIO DEL PARTIDO ===");
         System.out.println(equipoLocal.getNombre() + " vs " + equipoVisitante.getNombre());
 
         // Seleccionar 11 titulares para cada equipo
         List<Jugador> titularesLocal = seleccionar11Titular(equipoLocal);
         List<Jugador> titularesVisitante = seleccionar11Titular(equipoVisitante);
+
+        if (titularesLocal.size() < 11 || titularesVisitante.size() < 11) {
+            System.out.println("No se puede jugar el partido: uno o ambos equipos no pueden formar un 11 inicial completo");
+            return;
+        }
 
         // Mostrar alineaciones
         System.out.println("\nAlineación " + equipoLocal.getNombre() + ":");
@@ -344,9 +375,7 @@ public class Partido {
         final int[] golesVisitante = {0};
         final int[] paradasLocal = {0};
         final int[] paradasVisitante = {0};
-        final int[] tarjetasAmarillas = {0};
         final List<Jugador> jugadoresExpulsados = new ArrayList<>();
-        final int[] tarjetasRojas = {0};
         final double[] probabilidadLocal = {calcularProbabilidadLocal(equipoLocal)};
         final double[] probabilidadVisitante = {calcularProbabilidadVisitante(equipoVisitante)};
         Random random = new Random();
@@ -362,16 +391,19 @@ public class Partido {
         /* Tarea del partido */
         TimerTask task = new TimerTask() {
             private int loQueLleva = 0;
-            final int tiempoMax = 10; // 10 ciclos para el partido
+            final int tiempoMax = 30; // Aumentado a 30 ciclos (3 segundos)
+            final int intervaloEventos = 3; // Eventos cada 0.3 segundos
 
+            @Override
             public void run() {
                 if (loQueLleva < tiempoMax) {
-                    procesarEquipoLocal(titularesLocal, jugadoresExpulsados, probabilidadLocal, 
-                                      golesLocal, paradasVisitante, porteroVisitanteFinal, random);
-                    
-                    procesarEquipoVisitante(titularesVisitante, jugadoresExpulsados, probabilidadVisitante, 
-                                          golesVisitante, paradasLocal, porteroLocalFinal, random);
-
+                    if (loQueLleva % intervaloEventos == 0) {
+                        procesarEquipoLocal(titularesLocal, jugadoresExpulsados, probabilidadLocal, 
+                                          golesLocal, paradasVisitante, porteroVisitanteFinal, random);
+                        
+                        procesarEquipoVisitante(titularesVisitante, jugadoresExpulsados, probabilidadVisitante, 
+                                              golesVisitante, paradasLocal, porteroLocalFinal, random);
+                    }
                     loQueLleva++;
                 } else {
                     timer.cancel();
@@ -459,28 +491,41 @@ public class Partido {
             }
         };
 
-        timer.scheduleAtFixedRate(task, 0, 100); // 100ms entre eventos para un total de 1 segundo
+        timer.scheduleAtFixedRate(task, 0, 100); // 100ms entre eventos
 
         try {
-            // Esperar a que termine el partido (1 segundo + margen)
-            Thread.sleep(1500);
+            // Esperar a que termine el partido (3 segundos + margen)
+            Thread.sleep(3500);
             
             // Preguntar si quiere ver la clasificación
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("\n¿Quieres ver la clasificación? (1. Si, 2. No)");
-            String respuesta = scanner.nextLine().toLowerCase().trim();
-            if (respuesta.equals("s") || respuesta.equals("si") || respuesta.equals("1")) {
+            System.out.println("\n¿Quieres ver la clasificación? (s/n)");
+            int respuesta = System.in.read();
+            // Limpiar el buffer
+            while (System.in.available() > 0) {
+                System.in.read();
+            }
+            
+            if (respuesta == 's' || respuesta == 'S') {
+                System.out.println("\n=== CLASIFICACIÓN ACTUAL ===");
                 if (competicion instanceof Liga) {
-                    System.out.println("\n=== CLASIFICACIÓN DE LA LIGA ===");
                     ((Liga) competicion).VerClasificacion();
-                } else if (competicion instanceof champions.Fase_De_Grupos) {
-                    System.out.println("\n=== CLASIFICACIÓN DE LA CHAMPIONS ===");
-                    ((champions.Fase_De_Grupos) competicion).VerClasificacion();
+                } else if (competicion instanceof Champions.Fase_De_Grupos) {
+                    ((Champions.Fase_De_Grupos) competicion).VerClasificacion();
                 }
             }
+            
+            System.out.println("\nPresiona ENTER para continuar...");
+            System.in.read();
+            while (System.in.available() > 0) {
+                System.in.read();
+            }
+            
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        
     }
 
 

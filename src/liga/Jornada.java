@@ -99,7 +99,6 @@ public class Jornada {
                 System.out.println("Error: No se encontraron los equipos " + nombreEquipoLocal + " y/o " + nombreEquipoVisitante);
             }
         }
-        scanner.close();
     }
 
     /* Equals y ToString*/

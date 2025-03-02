@@ -1,4 +1,4 @@
-package champions;
+package Champions;
 import java.util.List;
 import partido.Partido;
 import personal.Equipo;
@@ -22,7 +22,7 @@ public class Fase_De_Grupos {
 
     /* Constructor */
     public Fase_De_Grupos(List<Equipo> equipos) {
-        this.equipos = equipos;
+    this.equipos = equipos;
         this.partidos = new ArrayList<>();
         this.grupoA = new ArrayList<>();
         this.grupoB = new ArrayList<>();
@@ -35,22 +35,22 @@ public class Fase_De_Grupos {
     }
 
     /* Getters y setters */
-    public List<Equipo> getEquipos() {
-        return equipos;
-    }
+public List<Equipo> getEquipos() {
+    return equipos;
+}
 
-    public void setEquipos(List<Equipo> equipos) {
-        this.equipos = equipos;
-    }
+public void setEquipos(List<Equipo> equipos) {
+    this.equipos = equipos;
+}
 
-    public List<Partido> getPartidos() {
-        return partidos;
-    }
+public List<Partido> getPartidos() {
+    return partidos;
+}
 
-    public void setPartidos(List<Partido> partidos) {
-        this.partidos = partidos;
-    }
-
+public void setPartidos(List<Partido> partidos) {
+    this.partidos = partidos;
+}
+ 
     public List<Equipo> getGrupoA() {
         return grupoA;
     }
@@ -425,5 +425,5 @@ public class Fase_De_Grupos {
                 + ", grupoG=" + grupoG + ", grupoH=" + grupoH + "]";
     }
 
-    
+
 }

@@ -1,4 +1,4 @@
-package champions;
+package Champions;
 import java.util.List;
 
 import personal.Equipo;
