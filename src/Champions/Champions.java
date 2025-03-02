@@ -1,15 +1,18 @@
-package Champions;
+package champions;
 import java.util.List;
-import personal.*;
-import Champions.*;
+
+import personal.Equipo;
 
 public class Champions {
+    /* Variables */
     private List<Equipo> equipos;
 
+    /* Constructor */
     public Champions(List<Equipo> equipos) {
         this.equipos = equipos;
     }
-    
+
+    /* Getters y setters */
     public List<Equipo> getEquipos() {
         return equipos;
     }
@@ -17,7 +20,8 @@ public class Champions {
     public void setEquipos(List<Equipo> equipos) {
         this.equipos = equipos;
     }
-
+ 
+    /* Jugar champions */
     public void jugarChampions() {
         Fase_De_Grupos faseGrupos = new Fase_De_Grupos(equipos);
         faseGrupos.AsignarGrupos();

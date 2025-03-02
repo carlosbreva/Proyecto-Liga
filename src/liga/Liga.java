@@ -15,21 +15,17 @@ public class Liga {
     private Jornada[] jornadas;
     private Persona[] jugadores;
 
-//Constructor//
- public Liga(String nombre, List<Equipo> equipos){
-    this.nombre = nombre;
-    this.equipos = equipos;
-    // Crear jornadas (cada equipo juega contra todos los demás una vez)
-    int numeroJornadas = (equipos.size() * 2) - 2; // Multiplicado por 2 para ida y vuelta
-    this.jornadas = new Jornada[numeroJornadas];
+    /* Constructor */
+    public Liga(String nombre, List<Equipo> equipos){
+        this.nombre = nombre;
+        this.equipos = equipos;
+        // Crear jornadas (cada equipo juega contra todos los demás una vez)
+        int numeroJornadas = (equipos.size() * 2) - 2; // Multiplicado por 2 para ida y vuelta
+        this.jornadas = new Jornada[numeroJornadas];
     for (int i = 0; i < numeroJornadas; i++) {
-        this.jornadas[i] = new Jornada(i + 1, this);
+            this.jornadas[i] = new Jornada(i + 1, this);
+        }
     }
- }
-
-  public Liga(){
-  }
-
 
 
     /* Getters y setters  */
@@ -66,8 +62,12 @@ public class Liga {
         this.jugadores = jugadores;
     }
 
+
+
+
     /*Metodos y funciones  */
 
+    /* Crear liga */
     public static Liga crearLiga(String nombreLiga, Paises pais){
         String Entrenadores = "src/Documentos_Ligas/" + nombreLiga + "/Entrenadores_" + nombreLiga + ".txt";
         String Porteros = "src/Documentos_Ligas/" + nombreLiga + "/Porteros_" + nombreLiga + ".txt";
@@ -77,11 +77,16 @@ public class Liga {
         List<Portero> porteros = Portero.crearPorteros(Porteros, pais);
         List<Jugador> jugadores = Jugador.crearJugadores(Jugadores, pais);
         List<Equipo> equipos = Equipo.crearEquipos(Nombres_Equipos, entrenadores, porteros, jugadores, pais);
-        Liga liga = new Liga(nombreLiga, equipos);
-        return liga;
+        if (entrenadores.isEmpty() || porteros.isEmpty() || jugadores.isEmpty() || equipos.isEmpty()) {
+            System.out.println("No se pudieron crear equipos. Verifica que hay suficientes jugadores y porteros.");
+            return null;
+        } else {
+            Liga liga = new Liga(nombreLiga, equipos);
+            return liga;
+        }
     }
 
-
+    /* Jugar liga */
     public void jugarLiga() {
         if (equipos == null || equipos.isEmpty()) {
             System.out.println("No hay equipos suficientes para jugar la jornada.");
@@ -89,16 +94,20 @@ public class Liga {
         }
 
         Scanner scanner = new Scanner(System.in);
+        /* Inicio de la liga */
         System.out.println("\n=== INICIO DE LA LIGA ===\n");
+        /* Jugar jornadas */
         for (Jornada jornada : jornadas) {
             System.out.println("\n=== JORNADA " + jornada.getNumeroJornada() + " ===\n");
             jornada.jugarPartidos(equipos);
             if (jornada.getNumeroJornada() < jornadas.length) {
+                /* Ver clasificacion */
                 System.out.println("\n=== CLASIFICACIÓN TRAS LA JORNADA " + jornada.getNumeroJornada() + " ===");
                 VerClasificacion();
                 System.out.println("\nPulsa ENTER para continuar...");
                 scanner.nextLine();
             } else {
+                /* Ver clasificacion final */
                 System.out.println("\n=== CLASIFICACIÓN FINAL DE LA LIGA ===");
                 VerClasificacion();
                 System.out.println("\nPulsa ENTER para continuar...");
@@ -106,6 +115,7 @@ public class Liga {
             }
         }
         System.out.println("\n=== FIN DE LA LIGA ===\n");
+        scanner.close();
     }
 
 
@@ -114,13 +124,15 @@ public void VerClasificacion(){
     System.out.println("Pos  Equipo                  PJ   PG   PE   PP   GF   GC   DG   Pts");
     System.out.println("----------------------------------------------------------------");
 
+    /* Ordenar equipos por puntos y diferencia de goles */
     equipos.sort((e1, e2) -> {
         if (e2.getPuntos() != e1.getPuntos()) {
-            return e2.getPuntos() - e1.getPuntos();
+            return e2.getPuntos() - e1.getPuntos();  // Ordena por puntos de mayor a menor
         }
-        return e2.getDiferenciaGoles() - e1.getDiferenciaGoles();
+        return e2.getDiferenciaGoles() - e1.getDiferenciaGoles();  // Si tienen mismos puntos, ordena por diferencia de goles
     });
 
+    /* Mostrar clasificacion */
     for (int i = 0; i < equipos.size(); i++) {
         Equipo e = equipos.get(i);
         int partidosJugados = e.getPartidosJugados();
@@ -128,6 +140,7 @@ public void VerClasificacion(){
         int partidosEmpatados = e.getPuntos() % 3;
         int partidosPerdidos = partidosJugados - partidosGanados - partidosEmpatados;
 
+        /* Formato de la clasificacion */
         System.out.printf("%-4d %-20s %4d %4d %4d %4d %4d %4d %4d %4d%n",
             i + 1,
             e.getNombre(),

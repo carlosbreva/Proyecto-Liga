@@ -5,13 +5,13 @@ import personal.Equipo;
 import personal.Portero;
 import java.util.ArrayList;
 public class Premios  {
-    
+    /* Variables */
     private String MVP;
     private String Goleador;
     private String PorteroTorneo;
     private String EquipoCampeon;
 
-
+    /* Constructor */
     public Premios(String MVP, String Goleador, String PorteroTorneo, String EquipoCampeon) {
         this.MVP = MVP;
         this.Goleador = Goleador;
@@ -20,9 +20,7 @@ public class Premios  {
 
     }
 
-    public Premios(){
-
-    }
+    /* Getters y setters */
     
     public String getMVP() {
         return MVP;
@@ -57,8 +55,9 @@ public class Premios  {
     }
 
 
+    /* Dar premios */
     public static void darPremios(List<Jugador> jugadores, List<Equipo> equipos, List<Portero> porteros) {
-        //LIGA
+        //Equipo campeon
         Equipo campeon = equipos.get(0);
         for (Equipo equipo : equipos) {
             if (equipo.getPuntos() > campeon.getPuntos()) {
@@ -96,6 +95,7 @@ public class Premios  {
 
     }
 
+    /* Equipos a Europa */
     public static List<Equipo> EquiposAEuropa(List<Equipo> equipos) {
         List<Equipo> equiposEuropa = new ArrayList<>();
         Equipo primerEquipoEuropa = equipos.get(0);
@@ -121,6 +121,8 @@ public class Premios  {
         equiposEuropa.add(tercerEquipoEuropa);
         return equiposEuropa;
     }
+
+    /* Equals */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

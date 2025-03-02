@@ -2,13 +2,15 @@ import personal.*;
 import liga.*;
 import java.util.List;
 import java.util.Scanner;
+
+import champions.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import Champions.*;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);  // Un solo Scanner para toda la aplicación
+        Scanner scanner = new Scanner(System.in);  
         boolean seguirJugando = true;
         List<Equipo> equiposEuropa = new ArrayList<>(Arrays.asList(new Equipo[32])); // Inicializar con 32 espacios nulos
         
@@ -23,6 +25,7 @@ public class Main {
         final int BELGIAN_START = 28;     // 28-31
 
         while (seguirJugando) {
+            // Menú principal
             System.out.println("=== XTART FÚTBOL SIMULATOR ===\n");
             System.out.println("=== OPCIONES DISPONIBLES (Recomendamos jugar todas las ligas para obtener una experiencia sorpresa...): ===\n");
             System.out.println("1. Bundesliga (Alemania)");
@@ -42,6 +45,7 @@ public class Main {
             Liga ligaActual = null;
             int startIndex = 0;
 
+            //switch para seleccionar la liga
             switch (opcion) {
                 case 1:
                     System.out.println("Has seleccionado la Bundesliga");
@@ -93,23 +97,32 @@ public class Main {
                     }
                     
                     if (equiposDisponibles == 32) {
+                        //seleccionar la champions league si hay 32 equipos y jugarla
                         System.out.println("Has seleccionado la Champions League");
                         Champions champions = new Champions(equiposEuropa);
                         champions.jugarChampions();
                         System.out.println("¡Esto es todo por ahora! ¡Gracias por jugar!");
                         seguirJugando = false;
                     } else {
+                        //no tienes suficientes equipos para jugar la champions league
                         System.out.println("No tienes suficientes equipos para jugar la Champions League.");
                         System.out.println("Necesitas completar todas las ligas primero (tienes " + equiposDisponibles + " de 32 equipos).");
                     }
                     break;
                 case 10:
+                    //salir del programa
                     seguirJugando = false;
                     System.out.println("Gracias por jugar!");
                     break;
-            }
-
+                    
+                default:
+                    //opcion inválida
+                    System.out.println("Opción inválida. Por favor, selecciona una opción válida.");
+                    break; 
+            } 
+            scanner.close();
             if (ligaActual != null) {
+                //jugar la liga
                 ligaActual.jugarLiga();
                 List<Equipo> equipos = ligaActual.getEquipos();
                 List<Jugador> jugadores = new ArrayList<>();
@@ -137,6 +150,7 @@ public class Main {
             }
 
             if (seguirJugando) {
+                //pregunta si quiere jugar otra liga
                 System.out.println("¿Quieres jugar otra liga? (1. Si 2. No)");
                 int respuesta = scanner.nextInt();
                 scanner.nextLine();

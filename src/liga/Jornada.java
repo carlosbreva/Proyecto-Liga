@@ -8,6 +8,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import partido.Partido;
+
 public class Jornada {
     /* Variables generales*/
     private int numeroJornada;
@@ -97,6 +99,7 @@ public class Jornada {
                 System.out.println("Error: No se encontraron los equipos " + nombreEquipoLocal + " y/o " + nombreEquipoVisitante);
             }
         }
+        scanner.close();
     }
 
     /* Equals y ToString*/

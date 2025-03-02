@@ -16,9 +16,6 @@ public class Persona {
         this.pais = pais;
     }
 
-    public Persona(String nombre) {
-        this.nombre = nombre;
-    }
 
     /* Getters y Setters */
     public int getEdad() {

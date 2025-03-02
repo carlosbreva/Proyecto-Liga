@@ -10,6 +10,7 @@ import java.util.Random;
 
 public class Jugador extends Persona {
 
+    /* Variables */
     private Posicion posicion;
     private int statMediaJugador;
     private int tarjetasAmarillas;
@@ -17,7 +18,8 @@ public class Jugador extends Persona {
     private int golesAnotados;
     private int velocidad;
     private static Random random = new Random();
-    //Estadísticas de Jugador de Campo
+
+    /* Estadísticas exclusivas de Jugador de Campo */
     private int ritmo;
     private int pase;
     private int tiros;
@@ -26,7 +28,7 @@ public class Jugador extends Persona {
     private int fisico;
 
 
-
+    /* Constructor */
     public Jugador(String nombre, int edad, Posicion posicion, int tarjetasAmarillas, int tarjetasRojas, int golesAnotados, int velocidad, int ritmo, int pase, int tiros, int defensa, int regate, int fisico,int statMediaJugador, Paises pais) {
         super(nombre, edad, pais);
         this.posicion = posicion;
@@ -43,7 +45,7 @@ public class Jugador extends Persona {
         this.fisico = fisico;
     }
 
-
+    /* Getters y Setters */
     public int getRitmo() {
     	return this.ritmo;
     }
@@ -55,6 +57,7 @@ public class Jugador extends Persona {
     public int getPase() {
     	return this.pase;
     }
+
     public void setPase(int pase) {
     	this.pase = pase;
     }
@@ -119,6 +122,15 @@ public class Jugador extends Persona {
         this.velocidad = velocidad;
     }
 
+
+    public Posicion getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(Posicion posicion) {
+        this.posicion = posicion;
+    }
+    
     public int getStatMediaJugador() {
         return this.statMediaJugador;
     }
@@ -126,6 +138,8 @@ public class Jugador extends Persona {
         this.statMediaJugador = statMediaJugador;
     }
 
+
+    /* Métodos */
     public static List<Jugador> crearJugadores(String rutaFichero, Paises pais) {
         List<Jugador> jugadores = new ArrayList<>();
         List<String> nombresJugadores = new ArrayList<>();
@@ -139,9 +153,11 @@ public class Jugador extends Persona {
                 }
             }
         } catch (FileNotFoundException e) {
+            //si no se encuentra el archivo de nombres
             System.err.println("No se encontró el archivo de nombres: " + rutaFichero);
             return jugadores;
         } catch (IOException e) {
+            //si hay un error al leer el archivo
             System.err.println("Error al leer el archivo: " + e.getMessage());
             return jugadores;
         }
@@ -154,6 +170,7 @@ public class Jugador extends Persona {
             nombresJugadores.set(j, temp);
         }
 
+        //contadores de jugadores necesarios
         int defensasNecesarios = 8;
         int mediocentrosNecesarios = 8;
         int delanterosNecesarios = 4;
@@ -186,19 +203,24 @@ public class Jugador extends Persona {
                 case PORTERO:
                     // Los porteros se manejan en una clase separada
                     break;
+                default:
+                    //si no es ninguna de las posiciones anteriores
+                    break;
             }
 
             // Crear jugador con estadísticas aleatorias
             int edad = 18 + random.nextInt(22); // Entre 18 y 39 años
             int ritmo = 40 + random.nextInt(61); // Entre 40-100
-            int pase = 40 + random.nextInt(61);
-            int tiros = 40 + random.nextInt(61);
-            int defensa = 40 + random.nextInt(61);
-            int regate = 40 + random.nextInt(61);
-            int fisico = 40 + random.nextInt(61);
-            int velocidad = 40 + random.nextInt(61);
+            int pase = 40 + random.nextInt(61); // Entre 40-100
+            int tiros = 40 + random.nextInt(61); // Entre 40-100
+            int defensa = 40 + random.nextInt(61); // Entre 40-100
+            int regate = 40 + random.nextInt(61); // Entre 40-100
+            int fisico = 40 + random.nextInt(61); // Entre 40-100
+            int velocidad = 40 + random.nextInt(61); // Entre 40-100
+            //calcula la media de las estadísticas
             int statMediaJugador = (ritmo + pase + tiros + defensa + regate + fisico + velocidad) / 7;
 
+            //crea el jugador
             Jugador jugador = new Jugador(
                 nombresJugadores.get(jugadoresCreados),
                 edad,
@@ -214,7 +236,7 @@ public class Jugador extends Persona {
                 statMediaJugador,
                 pais
             );
-            
+            //añade el jugador a la lista
             jugadores.add(jugador);
             jugadoresCreados++;
         }
@@ -224,10 +246,11 @@ public class Jugador extends Persona {
         System.out.println("Defensas: " + (8 - defensasNecesarios) + "/8");
         System.out.println("Mediocentros: " + (8 - mediocentrosNecesarios) + "/8");
         System.out.println("Delanteros: " + (4 - delanterosNecesarios) + "/4");
-        
+        //devuelve la lista de jugadores
         return jugadores;
     }
 
+    /* Equals y toString */
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -245,12 +268,6 @@ public class Jugador extends Persona {
                 + regate + ", fisico=" + fisico + ", statMediaJugador=" + statMediaJugador;
     }
 
-    public Posicion getPosicion() {
-        return posicion;
-    }
 
-    public void setPosicion(Posicion posicion) {
-        this.posicion = posicion;
-    }
 
 }

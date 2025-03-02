@@ -1,14 +1,14 @@
-package Champions;
+package champions;
 import java.util.List;
-import liga.*;
-import personal.*;
-import java.util.Random;
+import partido.Partido;
+import personal.Equipo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.Arrays;
 public class Fase_De_Grupos {
 
+    /* Variables */
     private List<Equipo> equipos;
     private List<Partido> partidos;
     private List<Equipo> grupoA;
@@ -20,6 +20,7 @@ public class Fase_De_Grupos {
     private List<Equipo> grupoG;
     private List<Equipo> grupoH;
 
+    /* Constructor */
     public Fase_De_Grupos(List<Equipo> equipos) {
         this.equipos = equipos;
         this.partidos = new ArrayList<>();
@@ -33,7 +34,7 @@ public class Fase_De_Grupos {
         this.grupoH = new ArrayList<>();
     }
 
-    /*Metodos get y set*/
+    /* Getters y setters */
     public List<Equipo> getEquipos() {
         return equipos;
     }
@@ -50,12 +51,77 @@ public class Fase_De_Grupos {
         this.partidos = partidos;
     }
 
-    // Metodo asginar grupos   
+    public List<Equipo> getGrupoA() {
+        return grupoA;
+    }
+
+    public void setGrupoA(List<Equipo> grupoA) {
+        this.grupoA = grupoA;
+    }
+
+    public List<Equipo> getGrupoB() {
+        return grupoB;
+    }
+
+    public void setGrupoB(List<Equipo> grupoB) {
+        this.grupoB = grupoB;
+    }
+
+    public List<Equipo> getGrupoC() {
+        return grupoC;
+    }
+
+    public void setGrupoC(List<Equipo> grupoC) {
+        this.grupoC = grupoC;
+    }
+
+    public List<Equipo> getGrupoD() {
+        return grupoD;
+    }
+
+    public void setGrupoD(List<Equipo> grupoD) {
+        this.grupoD = grupoD;
+    }
+
+    public List<Equipo> getGrupoE() {
+        return grupoE;
+    }
+
+    public void setGrupoE(List<Equipo> grupoE) {
+        this.grupoE = grupoE;
+    }
+
+    public List<Equipo> getGrupoF() {
+        return grupoF;
+    }
+
+    public void setGrupoF(List<Equipo> grupoF) {
+        this.grupoF = grupoF;
+    }
+
+    public List<Equipo> getGrupoG() {
+        return grupoG;
+    }
+
+    public void setGrupoG(List<Equipo> grupoG) {
+        this.grupoG = grupoG;
+    }
+
+    public List<Equipo> getGrupoH() {
+        return grupoH;
+    }
+
+    public void setGrupoH(List<Equipo> grupoH) {
+        this.grupoH = grupoH;
+    }
+
+    /* Asignar grupos */
     public void AsignarGrupos() {
         // Limpiar grupos anteriores
         grupoA.clear(); grupoB.clear(); grupoC.clear(); grupoD.clear();
         grupoE.clear(); grupoF.clear(); grupoG.clear(); grupoH.clear();
 
+        /* Resetear estadisticas de los equipos */
         for (Equipo equipo : equipos){
             equipo.setPartidosJugados(0);
             equipo.setPuntos(0);
@@ -64,10 +130,11 @@ public class Fase_De_Grupos {
             equipo.setDiferenciaGoles(0);
         }
 
+        /* Sortero de grupos */
         System.out.println("\n=== SORTEO DE GRUPOS DE LA CHAMPIONS LEAGUE ===\n");
-        
+        /* Mezclar equipos */
         Collections.shuffle(equipos);
-        
+        /* Asignar equipos a grupos */
         for (int i = 0; i < equipos.size(); i++) {
             Equipo equipo = equipos.get(i);
             if (equipo == null) continue;
@@ -96,11 +163,14 @@ public class Fase_De_Grupos {
             } else if (i < 32) {
                 grupoH.add(equipo);
                 System.out.println("Grupo H: " + equipo.getNombre());
+            } else {
+                System.out.println("Error: Equipo no asignado a ningun grupo");
             }
         }
         System.out.println("\n=== FIN DEL SORTEO ===\n");
     }
 
+    /* Simular partidos de un grupo */
     private void simularPartidosGrupo(List<Equipo> grupo) {
         if (grupo.size() < 4) return;
         
@@ -133,6 +203,7 @@ public class Fase_De_Grupos {
         }
     }
 
+    /* Jugar grupos */
     public void JugarGrupos() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\n=== INICIO DE LA FASE DE GRUPOS ===\n");
@@ -189,8 +260,10 @@ public class Fase_De_Grupos {
         VerClasificacion();
         
         System.out.println("\n=== FIN DE LA FASE DE GRUPOS ===\n");
+        scanner.close();
     }
 
+    /* Mostrar clasificacion de un grupo */
     private void mostrarClasificacionGrupo(String nombreGrupo, List<Equipo> grupo) {
         if (grupo.isEmpty()) return;
         
@@ -201,11 +274,12 @@ public class Fase_De_Grupos {
         // Ordenar equipos por puntos y diferencia de goles
         Collections.sort(grupo, (e1, e2) -> {
             if (e2.getPuntos() != e1.getPuntos()) {
-                return e2.getPuntos() - e1.getPuntos();
+                return e2.getPuntos() - e1.getPuntos();  // Ordena por puntos de mayor a menor
             }
-            return e2.getDiferenciaGoles() - e1.getDiferenciaGoles();
+            return e2.getDiferenciaGoles() - e1.getDiferenciaGoles();  // Si tienen mismos puntos, ordena por diferencia de goles
         });
 
+        /* Mostrar clasificacion */
         for (int i = 0; i < grupo.size(); i++) {
             Equipo e = grupo.get(i);
             int partidosJugados = e.getPartidosJugados();
@@ -213,6 +287,7 @@ public class Fase_De_Grupos {
             int partidosEmpatados = e.getPuntos() % 3;
             int partidosPerdidos = partidosJugados - partidosGanados - partidosEmpatados;
 
+            /* Formato de la clasificacion */
             System.out.printf("%-4d %-20s %4d %4d %4d %4d %4d %4d %4d %4d%n",
                 i + 1,
                 e.getNombre(),
@@ -229,6 +304,7 @@ public class Fase_De_Grupos {
         System.out.println("----------------------------------------------------------------");
     }
 
+    /* Ver clasificacion */
     public void VerClasificacion() {
         System.out.println("\n====== CLASIFICACIÓN DE LA CHAMPIONS LEAGUE ======\n");
         
@@ -242,6 +318,7 @@ public class Fase_De_Grupos {
         mostrarClasificacionGrupo("H", grupoH);
     }
 
+    /* Obtener clasificados de octavos */
     public List<Equipo> getClasificadosOctavos() {
         List<Equipo> clasificados = new ArrayList<>();
         List<Equipo> primeros = new ArrayList<>();
@@ -276,4 +353,77 @@ public class Fase_De_Grupos {
         
         return clasificados;
     }
+
+    /* Equals */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Fase_De_Grupos other = (Fase_De_Grupos) obj;
+        if (equipos == null) {
+            if (other.equipos != null)
+                return false;
+        } else if (!equipos.equals(other.equipos))
+            return false;
+        if (partidos == null) {
+            if (other.partidos != null)
+                return false;
+        } else if (!partidos.equals(other.partidos))
+            return false;
+        if (grupoA == null) {
+            if (other.grupoA != null)
+                return false;
+        } else if (!grupoA.equals(other.grupoA))
+            return false;
+        if (grupoB == null) {
+            if (other.grupoB != null)
+                return false;
+        } else if (!grupoB.equals(other.grupoB))
+            return false;
+        if (grupoC == null) {
+            if (other.grupoC != null)
+                return false;
+        } else if (!grupoC.equals(other.grupoC))
+            return false;
+        if (grupoD == null) {
+            if (other.grupoD != null)
+                return false;
+        } else if (!grupoD.equals(other.grupoD))
+            return false;
+        if (grupoE == null) {
+            if (other.grupoE != null)
+                return false;
+        } else if (!grupoE.equals(other.grupoE))
+            return false;
+        if (grupoF == null) {
+            if (other.grupoF != null)
+                return false;
+        } else if (!grupoF.equals(other.grupoF))
+            return false;
+        if (grupoG == null) {
+            if (other.grupoG != null)
+                return false;
+        } else if (!grupoG.equals(other.grupoG))
+            return false;
+        if (grupoH == null) {
+            if (other.grupoH != null)
+                return false;
+        } else if (!grupoH.equals(other.grupoH))
+            return false;
+        return true;
+    }
+
+    /* To string */
+    @Override
+    public String toString() {
+        return "Fase_De_Grupos [equipos=" + equipos + ", partidos=" + partidos + ", grupoA=" + grupoA + ", grupoB="
+                + grupoB + ", grupoC=" + grupoC + ", grupoD=" + grupoD + ", grupoE=" + grupoE + ", grupoF=" + grupoF
+                + ", grupoG=" + grupoG + ", grupoH=" + grupoH + "]";
+    }
+
+    
 }
