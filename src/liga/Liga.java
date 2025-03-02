@@ -104,58 +104,69 @@ public class Liga {
                 /* Ver clasificacion */
                 System.out.println("\n=== CLASIFICACIÓN TRAS LA JORNADA " + jornada.getNumeroJornada() + " ===");
                 VerClasificacion();
-                System.out.println("\nPulsa ENTER para continuar...");
-                scanner.nextLine();
+                System.out.println("\nPresiona ENTER para continuar...");
+                try {
+                    scanner.nextLine();
+                } catch (Exception e) {
+                    System.out.println("Error al leer la respuesta");
+                }
             } else {
                 /* Ver clasificacion final */
                 System.out.println("\n=== CLASIFICACIÓN FINAL DE LA LIGA ===");
                 VerClasificacion();
-                System.out.println("\nPulsa ENTER para continuar...");
-                scanner.nextLine();
+                System.out.println("\nPresiona ENTER para continuar...");
+                try {
+                    scanner.nextLine();
+                } catch (Exception e) {
+                    System.out.println("Error al leer la respuesta");
+                }
             }
         }
         System.out.println("\n=== FIN DE LA LIGA ===\n");
-        scanner.close();
     }
 
 
-public void VerClasificacion(){
-    System.out.println("\n=== CLASIFICACIÓN ===");
-    System.out.println("Pos  Equipo                  PJ   PG   PE   PP   GF   GC   DG   Pts");
-    System.out.println("----------------------------------------------------------------");
-
-    /* Ordenar equipos por puntos y diferencia de goles */
-    equipos.sort((e1, e2) -> {
-        if (e2.getPuntos() != e1.getPuntos()) {
-            return e2.getPuntos() - e1.getPuntos();  // Ordena por puntos de mayor a menor
+    public void VerClasificacion(){
+        System.out.println("\n=== CLASIFICACIÓN ===");
+        System.out.println("Pos  Equipo                          PJ   PG   PE   PP   GF   GC   DG   Pts");
+        System.out.println("---------------------------------------------------------------------------");
+    
+        /* Ordenar equipos por puntos y diferencia de goles */
+        equipos.sort((e1, e2) -> {
+            if (e2.getPuntos() != e1.getPuntos()) {
+                return e2.getPuntos() - e1.getPuntos();
+            }
+            return e2.getDiferenciaGoles() - e1.getDiferenciaGoles();
+        });
+    
+        /* Mostrar clasificacion */
+        for (int i = 0; i < equipos.size(); i++) {
+            Equipo e = equipos.get(i);
+            int partidosJugados = e.getPartidosJugados();
+            int partidosGanados = e.getPuntos() / 3;
+            int partidosEmpatados = e.getPuntos() % 3;
+            int partidosPerdidos = partidosJugados - partidosGanados - partidosEmpatados;
+    
+            /* Formato de la clasificacion */
+            String nombreEquipo = e.getNombre();
+            if (nombreEquipo.length() > 30) {
+                nombreEquipo = nombreEquipo.substring(0, 27) + "...";
+            }
+            System.out.printf("%-4d %-30s %4d %4d %4d %4d %4d %4d %4d %4d%n",
+                i + 1,
+                nombreEquipo,
+                partidosJugados,
+                partidosGanados,
+                partidosEmpatados,
+                partidosPerdidos,
+                e.getGolesAfavor(),
+                e.getGolesEnContra(),
+                e.getDiferenciaGoles(),
+                e.getPuntos()
+            );
         }
-        return e2.getDiferenciaGoles() - e1.getDiferenciaGoles();  // Si tienen mismos puntos, ordena por diferencia de goles
-    });
-
-    /* Mostrar clasificacion */
-    for (int i = 0; i < equipos.size(); i++) {
-        Equipo e = equipos.get(i);
-        int partidosJugados = e.getPartidosJugados();
-        int partidosGanados = e.getPuntos() / 3;
-        int partidosEmpatados = e.getPuntos() % 3;
-        int partidosPerdidos = partidosJugados - partidosGanados - partidosEmpatados;
-
-        /* Formato de la clasificacion */
-        System.out.printf("%-4d %-20s %4d %4d %4d %4d %4d %4d %4d %4d%n",
-            i + 1,
-            e.getNombre(),
-            partidosJugados,
-            partidosGanados,
-            partidosEmpatados,
-            partidosPerdidos,
-            e.getGolesAfavor(),
-            e.getGolesEnContra(),
-            e.getDiferenciaGoles(),
-            e.getPuntos()
-        );
+        System.out.println("---------------------------------------------------------------------------");
     }
-    System.out.println("----------------------------------------------------------------");
-}
 
 
 

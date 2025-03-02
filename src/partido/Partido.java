@@ -11,8 +11,8 @@ import liga.Liga;
 import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Partido {
     
@@ -219,6 +219,7 @@ public class Partido {
                 if (!posiblesGoleadores.isEmpty()) {
                     Jugador goleador = posiblesGoleadores.get(random.nextInt(posiblesGoleadores.size()));
                     golesLocal[0]++;
+                    goleador.setGolesAnotados(goleador.getGolesAnotados() + 1);
                     System.out.println("¡GOL! del " + equipoLocal.getNombre() + " marcado por " + goleador.getNombre());
                 }
             }
@@ -288,6 +289,7 @@ public class Partido {
                 if (!posiblesGoleadores.isEmpty()) {
                     Jugador goleador = posiblesGoleadores.get(random.nextInt(posiblesGoleadores.size()));
                     golesVisitante[0]++;
+                    goleador.setGolesAnotados(goleador.getGolesAnotados() + 1);
                     System.out.println("¡GOL! del " + equipoVisitante.getNombre() + " marcado por " + goleador.getNombre());
                 }
             }
@@ -446,44 +448,25 @@ public class Partido {
                     
                     // Mostrar resumen de tarjetas
                     System.out.println("\nRESUMEN DE TARJETAS:");
-                    boolean hayTarjetasLocal = false;
-                    System.out.println(equipoLocal.getNombre() + ":");
-                    for (Jugador j : titularesLocal) {
-                        if (j.getTarjetasAmarillas() > 0 || j.getTarjetasRojas() > 0) {
-                            hayTarjetasLocal = true;
-                            StringBuilder tarjetas = new StringBuilder("- " + j.getNombre() + ":");
-                            if (j.getTarjetasAmarillas() > 0) {
-                                tarjetas.append(" ").append(j.getTarjetasAmarillas()).append(" amarilla(s)");
+                    if (!tarjetasAmarillasPartido.isEmpty() || !tarjetasRojasPartido.isEmpty()) {
+                        System.out.println(equipoLocal.getNombre() + ":");
+                        for (Jugador j : titularesLocal) {
+                            if (j.getTarjetasAmarillas() > 0 || j.getTarjetasRojas() > 0) {
+                                System.out.println("- " + j.getNombre() + ": " + 
+                                    (j.getTarjetasAmarillas() > 0 ? j.getTarjetasAmarillas() + " amarilla(s) " : "") +
+                                    (j.getTarjetasRojas() > 0 ? j.getTarjetasRojas() + " roja(s)" : ""));
                             }
-                            if (j.getTarjetasRojas() > 0) {
-                                if (j.getTarjetasAmarillas() > 0) tarjetas.append(" y");
-                                tarjetas.append(" ").append(j.getTarjetasRojas()).append(" roja(s)");
-                            }
-                            System.out.println(tarjetas.toString());
                         }
-                    }
-                    if (!hayTarjetasLocal) {
-                        System.out.println("Ninguna tarjeta");
-                    }
-
-                    boolean hayTarjetasVisitante = false;
-                    System.out.println(equipoVisitante.getNombre() + ":");
-                    for (Jugador j : titularesVisitante) {
-                        if (j.getTarjetasAmarillas() > 0 || j.getTarjetasRojas() > 0) {
-                            hayTarjetasVisitante = true;
-                            StringBuilder tarjetas = new StringBuilder("- " + j.getNombre() + ":");
-                            if (j.getTarjetasAmarillas() > 0) {
-                                tarjetas.append(" ").append(j.getTarjetasAmarillas()).append(" amarilla(s)");
+                        System.out.println(equipoVisitante.getNombre() + ":");
+                        for (Jugador j : titularesVisitante) {
+                            if (j.getTarjetasAmarillas() > 0 || j.getTarjetasRojas() > 0) {
+                                System.out.println("- " + j.getNombre() + ": " + 
+                                    (j.getTarjetasAmarillas() > 0 ? j.getTarjetasAmarillas() + " amarilla(s) " : "") +
+                                    (j.getTarjetasRojas() > 0 ? j.getTarjetasRojas() + " roja(s)" : ""));
                             }
-                            if (j.getTarjetasRojas() > 0) {
-                                if (j.getTarjetasAmarillas() > 0) tarjetas.append(" y");
-                                tarjetas.append(" ").append(j.getTarjetasRojas()).append(" roja(s)");
-                            }
-                            System.out.println(tarjetas.toString());
                         }
-                    }
-                    if (!hayTarjetasVisitante) {
-                        System.out.println("Ninguna tarjeta");
+                    } else {
+                        System.out.println("No hubo tarjetas en este partido");
                     }
                     
                     System.out.println("==========================================\n");
@@ -497,38 +480,50 @@ public class Partido {
             // Esperar a que termine el partido (3 segundos + margen)
             Thread.sleep(3500);
             
-            // Preguntar si quiere ver la clasificación
-            System.out.println("\n¿Quieres ver la clasificación? (s/n)");
-            int respuesta = System.in.read();
-            // Limpiar el buffer
-            while (System.in.available() > 0) {
-                System.in.read();
-            }
+            Scanner scanner = new Scanner(System.in);
             
-            if (respuesta == 's' || respuesta == 'S') {
-                System.out.println("\n=== CLASIFICACIÓN ACTUAL ===");
-                if (competicion instanceof Liga) {
-                    ((Liga) competicion).VerClasificacion();
-                } else if (competicion instanceof Champions.Fase_De_Grupos) {
-                    ((Champions.Fase_De_Grupos) competicion).VerClasificacion();
-                }
+            if (competicion instanceof Liga) {
+                mostrarClasificacionLiga((Liga) competicion, scanner);
+            } else if (competicion instanceof Champions.Fase_De_Grupos) {
+                mostrarClasificacionChampions((Champions.Fase_De_Grupos) competicion, scanner);
             }
             
             System.out.println("\nPresiona ENTER para continuar...");
-            System.in.read();
-            while (System.in.available() > 0) {
-                System.in.read();
-            }
+            scanner.nextLine();
             
         } catch (InterruptedException e) {
+            System.err.println("Error: El partido fue interrumpido - " + e.getMessage());
             Thread.currentThread().interrupt();
-        } catch (IOException e) {
+        } catch (Exception e) {
+            System.err.println("Error inesperado durante el partido: " + e.getMessage());
             e.printStackTrace();
+        } finally {
+            timer.cancel();  // Aseguramos que el timer se cancele incluso si hay una excepción
         }
         
     }
 
+    /* Método para mostrar clasificación de Liga */
+    private void mostrarClasificacionLiga(Liga liga, Scanner scanner) {
+        System.out.println("\n¿Quieres ver la clasificación de la liga? (s/n)");
+        String respuesta = scanner.nextLine().toLowerCase().trim();
+        if (respuesta.equals("s")) {
+            liga.VerClasificacion();
+        } else if (!respuesta.equals("n")) {
+            System.out.println("Entrada no válida. Se esperaba 's' para sí o 'n' para no.");
+        }
+    }
 
+    /* Método para mostrar clasificación de Champions */
+    private void mostrarClasificacionChampions(Champions.Fase_De_Grupos faseGrupos, Scanner scanner) {
+        System.out.println("\n¿Quieres ver la clasificación de todos los grupos? (s/n)");
+        String respuesta = scanner.nextLine().toLowerCase().trim();
+        if (respuesta.equals("s")) {
+            faseGrupos.VerClasificacion();
+        } else if (!respuesta.equals("n")) {
+            System.out.println("Entrada no válida. Se esperaba 's' para sí o 'n' para no.");
+        }
+    }
 
     /* Equals y toString */
 

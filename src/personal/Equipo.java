@@ -137,90 +137,87 @@ public class Equipo {
     public static List<Equipo> crearEquipos(String rutaFichero, List<Entrenador> entrenadores, List<Portero> porteros, List<Jugador> jugadores, Paises pais) {
         List<Equipo> equipos = new ArrayList<>();
         int indiceEntrenador = 0;
-        //lee el archivo de equipos
-    try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {
-        String linea;
-        while ((linea = br.readLine()) != null && indiceEntrenador < entrenadores.size()) { 
-            if (!linea.trim().isEmpty()) {
-                //Asigna el nombre del entrenador a un equipo
-                String nombreEntrenador = entrenadores.get(indiceEntrenador).getNombre();
-                List<Jugador> jugadoresEquipo = new ArrayList<>();
-                
-                // Agregar 2 porteros
-                for (int i = 0; i < 2 && i < porteros.size(); i++) {
-                    //añade el portero a la lista
-                    jugadoresEquipo.add(porteros.get(i));
-                }
-                
-                // Agregar 8 defensas
-                int defensasAgregados = 0;
-                for (Jugador j : jugadores) {
-                    //añade la defensa a la lista
-                    if (j.getPosicion() == Posicion.DEFENSA && defensasAgregados < 8) {
-                        jugadoresEquipo.add(j);
-                        defensasAgregados++;
-                    }
-                }
-                
-                // Agregar 8 mediocentros
-                int mediocentrosAgregados = 0;
-                for (Jugador j : jugadores) {
-                    //añade el mediocentro a la lista
-                    if (j.getPosicion() == Posicion.MEDIOCENTRO && mediocentrosAgregados < 8) {
-                        jugadoresEquipo.add(j);
-                        mediocentrosAgregados++;
-                    }
-                }
-                
-                // Agregar 4 delanteros
-                int delanterosAgregados = 0;
-                for (Jugador j : jugadores) {
-                    //añade el delantero a la lista
-                    if (j.getPosicion() == Posicion.DELANTERO && delanterosAgregados < 4) {
-                        jugadoresEquipo.add(j);
-                        delanterosAgregados++;
-                    }
-                }
-                
-                // Calcular la media de estadísticas del equipo
-                int sumaStats = 0;
-                for (Jugador j : jugadoresEquipo) {
-                    int mediaJugador = (j.getRitmo() + j.getPase() + j.getTiros() + 
-                                      j.getDefensa() + j.getRegate() + j.getFisico()) / 6;
-                    sumaStats += mediaJugador;
-                }
-                int mediaStats = sumaStats / jugadoresEquipo.size();
-                //crea el equipo
-                Equipo equipo = new Equipo(linea.trim(), nombreEntrenador, jugadoresEquipo, pais, 0, 0, 0, mediaStats, 0, null, 0);
-                //añade el equipo a la lista
-                equipos.add(equipo);
-                indiceEntrenador++;
+        
+        // Crear copias de las listas para no modificar las originales
+        List<Portero> porterosDisponibles = new ArrayList<>(porteros);
+        List<Jugador> jugadoresDisponibles = new ArrayList<>(jugadores);
 
-                // Verificar que el equipo tiene todos los jugadores necesarios
-                if (jugadoresEquipo.size() < 22) {
-                    System.err.println("Advertencia: El equipo " + linea.trim() + " no tiene todos los jugadores necesarios.");
-                    System.err.println("Jugadores totales: " + jugadoresEquipo.size());
-                    System.err.println("Defensas: " + defensasAgregados + "/8");
-                    System.err.println("Mediocentros: " + mediocentrosAgregados + "/8");
-                    System.err.println("Delanteros: " + delanterosAgregados + "/4");
-
-                } 
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaFichero))) {
+            String linea;
+            while ((linea = br.readLine()) != null && indiceEntrenador < entrenadores.size()) { 
+                if (!linea.trim().isEmpty()) {
+                    String nombreEntrenador = entrenadores.get(indiceEntrenador).getNombre();
+                    List<Jugador> jugadoresEquipo = new ArrayList<>();
+                    
+                    // Agregar 2 porteros
+                    for (int i = 0; i < 2 && !porterosDisponibles.isEmpty(); i++) {
+                        Portero portero = porterosDisponibles.remove(0);
+                        jugadoresEquipo.add(portero);
+                    }
+                    
+                    // Agregar 8 defensas
+                    int defensasAgregados = 0;
+                    for (int i = 0; i < jugadoresDisponibles.size() && defensasAgregados < 8; i++) {
+                        Jugador j = jugadoresDisponibles.get(i);
+                        if (j.getPosicion() == Posicion.DEFENSA) {
+                            jugadoresEquipo.add(j);
+                            jugadoresDisponibles.remove(i);
+                            i--; // Ajustar índice después de remover
+                            defensasAgregados++;
+                        }
+                    }
+                    
+                    // Agregar 8 mediocentros
+                    int mediocentrosAgregados = 0;
+                    for (int i = 0; i < jugadoresDisponibles.size() && mediocentrosAgregados < 8; i++) {
+                        Jugador j = jugadoresDisponibles.get(i);
+                        if (j.getPosicion() == Posicion.MEDIOCENTRO) {
+                            jugadoresEquipo.add(j);
+                            jugadoresDisponibles.remove(i);
+                            i--; // Ajustar índice después de remover
+                            mediocentrosAgregados++;
+                        }
+                    }
+                    
+                    // Agregar 4 delanteros
+                    int delanterosAgregados = 0;
+                    for (int i = 0; i < jugadoresDisponibles.size() && delanterosAgregados < 4; i++) {
+                        Jugador j = jugadoresDisponibles.get(i);
+                        if (j.getPosicion() == Posicion.DELANTERO) {
+                            jugadoresEquipo.add(j);
+                            jugadoresDisponibles.remove(i);
+                            i--; // Ajustar índice después de remover
+                            delanterosAgregados++;
+                        }
+                    }
+                    
+                    // Verificar que el equipo tiene suficientes jugadores
+                    if (jugadoresEquipo.size() < 22) {
+                        System.out.println("Advertencia: El equipo " + linea.trim() + " no tiene suficientes jugadores (" + jugadoresEquipo.size() + "/22)");
+                    }
+                    
+                    // Calcular la media de estadísticas del equipo
+                    int sumaStats = 0;
+                    for (Jugador j : jugadoresEquipo) {
+                        int mediaJugador = (j.getRitmo() + j.getPase() + j.getTiros() + 
+                                          j.getDefensa() + j.getRegate() + j.getFisico()) / 6;
+                        sumaStats += mediaJugador;
+                    }
+                    int mediaStats = jugadoresEquipo.isEmpty() ? 0 : sumaStats / jugadoresEquipo.size();
+                    
+                    Equipo equipo = new Equipo(linea.trim(), nombreEntrenador, jugadoresEquipo, pais, 0, 0, 0, mediaStats, 0, null, 0);
+                    equipos.add(equipo);
+                    indiceEntrenador++;
+                }
             }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: No se encontró el archivo " + rutaFichero);
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo " + rutaFichero);
         }
-    } catch (FileNotFoundException e) {
-        //si no se encuentra el archivo de nombres de equipos
-        System.err.println("No se encontró el archivo de nombres de equipos: " + rutaFichero);
-    } catch (IOException e) {
-        //si hay un error al leer el archivo
-        System.err.println("Error al leer el archivo: " + e.getMessage());
+        
+        return equipos;
     }
-    //si no hay equipos creados
-    if (equipos.isEmpty()) {
-        System.err.println("No se pudieron crear equipos. Verifica que hay suficientes jugadores y porteros.");
-    }
-    //devuelve la lista de equipos
-    return equipos;  
-}
 
     /* Equals y toString */
     @Override

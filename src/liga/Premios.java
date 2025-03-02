@@ -57,22 +57,32 @@ public class Premios  {
 
     /* Dar premios */
     public static void darPremios(List<Jugador> jugadores, List<Equipo> equipos, List<Portero> porteros) {
-        //Equipo campeon
+        System.out.println("\n=== PREMIOS DE LA TEMPORADA ===\n");
+        
+        //Equipo campeón
         Equipo campeon = equipos.get(0);
         for (Equipo equipo : equipos) {
-            if (equipo.getPuntos() > campeon.getPuntos()) {
+            if (equipo.getPuntos() > campeon.getPuntos() || 
+               (equipo.getPuntos() == campeon.getPuntos() && equipo.getDiferenciaGoles() > campeon.getDiferenciaGoles())) {
                 campeon = equipo;
             }
         }
-        System.out.println("Equipo campeón: " + campeon.getNombre());
-        // MVP
+        System.out.println("CAMPEÓN DE LIGA: " + campeon.getNombre());
+        
+        // MVP - considerando goles, tarjetas y media de stats
         Jugador mvp = jugadores.get(0);
         for (Jugador jugador : jugadores) {
-            if (jugador.getGolesAnotados() > mvp.getGolesAnotados() && jugador.getTarjetasRojas() < mvp.getTarjetasRojas() && jugador.getTarjetasAmarillas() < mvp.getTarjetasAmarillas()) {
+            int puntosMVP_actual = jugador.getGolesAnotados()*3 - jugador.getTarjetasRojas()*5 - 
+                                  jugador.getTarjetasAmarillas() + jugador.getStatMediaJugador();
+            int puntosMVP_mejor = mvp.getGolesAnotados()*3 - mvp.getTarjetasRojas()*5 - 
+                                 mvp.getTarjetasAmarillas() + mvp.getStatMediaJugador();
+            
+            if (puntosMVP_actual > puntosMVP_mejor) {
                 mvp = jugador;
             }
         }
-        System.out.println("MVP: " + mvp.getNombre());
+        System.out.println("MVP: " + mvp.getNombre() + " (" + mvp.getGolesAnotados() + " goles)");
+        
         // Goleador
         Jugador goleador = jugadores.get(0);
         for (Jugador jugador : jugadores) {
@@ -80,7 +90,7 @@ public class Premios  {
                 goleador = jugador;
             }
         }
-        System.out.println("Goleador: " + goleador.getNombre());
+        System.out.println("PICHICHI: " + goleador.getNombre() + " (" + goleador.getGolesAnotados() + " goles)");
 
         // Portero del torneo
         Portero zamorano = porteros.get(0);
@@ -89,65 +99,48 @@ public class Premios  {
                 zamorano = p;
             }
         }
-        System.out.println("Portero del torneo: " + zamorano.getNombre());  
+        System.out.println("ZAMORA: " + zamorano.getNombre() + " (" + zamorano.getNumeroDeParadas() + " paradas)");
 
-        /* Equipos descendidos */
-        List<Equipo> equiposDescendidos = new ArrayList<>();
-        Equipo primerEquipoDescendido = equipos.get(0);
-        Equipo segundoEquipoDescendido = equipos.get(0);
-        Equipo tercerEquipoDescendido = equipos.get(0);
-        for (Equipo equipo : equipos) {
-            if (equipo.getPuntos() < primerEquipoDescendido.getPuntos()) {
-                primerEquipoDescendido = equipo;
-            }
+        // Equipos a Champions
+        List<Equipo> equiposChampions = EquiposAEuropa(equipos);
+        System.out.println("\n=== EQUIPOS CLASIFICADOS A CHAMPIONS ===");
+        for (int i = 0; i < equiposChampions.size(); i++) {
+            System.out.println((i+1) + ". " + equiposChampions.get(i).getNombre() + 
+                             " (" + equiposChampions.get(i).getPuntos() + " pts)");
         }
-        equiposDescendidos.add(primerEquipoDescendido);
-        for (Equipo equipo : equipos) {
-            if (equipo.getPuntos() < segundoEquipoDescendido.getPuntos() && equipo != primerEquipoDescendido) {
-                segundoEquipoDescendido = equipo;
+
+        // Equipos descendidos
+        System.out.println("\n=== EQUIPOS DESCENDIDOS ===");
+        List<Equipo> equiposOrdenados = new ArrayList<>(equipos);
+        equiposOrdenados.sort((e1, e2) -> {
+            if (e1.getPuntos() != e2.getPuntos()) {
+                return e1.getPuntos() - e2.getPuntos();
             }
+            return e1.getDiferenciaGoles() - e2.getDiferenciaGoles();
+        });
+
+        for (int i = 0; i < 3 && i < equiposOrdenados.size(); i++) {
+            Equipo descendido = equiposOrdenados.get(i);
+            System.out.println(descendido.getNombre() + 
+                             " (" + descendido.getPuntos() + " pts, " + 
+                             descendido.getDiferenciaGoles() + " dif. goles)");
         }
-        equiposDescendidos.add(segundoEquipoDescendido);
-        for (Equipo equipo : equipos) {
-            if (equipo.getPuntos() < tercerEquipoDescendido.getPuntos() && equipo != primerEquipoDescendido && equipo != segundoEquipoDescendido) {
-                tercerEquipoDescendido = equipo;
-            }
-        }
-        equiposDescendidos.add(tercerEquipoDescendido);
-        System.out.println("Los equipos que descienden son: " + equiposDescendidos);
-        
-        
-
-        
-        
-
-
     }
 
     /* Equipos a Europa */
     public static List<Equipo> EquiposAEuropa(List<Equipo> equipos) {
+        List<Equipo> equiposOrdenados = new ArrayList<>(equipos);
+        equiposOrdenados.sort((e1, e2) -> {
+            if (e2.getPuntos() != e1.getPuntos()) {
+                return e2.getPuntos() - e1.getPuntos();
+            }
+            return e2.getDiferenciaGoles() - e1.getDiferenciaGoles();
+        });
+
         List<Equipo> equiposEuropa = new ArrayList<>();
-        Equipo primerEquipoEuropa = equipos.get(0);
-        Equipo segundoEquipoEuropa = equipos.get(0);
-        Equipo tercerEquipoEuropa = equipos.get(0);
-        for (Equipo equipo : equipos) {
-            if (equipo.getPuntos() > primerEquipoEuropa.getPuntos()) {
-                primerEquipoEuropa = equipo;
-            }
+        for (int i = 0; i < 4 && i < equiposOrdenados.size(); i++) {
+            equiposEuropa.add(equiposOrdenados.get(i));
         }
-        equiposEuropa.add(primerEquipoEuropa);
-        for (Equipo equipo : equipos) {
-            if (equipo.getPuntos() > segundoEquipoEuropa.getPuntos() && equipo != primerEquipoEuropa) {
-                segundoEquipoEuropa = equipo;
-            }
-        }
-        equiposEuropa.add(segundoEquipoEuropa);
-        for (Equipo equipo : equipos) {
-            if (equipo.getPuntos() > tercerEquipoEuropa.getPuntos() && equipo != primerEquipoEuropa && equipo != segundoEquipoEuropa) {
-                tercerEquipoEuropa = equipo;
-            }
-        }
-        equiposEuropa.add(tercerEquipoEuropa);
         return equiposEuropa;
     }
 

@@ -7,7 +7,6 @@ import java.util.List;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import partido.Partido;
 
 public class Jornada {
@@ -71,7 +70,6 @@ public class Jornada {
 
         int numeroPartidosenJornada = equipos.size()/2;
         int offset = (numeroJornada - 1) * numeroPartidosenJornada * 2;
-        Scanner scanner = new Scanner(System.in);
         
         for (int i = 0; i < numeroPartidosenJornada; i++) {
             System.out.println("\nPartido " + (i+1) + ":");

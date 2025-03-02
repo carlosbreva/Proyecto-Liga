@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import partido.Partido;
 import personal.Equipo;
 import java.util.Scanner;
+import java.util.Random;
 
 public class Fase_Final {
     /* Variables */
@@ -83,248 +84,213 @@ public class Fase_Final {
         this.ganadorChampions = ganadorChampions;
     }
 
-    /* Jugar octavos */
-    public List<Equipo> JugarOctavos(List<Equipo> equipos) {
-        cuartos.clear();
-        /* Resetear estadisticas de los equipos */
-        for (Equipo equipo : equipos) {
-            equipo.setPuntos(0);
-            equipo.setGolesAfavor(0);
-            equipo.setGolesEnContra(0);
-        }
-        
-        /* Emparejar equipos para octavos */
-        for (int i = 0; i < equipos.size(); i += 2) {
-            if (i + 1 < equipos.size()) {
-                Equipo equipo1 = equipos.get(i);
-                Equipo equipo2 = equipos.get(i + 1);
-                
-                System.out.println("\n=== OCTAVOS DE FINAL - PARTIDO " + ((i/2) + 1) + " ===");
-                System.out.println(equipo1.getNombre() + " vs " + equipo2.getNombre());
-                System.out.println("\nPresiona ENTER para jugar el partido de IDA...");
-                Scanner scanner = new Scanner(System.in);
-                scanner.nextLine();
-                
-                // Partido de ida
-                Partido partidoIda = new Partido(equipo1, equipo2, new int[]{0,0}, 0);
-                partidoIda.simularPartido(equipo1, equipo2, null);
-                int golesIda1 = partidoIda.getResultado()[0];
-                int golesIda2 = partidoIda.getResultado()[1];
-                
-                System.out.println("\nPresiona ENTER para jugar el partido de VUELTA...");
-                scanner.nextLine();
-                
-                // Partido de vuelta
-                Partido partidoVuelta = new Partido(equipo2, equipo1, new int[]{0,0}, 0);
-                partidoVuelta.simularPartido(equipo2, equipo1, null);
-                int golesVuelta1 = partidoVuelta.getResultado()[1];
-                int golesVuelta2 = partidoVuelta.getResultado()[0];
-                
-                // Calcular resultado global
-                int golesGlobales1 = golesIda1 + golesVuelta1;
-                int golesGlobales2 = golesIda2 + golesVuelta2;
-                
-                System.out.println("\nRESULTADO GLOBAL: " + equipo1.getNombre() + " " + golesGlobales1 + 
-                                 " - " + golesGlobales2 + " " + equipo2.getNombre());
-                
-                /* Avanzar equipo */
-                if (golesGlobales1 > golesGlobales2) {
-                    cuartos.add(equipo1);
-                    System.out.println("\n¡" + equipo1.getNombre() + " avanza a cuartos de final!");
-                } else if (golesGlobales2 > golesGlobales1) {
-                    cuartos.add(equipo2);
-                    System.out.println("\n¡" + equipo2.getNombre() + " avanza a cuartos de final!");
-                } else {
-                    // En caso de empate, el equipo con más goles fuera gana
-                    if (golesIda2 > golesVuelta1) {
-                        cuartos.add(equipo2);
-                        System.out.println("\n¡" + equipo2.getNombre() + " avanza a cuartos por goles fuera de casa!");
-                    } else {
-                        cuartos.add(equipo1);
-                        System.out.println("\n¡" + equipo1.getNombre() + " avanza a cuartos por goles fuera de casa!");
-                    }
-                }
-                
-                System.out.println("\nPresiona ENTER para continuar...");
-                scanner.nextLine();
-                scanner.close();
-                
+    /* Simular tanda de penaltis */
+    private Equipo simularPenaltis(Equipo equipo1, Equipo equipo2) {
+        System.out.println("\n=== TANDA DE PENALTIS ===");
+        int penaltisEquipo1 = 0;
+        int penaltisEquipo2 = 0;
+        Random random = new Random();
+
+        // Primera ronda de 5 penaltis por equipo
+        for (int i = 0; i < 5; i++) {
+            // Penalti equipo 1
+            if (random.nextDouble() < 0.75) {
+                penaltisEquipo1++;
+                System.out.println("¡GOL! " + equipo1.getNombre() + " (" + penaltisEquipo1 + "-" + penaltisEquipo2 + ")");
+            } else {
+                System.out.println("¡FALLO! " + equipo1.getNombre());
+            }
+            
+            // Penalti equipo 2
+            if (random.nextDouble() < 0.75) {
+                penaltisEquipo2++;
+                System.out.println("¡GOL! " + equipo2.getNombre() + " (" + penaltisEquipo1 + "-" + penaltisEquipo2 + ")");
+            } else {
+                System.out.println("¡FALLO! " + equipo2.getNombre());
             }
         }
-        return cuartos;
+
+        // Si hay empate, muerte súbita
+        while (penaltisEquipo1 == penaltisEquipo2) {
+            // Penalti equipo 1
+            if (random.nextDouble() < 0.75) {
+                penaltisEquipo1++;
+                System.out.println("¡GOL! " + equipo1.getNombre() + " (" + penaltisEquipo1 + "-" + penaltisEquipo2 + ")");
+            } else {
+                System.out.println("¡FALLO! " + equipo1.getNombre());
+            }
+            
+            // Si el segundo equipo falla, gana el primero
+            if (penaltisEquipo1 > penaltisEquipo2) {
+                if (random.nextDouble() < 0.75) {
+                    penaltisEquipo2++;
+                    System.out.println("¡GOL! " + equipo2.getNombre() + " (" + penaltisEquipo1 + "-" + penaltisEquipo2 + ")");
+                } else {
+                    System.out.println("¡FALLO! " + equipo2.getNombre());
+                    System.out.println("\n¡" + equipo1.getNombre() + " gana en los penaltis! (" + penaltisEquipo1 + "-" + penaltisEquipo2 + ")");
+                    return equipo1;
+                }
+            }
+        }
+
+        // Determinar ganador
+        if (penaltisEquipo1 > penaltisEquipo2) {
+            System.out.println("\n¡" + equipo1.getNombre() + " gana en los penaltis! (" + penaltisEquipo1 + "-" + penaltisEquipo2 + ")");
+            return equipo1;
+        } else {
+            System.out.println("\n¡" + equipo2.getNombre() + " gana en los penaltis! (" + penaltisEquipo1 + "-" + penaltisEquipo2 + ")");
+            return equipo2;
+        }
+    }
+
+    /* Jugar octavos */
+    public List<Equipo> JugarOctavos(List<Equipo> equipos) {
+        List<Equipo> clasificados = new ArrayList<>();
+        
+        for (int i = 0; i < equipos.size(); i += 2) {
+            Equipo equipo1 = equipos.get(i);
+            Equipo equipo2 = equipos.get(i + 1);
+            
+            System.out.println("\n=== OCTAVOS DE FINAL - PARTIDO DE IDA ===");
+            Partido PartidoIda = new Partido(equipo1, equipo2, new int[]{0, 0}, 0);
+            PartidoIda.simularPartido(equipo1, equipo2, null);
+            
+            System.out.println("\n=== OCTAVOS DE FINAL - PARTIDO DE VUELTA ===");
+            Partido PartidoVuelta = new Partido(equipo2, equipo1, new int[]{0, 0}, 0);
+            PartidoVuelta.simularPartido(equipo2, equipo1, null);
+            
+            // Calcular resultado global
+            int golesEquipo1 = PartidoIda.getResultado()[0] + PartidoVuelta.getResultado()[1];
+            int golesEquipo2 = PartidoIda.getResultado()[1] + PartidoVuelta.getResultado()[0];
+            
+            System.out.println("\nRESULTADO GLOBAL: " + equipo1.getNombre() + " " + golesEquipo1 + 
+                             " - " + golesEquipo2 + " " + equipo2.getNombre());
+            
+            // Si hay empate, penaltis
+            if (golesEquipo1 == golesEquipo2) {
+                System.out.println("\n¡EMPATE EN EL GLOBAL! Se decidirá en los penaltis");
+                Equipo ganador = simularPenaltis(equipo1, equipo2);
+                clasificados.add(ganador);
+            } else {
+                // Clasificar al ganador
+                if (golesEquipo1 > golesEquipo2) {
+                    System.out.println("\n¡" + equipo1.getNombre() + " se clasifica para cuartos de final!");
+                    clasificados.add(equipo1);
+                } else {
+                    System.out.println("\n¡" + equipo2.getNombre() + " se clasifica para cuartos de final!");
+                    clasificados.add(equipo2);
+                }
+            }
+        }
+        return clasificados;
     }
 
     /* Jugar cuartos */
     public List<Equipo> JugarCuartos(List<Equipo> equipos) {
-        semifinales.clear();
-        for (Equipo equipo : equipos) {
-            equipo.setPuntos(0);
-            equipo.setGolesAfavor(0);
-            equipo.setGolesEnContra(0);
-        }
+        List<Equipo> clasificados = new ArrayList<>();
         
-        // Emparejar equipos para cuartos
         for (int i = 0; i < equipos.size(); i += 2) {
-            if (i + 1 < equipos.size()) {
-                Equipo equipo1 = equipos.get(i);
-                Equipo equipo2 = equipos.get(i + 1);
-                
-                System.out.println("\n=== CUARTOS DE FINAL - PARTIDO " + ((i/2) + 1) + " ===");
-                System.out.println(equipo1.getNombre() + " vs " + equipo2.getNombre());
-                System.out.println("\nPresiona ENTER para jugar el partido de IDA...");
-                Scanner scanner = new Scanner(System.in);
-                scanner.nextLine();
-                
-                // Partido de ida
-                Partido partidoIda = new Partido(equipo1, equipo2, new int[]{0,0}, 0);
-                partidoIda.simularPartido(equipo1, equipo2, null);
-                int golesIda1 = partidoIda.getResultado()[0];
-                int golesIda2 = partidoIda.getResultado()[1];
-                
-                System.out.println("\nPresiona ENTER para jugar el partido de VUELTA...");
-                scanner.nextLine();
-                
-                // Partido de vuelta
-                Partido partidoVuelta = new Partido(equipo2, equipo1, new int[]{0,0}, 0);
-                partidoVuelta.simularPartido(equipo2, equipo1, null);
-                int golesVuelta1 = partidoVuelta.getResultado()[1];
-                int golesVuelta2 = partidoVuelta.getResultado()[0];
-                
-                // Calcular resultado global
-                int golesGlobales1 = golesIda1 + golesVuelta1;
-                int golesGlobales2 = golesIda2 + golesVuelta2;
-                
-                System.out.println("\nRESULTADO GLOBAL: " + equipo1.getNombre() + " " + golesGlobales1 + 
-                                 " - " + golesGlobales2 + " " + equipo2.getNombre());
-                
-                if (golesGlobales1 > golesGlobales2) {
-                    semifinales.add(equipo1);
-                    System.out.println("\n¡" + equipo1.getNombre() + " avanza a semifinales!");
-                } else if (golesGlobales2 > golesGlobales1) {
-                    semifinales.add(equipo2);
-                    System.out.println("\n¡" + equipo2.getNombre() + " avanza a semifinales!");
+            Equipo equipo1 = equipos.get(i);
+            Equipo equipo2 = equipos.get(i + 1);
+            
+            System.out.println("\n=== CUARTOS DE FINAL - PARTIDO DE IDA ===");
+            Partido PartidoIda = new Partido(equipo1, equipo2, new int[]{0, 0}, 0);
+            PartidoIda.simularPartido(equipo1, equipo2, null);
+            
+            System.out.println("\n=== CUARTOS DE FINAL - PARTIDO DE VUELTA ===");
+            Partido PartidoVuelta = new Partido(equipo2, equipo1, new int[]{0, 0}, 0);
+            PartidoVuelta.simularPartido(equipo2, equipo1, null);
+            
+            // Calcular resultado global
+            int golesEquipo1 = PartidoIda.getResultado()[0] + PartidoVuelta.getResultado()[1];
+            int golesEquipo2 = PartidoIda.getResultado()[1] + PartidoVuelta.getResultado()[0];
+            
+            System.out.println("\nRESULTADO GLOBAL: " + equipo1.getNombre() + " " + golesEquipo1 + 
+                             " - " + golesEquipo2 + " " + equipo2.getNombre());
+            
+            // Si hay empate, penaltis
+            if (golesEquipo1 == golesEquipo2) {
+                System.out.println("\n¡EMPATE EN EL GLOBAL! Se decidirá en los penaltis");
+                Equipo ganador = simularPenaltis(equipo1, equipo2);
+                clasificados.add(ganador);
+            } else {
+                // Clasificar al ganador
+                if (golesEquipo1 > golesEquipo2) {
+                    System.out.println("\n¡" + equipo1.getNombre() + " se clasifica para semifinales!");
+                    clasificados.add(equipo1);
                 } else {
-                    // En caso de empate, el equipo con más goles fuera gana
-                    if (golesIda2 > golesVuelta1) {
-                        semifinales.add(equipo2);
-                        System.out.println("\n¡" + equipo2.getNombre() + " avanza a semifinales por goles fuera de casa!");
-                    } else {
-                        semifinales.add(equipo1);
-                        System.out.println("\n¡" + equipo1.getNombre() + " avanza a semifinales por goles fuera de casa!");
-                    }
+                    System.out.println("\n¡" + equipo2.getNombre() + " se clasifica para semifinales!");
+                    clasificados.add(equipo2);
                 }
-                
-                System.out.println("\nPresiona ENTER para continuar...");
-                scanner.nextLine();
-                scanner.close();
             }
         }
-        return semifinales;
+        return clasificados;
     }
 
     /* Jugar semifinales */
     public List<Equipo> JugarSemifinales(List<Equipo> equipos) {
-        finales.clear();
-        for (Equipo equipo : equipos) {
-            equipo.setPuntos(0);
-            equipo.setGolesAfavor(0);
-            equipo.setGolesEnContra(0);
-        }
+        List<Equipo> clasificados = new ArrayList<>();
         
-        /* Emparejar equipos para semifinales */
         for (int i = 0; i < equipos.size(); i += 2) {
-            if (i + 1 < equipos.size()) {
-                Equipo equipo1 = equipos.get(i);
-                Equipo equipo2 = equipos.get(i + 1);
-                
-                System.out.println("\n=== SEMIFINAL - PARTIDO " + ((i/2) + 1) + " ===");
-                System.out.println(equipo1.getNombre() + " vs " + equipo2.getNombre());
-                System.out.println("\nPresiona ENTER para jugar el partido de IDA...");
-                Scanner scanner = new Scanner(System.in);
-                scanner.nextLine();
-                
-                // Partido de ida
-                Partido partidoIda = new Partido(equipo1, equipo2, new int[]{0,0}, 0);
-                partidoIda.simularPartido(equipo1, equipo2, null);
-                int golesIda1 = partidoIda.getResultado()[0];
-                int golesIda2 = partidoIda.getResultado()[1];
-                
-                System.out.println("\nPresiona ENTER para jugar el partido de VUELTA...");
-                scanner.nextLine();
-                
-                // Partido de vuelta
-                Partido partidoVuelta = new Partido(equipo2, equipo1, new int[]{0,0}, 0);
-                partidoVuelta.simularPartido(equipo2, equipo1, null);
-                int golesVuelta1 = partidoVuelta.getResultado()[1];
-                int golesVuelta2 = partidoVuelta.getResultado()[0];
-                
-                // Calcular resultado global
-                int golesGlobales1 = golesIda1 + golesVuelta1;
-                int golesGlobales2 = golesIda2 + golesVuelta2;
-                
-                System.out.println("\nRESULTADO GLOBAL: " + equipo1.getNombre() + " " + golesGlobales1 + 
-                                 " - " + golesGlobales2 + " " + equipo2.getNombre());
-                
-                if (golesGlobales1 > golesGlobales2) {
-                    finales.add(equipo1);
-                    System.out.println("\n¡" + equipo1.getNombre() + " avanza a la final!");
-                } else if (golesGlobales2 > golesGlobales1) {
-                    finales.add(equipo2);
-                    System.out.println("\n¡" + equipo2.getNombre() + " avanza a la final!");
+            Equipo equipo1 = equipos.get(i);
+            Equipo equipo2 = equipos.get(i + 1);
+            
+            System.out.println("\n=== SEMIFINALES - PARTIDO DE IDA ===");
+            Partido PartidoIda = new Partido(equipo1, equipo2, new int[]{0, 0}, 0);
+            PartidoIda.simularPartido(equipo1, equipo2, null);
+            
+            System.out.println("\n=== SEMIFINALES - PARTIDO DE VUELTA ===");
+            Partido PartidoVuelta = new Partido(equipo2, equipo1, new int[]{0, 0}, 0);
+            PartidoVuelta.simularPartido(equipo2, equipo1, null);
+            
+            // Calcular resultado global
+            int golesEquipo1 = PartidoIda.getResultado()[0] + PartidoVuelta.getResultado()[1];
+            int golesEquipo2 = PartidoIda.getResultado()[1] + PartidoVuelta.getResultado()[0];
+            
+            System.out.println("\nRESULTADO GLOBAL: " + equipo1.getNombre() + " " + golesEquipo1 + 
+                             " - " + golesEquipo2 + " " + equipo2.getNombre());
+            
+            // Si hay empate, penaltis
+            if (golesEquipo1 == golesEquipo2) {
+                System.out.println("\n¡EMPATE EN EL GLOBAL! Se decidirá en los penaltis");
+                Equipo ganador = simularPenaltis(equipo1, equipo2);
+                clasificados.add(ganador);
+            } else {
+                // Clasificar al ganador
+                if (golesEquipo1 > golesEquipo2) {
+                    System.out.println("\n¡" + equipo1.getNombre() + " se clasifica para la final!");
+                    clasificados.add(equipo1);
                 } else {
-                    // En caso de empate, el equipo con más goles fuera gana
-                    if (golesIda2 > golesVuelta1) {
-                        finales.add(equipo2);
-                        System.out.println("\n¡" + equipo2.getNombre() + " avanza a la final por goles fuera de casa!");
-                    } else {
-                        finales.add(equipo1);
-                        System.out.println("\n¡" + equipo1.getNombre() + " avanza a la final por goles fuera de casa!");
-                    }
+                    System.out.println("\n¡" + equipo2.getNombre() + " se clasifica para la final!");
+                    clasificados.add(equipo2);
                 }
-                
-                System.out.println("\nPresiona ENTER para continuar...");
-                scanner.nextLine();
-                scanner.close();
             }
         }
-        return finales;
+        return clasificados;
     }
 
     /* Jugar final */
-    public void JugarFinal(List<Equipo> equipos) {
-        if (equipos.size() != 2) {
-            System.out.println("Error: Se necesitan exactamente 2 equipos para la final");
-            return;
-        }
+    public void JugarFinal(List<Equipo> finales) {
+        Equipo equipo1 = finales.get(0);
+        Equipo equipo2 = finales.get(1);
         
-        ganadorChampions.clear();
-        Equipo equipo1 = equipos.get(0);
-        Equipo equipo2 = equipos.get(1);
-        
-        equipo1.setPuntos(0);
-        equipo1.setGolesAfavor(0);
-        equipo1.setGolesEnContra(0);
-        equipo2.setPuntos(0);
-        equipo2.setGolesAfavor(0);
-        equipo2.setGolesEnContra(0);
-
         System.out.println("\n=== FINAL DE LA UEFA CHAMPIONS LEAGUE ===");
-        System.out.println(equipo1.getNombre() + " vs " + equipo2.getNombre());
-        System.out.println("\nPresiona ENTER para comenzar la final...");
-        Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
+        Partido PartidoFinal = new Partido(equipo1, equipo2, new int[]{0, 0}, 0);
+        PartidoFinal.simularPartido(equipo1, equipo2, null);
         
-        Partido partidoFinal = new Partido(equipo1, equipo2, new int[]{0,0}, 0);
-        partidoFinal.simularPartido(equipo1, equipo2, null);
-        /* Verificar ganador */
-        if (partidoFinal.getEquipoLocal().getPuntos() > partidoFinal.getEquipoVisitante().getPuntos()) {
-            ganadorChampions.add(partidoFinal.getEquipoLocal());
+        // Si hay empate, penaltis
+        if (PartidoFinal.getResultado()[0] == PartidoFinal.getResultado()[1]) {
+            System.out.println("\n¡EMPATE! Se decidirá en los penaltis");
+            Equipo campeon = simularPenaltis(equipo1, equipo2);
+            System.out.println("\n¡" + campeon.getNombre() + " ES EL CAMPEÓN DE LA UEFA CHAMPIONS LEAGUE!");
         } else {
-            ganadorChampions.add(partidoFinal.getEquipoVisitante());
+            // Determinar el campeón
+            if (PartidoFinal.getResultado()[0] > PartidoFinal.getResultado()[1]) {
+                System.out.println("\n¡" + equipo1.getNombre() + " ES EL CAMPEÓN DE LA UEFA CHAMPIONS LEAGUE!");
+            } else {
+                System.out.println("\n¡" + equipo2.getNombre() + " ES EL CAMPEÓN DE LA UEFA CHAMPIONS LEAGUE!");
+            }
         }
-        /* Mostrar ganador */
-        System.out.println("\n¡" + ganadorChampions.get(0).getNombre() + " ES EL CAMPEÓN DE LA UEFA CHAMPIONS LEAGUE!");
-        scanner.close();
     }
 
     /* Equals */

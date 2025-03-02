@@ -153,11 +153,9 @@ public class Jugador extends Persona {
                 }
             }
         } catch (FileNotFoundException e) {
-            //si no se encuentra el archivo de nombres
             System.err.println("No se encontró el archivo de nombres: " + rutaFichero);
             return jugadores;
         } catch (IOException e) {
-            //si hay un error al leer el archivo
             System.err.println("Error al leer el archivo: " + e.getMessage());
             return jugadores;
         }
@@ -170,11 +168,47 @@ public class Jugador extends Persona {
             nombresJugadores.set(j, temp);
         }
 
-        //contadores de jugadores necesarios
-        int defensasNecesarios = 8;
-        int mediocentrosNecesarios = 8;
-        int delanterosNecesarios = 4;
+        // Determinar el número de equipos según el país
+        int numEquipos;
+        switch (pais) {
+            case ALEMANIA:
+                numEquipos = 18; // Bundesliga
+                break;
+            case ESPAÑA:
+                numEquipos = 20; // LaLiga
+                break;
+            case ITALIA:
+                numEquipos = 20; // Serie A
+                break;
+            case FRANCIA:
+                numEquipos = 18; // Ligue 1
+                break;
+            case INGLATERRA:
+                numEquipos = 20; // Premier League
+                break;
+            case PORTUGAL:
+                numEquipos = 18; // Primeira Liga
+                break;
+            case HOLANDA:
+                numEquipos = 18; // Eredivisie
+                break;
+            case BELGICA:
+                numEquipos = 16; // Belgian Pro League
+                break;
+            default:
+                numEquipos = 18;
+        }
+
+        // Calcular jugadores necesarios según el número de equipos
+        int defensasNecesarios = numEquipos * 8;  // 8 defensas por equipo
+        int mediocentrosNecesarios = numEquipos * 8;  // 8 mediocentros por equipo
+        int delanterosNecesarios = numEquipos * 4;  // 4 delanteros por equipo
         int jugadoresCreados = 0;
+
+        System.out.println("\nCreando jugadores para " + numEquipos + " equipos de " + pais + ":");
+        System.out.println("Necesitamos: " + defensasNecesarios + " defensas, " + 
+                          mediocentrosNecesarios + " mediocentros, " + 
+                          delanterosNecesarios + " delanteros");
 
         // Crear jugadores con posiciones aleatorias
         while (jugadoresCreados < nombresJugadores.size() && 
@@ -186,8 +220,26 @@ public class Jugador extends Persona {
             if (mediocentrosNecesarios > 0) posicionesDisponibles.add(Posicion.MEDIOCENTRO);
             if (delanterosNecesarios > 0) posicionesDisponibles.add(Posicion.DELANTERO);
 
+            if (posicionesDisponibles.isEmpty()) break;
+
             // Seleccionar una posición aleatoria de las disponibles
             Posicion posicion = posicionesDisponibles.get(random.nextInt(posicionesDisponibles.size()));
+
+            // Crear jugador con estadísticas aleatorias
+            String nombre = nombresJugadores.get(jugadoresCreados);
+            int edad = random.nextInt(23) + 18; // Edad entre 18 y 40
+            int velocidad = random.nextInt(41) + 60; // Velocidad entre 60 y 100
+            int ritmo = random.nextInt(41) + 60; // Ritmo entre 60 y 100
+            int pase = random.nextInt(41) + 60; // Pase entre 60 y 100
+            int tiros = random.nextInt(41) + 60; // Tiros entre 60 y 100
+            int defensa = random.nextInt(41) + 60; // Defensa entre 60 y 100
+            int regate = random.nextInt(41) + 60; // Regate entre 60 y 100
+            int fisico = random.nextInt(41) + 60; // Físico entre 60 y 100
+            int statMediaJugador = (ritmo + pase + tiros + defensa + regate + fisico) / 6;
+
+            Jugador jugador = new Jugador(nombre, edad, posicion, 0, 0, 0, velocidad, ritmo, pase, tiros, defensa, regate, fisico, statMediaJugador, pais);
+            jugadores.add(jugador);
+            jugadoresCreados++;
 
             // Actualizar contadores
             switch (posicion) {
@@ -200,54 +252,16 @@ public class Jugador extends Persona {
                 case DELANTERO:
                     delanterosNecesarios--;
                     break;
-                case PORTERO:
-                    // Los porteros se manejan en una clase separada
-                    break;
-                default:
-                    //si no es ninguna de las posiciones anteriores
-                    break;
             }
-
-            // Crear jugador con estadísticas aleatorias
-            int edad = 18 + random.nextInt(22); // Entre 18 y 39 años
-            int ritmo = 40 + random.nextInt(61); // Entre 40-100
-            int pase = 40 + random.nextInt(61); // Entre 40-100
-            int tiros = 40 + random.nextInt(61); // Entre 40-100
-            int defensa = 40 + random.nextInt(61); // Entre 40-100
-            int regate = 40 + random.nextInt(61); // Entre 40-100
-            int fisico = 40 + random.nextInt(61); // Entre 40-100
-            int velocidad = 40 + random.nextInt(61); // Entre 40-100
-            //calcula la media de las estadísticas
-            int statMediaJugador = (ritmo + pase + tiros + defensa + regate + fisico + velocidad) / 7;
-
-            //crea el jugador
-            Jugador jugador = new Jugador(
-                nombresJugadores.get(jugadoresCreados),
-                edad,
-                posicion,
-                0, 0, 0, // tarjetas y goles
-                velocidad,
-                ritmo,
-                pase,
-                tiros,
-                defensa,
-                regate,
-                fisico,
-                statMediaJugador,
-                pais
-            );
-            //añade el jugador a la lista
-            jugadores.add(jugador);
-            jugadoresCreados++;
         }
 
-        // Verificar que se crearon todos los jugadores necesarios
+        // Mostrar distribución de jugadores creados
         System.out.println("\nDistribución de jugadores creados:");
-        System.out.println("Defensas: " + (8 - defensasNecesarios) + "/8");
-        System.out.println("Mediocentros: " + (8 - mediocentrosNecesarios) + "/8");
-        System.out.println("Delanteros: " + (4 - delanterosNecesarios) + "/4");
-        //devuelve la lista de jugadores
-        return jugadores;  
+        System.out.println("Defensas: " + (144 - defensasNecesarios) + "/144");
+        System.out.println("Mediocentros: " + (144 - mediocentrosNecesarios) + "/144");
+        System.out.println("Delanteros: " + (72 - delanterosNecesarios) + "/72");
+
+        return jugadores;
     }
 
     /* Equals y toString */
